@@ -1,0 +1,10 @@
+category,subcategory,language_id,question_type,question,option 1 ,option 2,option 3,option 4,option 5,answer,level,note
+63,97,1,1,My question goes here?,op 1,op 2,op 3,op 4,,a,1,any note
+63,97,1,1,My second question here?,op 1,op 2,op 3,op 4,,a,1,any note
+63,97,1,1,My second question here?,op 2,op 3,op 4,op 5,,a,1,any note
+63,97,1,1,My second question here?,op 3,op 4,op 5,op 6,,a,1,any note
+63,97,1,1,My second question here?,op 4,op 5,op 6,op 7,,a,1,any note
+63,97,1,1,My second question here?,op 5,op 6,op 7,op 8,,a,1,any note
+63,97,1,1,My second question here?,op 6,op 7,op 8,op 9,,a,1,any note
+63,97,1,1,My second question here?,op 7,op 8,op 9,op 10,,a,1,any note
+63,97,1,1,My second question here?,op 8,op 9,op 10,op 11,,a,1,any note
