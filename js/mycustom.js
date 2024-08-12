@@ -31,7 +31,7 @@ $(document).ready(function () {
               <tr>
                   <td>${index + 1}</td>
                   <td>${question.id}</td>
-                  <td>${question.ssc_category}</td>
+                  <td>${question.category_id}</td>
                   <td>${question.question}</td>
                   <td>${question.optiona}</td>
                   <td>${question.optionb}</td>
@@ -250,7 +250,7 @@ $(document).ready(function () {
 
             // Preselect category
             $("#update_category_id option").each(function () {
-              if ($(this).val() == question.ssc_category) {
+              if ($(this).val() == question.category_id) {
                 $(this).attr("selected", "selected");
               } else {
                 $(this).removeAttr("selected");
@@ -295,7 +295,7 @@ $(document).ready(function () {
       const duration = parseInt($("#edit_duration").val());
       console.log(duration);
       const formData = {
-        ssc_category: $("#update_category_id").val(),
+        category_id: $("#update_category_id").val(),
         question: $("#edit_question").val(),
         optiona: $("#edit_a").val(),
         optionb: $("#edit_b").val(),
@@ -381,7 +381,7 @@ $(document).ready(function () {
       },
       submitHandler: function (form) {
         var data = {
-          ssc_category: $("#ssc_category_id").val(),
+          category_id: $("#ssc_category_id").val(),
           image: $("#image").val() || null,
           question: $("#question").val(),
           optiona: $("#a").val(),
@@ -432,17 +432,16 @@ $(document).ready(function () {
         page: page,
         limit: limit,
         search: search,
+        type: 1,
       };
-
-      if (category) {
-        data.category = category;
-      }
 
       $.ajax({
         url: `${apiUrl}?table=true`,
         method: "GET",
         data: data,
         success: function (data) {
+          console.log(data.response.data[0]);
+
           if (data.response.total !== "0") {
             $("#ssc_category_management_table").empty();
             data.response.data.forEach((category, index) => {
@@ -451,6 +450,7 @@ $(document).ready(function () {
                   <td>${index + 1}</td>
                   <td>${category.id}</td>
                   <td style="min-width:100px">${category.category_name}</td>
+                  <td style="min-width:100px">${category.type}</td>
                   <td style="width:700px">${Object.values(
                     category.instructions
                   ).map((instruction) => {
@@ -703,6 +703,7 @@ $(document).ready(function () {
       const categoryId = $("#edit_id").val();
       const formData = {
         category_name: $("#edit_category_name").val(),
+        type: $("#edit_category_type").val(),
         status: parseInt($("input[name='status']:checked").val()),
       };
       if ($("#edit_instructions").val()) {
@@ -760,6 +761,7 @@ $(document).ready(function () {
       submitHandler: function (form) {
         var data = {
           category_name: $("#category_name").val(),
+          type: $("#category_type").val(),
           instructions: $("#category_instructions").val() || null,
         };
 

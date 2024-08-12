@@ -42,24 +42,24 @@ $type = 1;
                                         <input type="hidden" id="add_question" name="add_question" required="" value="1"
                                             aria-required="true">
 
-                                        <?php $db->sql("SET NAMES 'utf8'");?>
+                                        <?php $db->sql("SET NAMES 'utf8'"); ?>
 
                                         <div class="form-group d-none">
                                             <label class="control-label col-md-1 col-sm-3 col-xs-12"
                                                 for="category">Category</label>
                                             <div class="col-md-10 col-sm-6 col-xs-12">
                                                 <?php
-                                                    $sql = "SELECT * FROM `ssc_category` ORDER BY id DESC";
-                                                    $db->sql($sql);
-                                                    $categories = $db->getResult();
+                                                $sql = "SELECT * FROM `tbl_categories` where `type` = 1 ORDER BY id DESC";
+                                                $db->sql($sql);
+                                                $categories = $db->getResult();
                                                 ?>
                                                 <select id="ssc_category_id" name="ssc_category_id" required
                                                     class="form-control">
                                                     <option value="">Select Category</option>
                                                     <?php foreach ($categories as $category) { ?>
-                                                    <option value='<?= $category['id'] ?>'>
-                                                        <?= $category['category_name'] ?>
-                                                    </option>
+                                                        <option value='<?= $category['id'] ?>'>
+                                                            <?= $category['category_name'] ?>
+                                                        </option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -126,17 +126,17 @@ $type = 1;
                                                 </div>
                                             </div>
                                             <?php if ($fn->is_option_e_mode_enabled()) { ?>
-                                            <div class="form-group">
-                                                <label for="e" class="control-label col-md-1 col-sm-3 col-xs-12">E
-                                                </label>
-                                                <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <input id="e" class="form-control" type="text" name="e">
+                                                <div class="form-group">
+                                                    <label for="e" class="control-label col-md-1 col-sm-3 col-xs-12">E
+                                                    </label>
+                                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                                        <input id="e" class="form-control" type="text" name="e">
+                                                    </div>
+                                                    <label for="d"
+                                                        class="control-label col-md-1 col-sm-3 col-xs-12"></label>
+                                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                                    </div>
                                                 </div>
-                                                <label for="d"
-                                                    class="control-label col-md-1 col-sm-3 col-xs-12"></label>
-                                                <div class="col-md-5 col-sm-6 col-xs-12">
-                                                </div>
-                                            </div>
                                             <?php } ?>
                                         </div>
                                         <div class="form-group">
@@ -150,7 +150,7 @@ $type = 1;
                                                     <option class='ntf' value='c'>C</option>
                                                     <option class='ntf' value='d'>D</option>
                                                     <?php if ($fn->is_option_e_mode_enabled()) { ?>
-                                                    <option class='ntf' value='e'>E</option>
+                                                        <option class='ntf' value='e'>E</option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -196,7 +196,7 @@ $type = 1;
                                             <select id='filter_category' class='form-control' required>
                                                 <option value=''>Select Category</option>
                                                 <?php foreach ($categories as $row) { ?>
-                                                <option value='<?= $row['id'] ?>'><?= $row['category_name'] ?></option>
+                                                    <option value='<?= $row['id'] ?>'><?= $row['category_name'] ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -310,17 +310,17 @@ $type = 1;
                                     class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <?php
-                                        $sql = "SELECT * FROM `ssc_category` ORDER BY id DESC";
-                                        $db->sql($sql);
-                                        $categories = $db->getResult();
+                                    $sql = "SELECT * FROM `tbl_categories` where `type` = 1 ORDER BY id DESC";
+                                    $db->sql($sql);
+                                    $categories = $db->getResult();
                                     ?>
                                     <select id="update_category_id" name="update_category_id" required
                                         class="form-control">
                                         <option value="">Select Category</option>
                                         <?php foreach ($categories as $category) { ?>
-                                        <option value='<?= $category['id'] ?>'>
-                                            <?= $category['category_name'] ?>
-                                        </option>
+                                            <option value='<?= $category['id'] ?>'>
+                                                <?= $category['category_name'] ?>
+                                            </option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -362,12 +362,12 @@ $type = 1;
 
                             <!-- Option E (conditionally shown) -->
                             <?php if ($fn->is_option_e_mode_enabled()) { ?>
-                            <div class="form-group">
-                                <label for="edit_e" class="control-label col-md-3 col-sm-3 col-xs-12">Option E</label>
-                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input id="edit_e" class="form-control" type="text" name="edit_e">
+                                <div class="form-group">
+                                    <label for="edit_e" class="control-label col-md-3 col-sm-3 col-xs-12">Option E</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <input id="edit_e" class="form-control" type="text" name="edit_e">
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
                             <!-- Answer -->
@@ -382,7 +382,7 @@ $type = 1;
                                         <option value="c" id="answer__c">C</option>
                                         <option value="d" id="answer__d">D</option>
                                         <?php if ($fn->is_option_e_mode_enabled()) { ?>
-                                        <option value="e">E</option>
+                                            <option value="e">E</option>
                                         <?php } ?>
                                     </select>
                                 </div>

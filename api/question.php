@@ -30,15 +30,15 @@ switch ($action) {
     case 'GET':
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']);
-            $db->select('ssc_question', '*', null, 'id = ' . $id);
+            $db->select('tbl_questions', '*', null, 'id = ' . $id);
             respond($db->getResult());
         } elseif (isset($_GET['category_id'])) {
             $category_id = intval($_GET['category_id']);
-            $db->select('ssc_question', '*', null, 'ssc_category = ' . $category_id);
+            $db->select('tbl_questions', '*', null, 'category_id = ' . $category_id);
             respond($db->getResult());
         } elseif (isset($_GET['category']) && !isset($_GET['table'])) {
             $category = $db->escapeString($_GET['category']);
-            $db->select('ssc_question', '*', null, 'ssc_category = "' . $category . '"');
+            $db->select('tbl_questions', '*', null, 'category_id = "' . $category . '"');
             respond($db->getResult());
         } elseif (isset($_GET['table'])) {
             $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
@@ -47,12 +47,12 @@ switch ($action) {
             $category = isset($_GET['category']) ? $db->escapeString($_GET['category']) : '';
 
             $offset = ($page - 1) * $limit;
-            $totalQuery = "SELECT COUNT(*) AS total FROM ssc_question WHERE `ssc_category` Like '%$category%' AND question LIKE '%$search%'";
+            $totalQuery = "SELECT COUNT(*) AS total FROM tbl_questions WHERE `category_id` Like '%$category%' AND question LIKE '%$search%'";
             $db->sql($totalQuery);
             $totalResult = $db->getResult();
             $totalRecords = $totalResult[0]['total'];
 
-            $query = "SELECT * FROM ssc_question WHERE `ssc_category` Like '%$category%' AND question LIKE '%$search%'  LIMIT $limit OFFSET $offset";
+            $query = "SELECT * FROM tbl_questions WHERE `category_id` Like '%$category%' AND question LIKE '%$search%'  LIMIT $limit OFFSET $offset";
             $db->sql($query);
             $data = $db->getResult();
 
@@ -64,18 +64,18 @@ switch ($action) {
             ];
             respond($response);
         } else {
-            $db->select('ssc_question');
+            $db->select('tbl_questions');
             respond($db->getResult());
         }
         break;
 
     case 'POST':
         $data = getParamsFromBody();
-        $requiredFields = ['ssc_category', 'question', 'optiona', 'optionb', 'optionc', 'optiond', 'answer', 'duration'];
+        $requiredFields = ['category_id', 'question', 'optiona', 'optionb', 'optionc', 'optiond', 'answer', 'duration'];
         validateParams($data, $requiredFields);
 
         $params = [
-            'ssc_category' => $db->escapeString($data['ssc_category']),
+            'category_id' => $db->escapeString($data['category_id']),
             'question' => $db->escapeString($data['question']),
             'optiona' => $db->escapeString($data['optiona']),
             'optionb' => $db->escapeString($data['optionb']),
@@ -89,7 +89,7 @@ switch ($action) {
         if (isset($data['image'])) $params['image'] = $db->escapeString($data['image']);
         if (isset($data['note'])) $params['note'] = $db->escapeString($data['note']);
 
-        $db->insert('ssc_question', $params);
+        $db->insert('tbl_questions', $params);
         respond(['status' => 200, 'message' => 'Question created successfully']);
         break;
 
@@ -98,7 +98,7 @@ switch ($action) {
         $data = getParamsFromBody();
 
         $params = [];
-        foreach (['ssc_category', 'question', 'optiona', 'optionb', 'optionc', 'optiond', 'optione', 'answer', 'note', 'image', 'duration'] as $field) {
+        foreach (['category_id', 'question', 'optiona', 'optionb', 'optionc', 'optiond', 'optione', 'answer', 'note', 'image', 'duration'] as $field) {
             if (isset($data[$field])) {
                 $params[$field] = $db->escapeString($data[$field]);
                 if ($field == 'duration') {
@@ -108,7 +108,7 @@ switch ($action) {
         }
 
         if (!empty($params)) {
-            $db->update('ssc_question', $params, 'id = ' . $id);
+            $db->update('tbl_questions', $params, 'id = ' . $id);
             respond(['message' => 'Question updated successfully']);
         } else {
             respond(['error' => 'No valid data provided'], 400);
@@ -121,7 +121,7 @@ switch ($action) {
             respond(['error' => 'ID is required'], 400);
         }
         $id = intval($data['id']);
-        $db->delete('ssc_question', 'id = ' . $id);
+        $db->delete('tbl_questions', 'id = ' . $id);
         if ($db->getResult()) {
             respond(['message' => 'Question deleted successfully']);
         } else {

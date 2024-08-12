@@ -39,6 +39,7 @@ $type = 1;
                                 <div class='row'>
                                     <div class='col-md-12'>
                                         <form id="category_form" class="form-horizontal form-label-left">
+                                            <input type="hidden" id="category_type" name="category_type" value="1">
 
                                             <div class="form-group row">
                                                 <div class="col-md-6 col-sm-12">
@@ -135,6 +136,7 @@ $type = 1;
                                                         <th>#</th>
                                                         <th>Id</th>
                                                         <th>Category</th>
+                                                        <th>Type</th>
                                                         <th>Instructions</th>
                                                         <th>Total Questions</th>
                                                         <th>Total Duration</th>
@@ -170,6 +172,7 @@ $type = 1;
                     <div class="modal-body">
                         <form id="update_form" class="form-horizontal form-label-left">
                             <input type="hidden" id="edit_id" name="edit_id">
+                            <input type="hidden" id="edit_type" name="edit_category_type" value="1">
 
                             <div class="form-group">
                                 <label>Category Name</label>
