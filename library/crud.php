@@ -6,7 +6,7 @@
  * @Version 1.0
  * @Package Database
  */
-define('DOMAIN_URL', 'http://localhost/cl.englivia.com/');
+define('DOMAIN_URL', 'http://cl.englivia.com/');
 define('JWT_SECRET_KEY', '9874849845198498465998191984984561981498465498459945');
 
 class Database

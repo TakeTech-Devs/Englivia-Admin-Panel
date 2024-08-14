@@ -1,11 +1,21 @@
 $(document).ready(function () {
+  // Determine the environment and set the API URL
+  const protocol = window.location.protocol; // 'http:' or 'https:'
+  const host = window.location.host; // 'localhost' or 'cl.englivia.com'
+
+  let apiUrl;
+
   // SSC Question Management
   let question_management_table = document.getElementById(
     "question_management_table"
   );
 
   if (document.body.contains(question_management_table)) {
-    const apiUrl = "http://localhost/cl.englivia.com/api/question.php";
+    if (host.includes("localhost")) {
+      apiUrl = `${protocol}//${host}/cl.englivia.com/api/question.php`;
+    } else {
+      apiUrl = `${protocol}//${host}/api/question.php`;
+    }
 
     function fetchQuestions(page, limit, search, category = null) {
       console.log(page, limit, search);
@@ -424,7 +434,11 @@ $(document).ready(function () {
   );
 
   if (document.body.contains(ssc_category_management_table)) {
-    const apiUrl = "http://localhost/cl.englivia.com/api/category.php";
+    if (host.includes("localhost")) {
+      apiUrl = `${protocol}//${host}/cl.englivia.com/api/category.php`;
+    } else {
+      apiUrl = `${protocol}//${host}/api/category.php`;
+    }
 
     function fetchSscCategories(page, limit, search, category = null) {
       console.log(page, limit, search);
@@ -789,4 +803,5 @@ $(document).ready(function () {
       },
     });
   }
+  // End of SSC Category Management
 });

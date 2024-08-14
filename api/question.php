@@ -7,18 +7,21 @@ $db->connect();
 
 $action = $_SERVER['REQUEST_METHOD'];
 
-function respond($data, $code = 200) {
+function respond($data, $code = 200)
+{
     $data = ["response" => $data, "status" => $code];
     http_response_code($code);
     echo json_encode($data);
     exit();
 }
 
-function getParamsFromBody() {
+function getParamsFromBody()
+{
     return json_decode(file_get_contents("php://input"), true);
 }
 
-function validateParams($data, $requiredFields) {
+function validateParams($data, $requiredFields)
+{
     foreach ($requiredFields as $field) {
         if (!isset($data[$field]) || empty($data[$field])) {
             respond(['error' => "Missing required field: $field"], 400);
@@ -28,31 +31,50 @@ function validateParams($data, $requiredFields) {
 
 switch ($action) {
     case 'GET':
+        $type = isset($_GET['type']) ? intval($_GET['type']) : 1;
+
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']);
-            $db->select('tbl_questions', '*', null, 'id = ' . $id);
-            respond($db->getResult());
-        } elseif (isset($_GET['category_id'])) {
-            $category_id = intval($_GET['category_id']);
-            $db->select('tbl_questions', '*', null, 'category_id = ' . $category_id);
+            $db->sql("
+                    SELECT q.*, c.type , c.category_name
+                    FROM tbl_questions q 
+                    JOIN tbl_categories c ON q.category_id = c.id 
+                    WHERE q.id = $id AND c.type = $type
+                ");
             respond($db->getResult());
         } elseif (isset($_GET['category']) && !isset($_GET['table'])) {
-            $category = $db->escapeString($_GET['category']);
-            $db->select('tbl_questions', '*', null, 'category_id = "' . $category . '"');
+            $category_id = intval($_GET['category']);
+            $db->sql("
+                    SELECT q.*, c.type , c.category_name
+                    FROM tbl_questions q 
+                    JOIN tbl_categories c ON q.category_id = c.id 
+                    WHERE q.category_id = $category_id AND c.type = $type
+                ");
             respond($db->getResult());
         } elseif (isset($_GET['table'])) {
             $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
             $limit = isset($_GET['limit']) ? intval($_GET['limit']) : 10;
             $search = isset($_GET['search']) ? $db->escapeString($_GET['search']) : '';
-            $category = isset($_GET['category']) ? $db->escapeString($_GET['category']) : '';
+            $category = isset($_GET['category']) ? intval($_GET['category']) : '';
 
             $offset = ($page - 1) * $limit;
-            $totalQuery = "SELECT COUNT(*) AS total FROM tbl_questions WHERE `category_id` Like '%$category%' AND question LIKE '%$search%'";
+            $totalQuery = "
+                    SELECT COUNT(*) AS total 
+                    FROM tbl_questions q 
+                    JOIN tbl_categories c ON q.category_id = c.id 
+                    WHERE (c.category_name LIKE '%$category%' OR c.id LIKE '%$category%') AND q.question LIKE '%$search%' AND c.type = $type
+                ";
             $db->sql($totalQuery);
             $totalResult = $db->getResult();
             $totalRecords = $totalResult[0]['total'];
 
-            $query = "SELECT * FROM tbl_questions WHERE `category_id` Like '%$category%' AND question LIKE '%$search%'  LIMIT $limit OFFSET $offset";
+            $query = "
+                    SELECT q.*, c.type , c.category_name
+                    FROM tbl_questions q 
+                    JOIN tbl_categories c ON q.category_id = c.id 
+                    WHERE (c.category_name LIKE '%$category%' OR c.id LIKE '%$category%') AND c.type = $type 
+                    LIMIT $limit OFFSET $offset
+                ";
             $db->sql($query);
             $data = $db->getResult();
 
@@ -64,7 +86,12 @@ switch ($action) {
             ];
             respond($response);
         } else {
-            $db->select('tbl_questions');
+            $db->sql("
+                    SELECT q.*, c.type , c.category_name
+                    FROM tbl_questions q 
+                    JOIN tbl_categories c ON q.category_id = c.id 
+                    WHERE c.type = $type
+                ");
             respond($db->getResult());
         }
         break;
@@ -85,9 +112,12 @@ switch ($action) {
             'duration' => intval($data['duration']) * 60000  // Convert minutes to milliseconds
         ];
 
-        if (isset($data['optione'])) $params['optione'] = $db->escapeString($data['optione']);
-        if (isset($data['image'])) $params['image'] = $db->escapeString($data['image']);
-        if (isset($data['note'])) $params['note'] = $db->escapeString($data['note']);
+        if (isset($data['optione']))
+            $params['optione'] = $db->escapeString($data['optione']);
+        if (isset($data['image']))
+            $params['image'] = $db->escapeString($data['image']);
+        if (isset($data['note']))
+            $params['note'] = $db->escapeString($data['note']);
 
         $db->insert('tbl_questions', $params);
         respond(['status' => 200, 'message' => 'Question created successfully']);
