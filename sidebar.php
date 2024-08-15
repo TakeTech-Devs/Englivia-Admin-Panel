@@ -117,6 +117,15 @@
                                     <li><a href="ssc-questions.php">Manage Questions</a></li>
                                 </ul>
                             </li>
+                            <li>
+                                <a><em class="fas fa-book"></em> Current Affairs mock test<span
+                                        class="fas fa-caret-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="current-affairs-categories.php">Manage Categories</a></li>
+
+                                    <li><a href="current-affairs-questions.php">Manage Questions</a></li>
+                                </ul>
+                            </li>
                             <li><a href="dictionary.php"><em class="fas fa-question"></em> Newspapers Words</a></li>
 
 
