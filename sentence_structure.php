@@ -50,7 +50,7 @@ if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
                                                     <label for="image">Image</label>
                                                     <input type='file' name="image" id="image" class="form-control">
                                                 </div>
-                                            </div>
+                                            </div>x
                                             <div class="ln_solid"></div>
                                             <div id="result"></div>
                                             <div class="form-group">

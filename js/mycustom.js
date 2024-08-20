@@ -1974,7 +1974,7 @@ if (document.body.contains( paragraph_translation_category_management_table)) {
     apiUrl = `${protocol}//${host}/api/category.php`;
   }
 
-  function fetchParagraphTranslationategories(page, limit, search, category = null) {
+  function fetchParagraphTranslationCategories(page, limit, search, category = null) {
     console.log(page, limit, search);
     let data = {
       page: page,
@@ -2508,7 +2508,7 @@ if (document.body.contains(sentence_structure_category_management_table)) {
   }
 
   // Initial fetch
-  fetchSentenceStructureTranslationCategories(1, 5, "");
+  fetchSentenceStructureCategories(1, 5, "");
 
   // Handle pagination click
   $(document).on(
@@ -2518,7 +2518,7 @@ if (document.body.contains(sentence_structure_category_management_table)) {
       const page = $(this).data("page");
       const limit = $("#sentence_structure_category__table__length").val();
       const search = $("#sentence_structure_category__data__search").val();
-      fetchSentenceStructureTranslationCategories(page, limit, search);
+      fetchSentenceStructureCategories(page, limit, search);
     }
   );
 
@@ -2527,7 +2527,7 @@ if (document.body.contains(sentence_structure_category_management_table)) {
     const page = 1;
     const limit = $(this).val();
     const search = $("#sentence_structure_category__data__search").val();
-    fetchSentenceStructureTranslationCategories(page, limit, search);
+    fetchSentenceStructureCategories(page, limit, search);
   });
 
   // Handle search
@@ -2535,7 +2535,7 @@ if (document.body.contains(sentence_structure_category_management_table)) {
     const page = 1;
     const limit = $("#sentence_structure_category__table__length").val();
     const search = $(this).val();
-    fetchSentenceStructureTranslationCategories(page, limit, search);
+    fetchSentenceStructureCategories(page, limit, search);
   });
 
   // Handle Delete
@@ -2557,7 +2557,7 @@ if (document.body.contains(sentence_structure_category_management_table)) {
             const page = 1;
             const limit = $("#sentence_structure_category__table__length").val();
             const search = $("#sentence_structure_category__data__search").val();
-            fetchSentenceStructureTranslationCategories(page, limit, search);
+            fetchSentenceStructureCategories(page, limit, search);
           } else {
             alert("Failed to delete category!");
           }
@@ -2650,7 +2650,7 @@ if (document.body.contains(sentence_structure_category_management_table)) {
             ).data("page");
             const limit = $("#sentence_structure_category__table__length").val();
             const search = $("#sentence_structure_category__data__search").val();
-            fetchSentenceStructureTranslationCategories(page, limit, search);
+            fetchSentenceStructureCategories(page, limit, search);
           }, 2000);
         } else {
           $("#update_result")
@@ -2692,7 +2692,7 @@ if (document.body.contains(sentence_structure_category_management_table)) {
           const page = 1;
           const limit = $("#sentence_structure_category__table__length").val();
           const search = $("#sentence_structure_category__data__search").val();
-          fetchSentenceStructureTranslationCategories(page, limit, search);
+          fetchSentenceStructureCategories(page, limit, search);
 
           $("#category_name").val("");
           $("#category_instructions").val("");
