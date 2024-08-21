@@ -5,6 +5,7 @@ if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
     return false;
     exit();
 }
+$type = 4;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +39,7 @@ if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
                                 <div class='row'>
                                     <div class='col-md-12'>
                                         <form id="category_form" class="form-horizontal form-label-left">
-                                            <input type="hidden" id="category_type" name="category_type" value="2">
+                                            <input type="hidden" id="category_type" name="category_type" value="4">
 
 
                                             <div class="form-group row">

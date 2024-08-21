@@ -125,21 +125,21 @@
 
                                     <li><a href="current-affairs-questions.php">Manage Questions</a></li>
                                 </ul>
-                            </li>
-                            <li>
-                                <a><em class="fas fa-book"></em> Translation <span
-                                        class="fas fa-caret-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="one_linear_translation.php">One Liner Translation </a></li>
-
-                                    <li><a href="paragraph_translation.php">Paragraph Translation </a></li>
-                                </ul>
-                            </li>
+                            </li>                            
                             <li>
                                 <a><em class="fas fa-book"></em> Sentence Structure <span
                                         class="fas fa-caret-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="sentence_structure.php">Manage Categories</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a><em class="fas fa-book"></em> Translation <span
+                                        class="fas fa-caret-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="one_linear_translation.php">One Linear Translation </a></li>
+
+                                    <li><a href="paragraph_translation.php">Paragraph Translation </a></li>
                                 </ul>
                             </li>
                             <li><a href="dictionary.php"><em class="fas fa-question"></em> Newspapers Words</a></li>
