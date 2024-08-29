@@ -2,7 +2,6 @@
 session_start();
 if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
     header("location:index.php");
-    return false;
     exit();
 }
 $type = 2;
@@ -73,7 +72,7 @@ $type = 2;
                                                     <input type='file' name="image" id="image" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <!-- <div class="form-group row">
                                                 <div class="col-md-6 col-sm-12">
                                                     <label for="category_instructions">Instructions</label>
                                                     <textarea type="text" id="category_instructions"
@@ -90,7 +89,7 @@ $type = 2;
                                                             "Instruction 1 | Instruction 2 | Instruction 3"</h5>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="ln_solid"></div>
                                             <div id="result"></div>
@@ -128,7 +127,6 @@ $type = 2;
                                                         Show
                                                         <select name="table__length" class="table__length__selector"
                                                             id="current_affairs_category__table__length">
-                                                            <option value="5">5</option>
                                                             <option value="10">10</option>
                                                             <option value="25">25</option>
                                                             <option value="50">50</option>
@@ -158,9 +156,6 @@ $type = 2;
                                                         <th>Id</th>
                                                         <th>Category</th>
                                                         <th>Type</th>
-                                                        <th>Instructions</th>
-                                                        <th>Total Questions</th>
-                                                        <th>Total Duration</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>

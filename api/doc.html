@@ -1,72 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="API Documentation for SSC Question and Category Management">
-  <meta name="keywords" content="API, Documentation, SSC, Question Management, Category Management">
-  <title>SSC API Documentation</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 20px;
-    }
-    h1, h2, h3, h4 {
-      color: #333;
-    }
-    pre {
-      background: #f4f4f4;
-      padding: 10px;
-      border: 1px solid #ddd;
-      overflow-x: auto;
-    }
-    code {
-      background: #f4f4f4;
-      padding: 2px 4px;
-      border-radius: 4px;
-    }
-    .endpoint {
-      margin-bottom: 40px;
-    }
-    .required {
-      color: red;
-    }
-    .request, .response {
-      border-left: 4px solid #ddd;
-      padding-left: 10px;
-      margin-bottom: 20px;
-    }
-    .example {
-      margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-  <h1>SSC API Documentation</h1>
-  <p>This document provides an overview of the endpoints available in the SSC API for managing questions and categories, including request methods, content types, and example requests and responses.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="API Documentation for SSC Question and Category Management"
+    />
+    <meta
+      name="keywords"
+      content="API, Documentation, SSC, Question Management, Category Management"
+    />
+    <title>SSC API Documentation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #333;
+      }
+      pre {
+        background: #f4f4f4;
+        padding: 10px;
+        border: 1px solid #ddd;
+        overflow-x: auto;
+      }
+      code {
+        background: #f4f4f4;
+        padding: 2px 4px;
+        border-radius: 4px;
+      }
+      .endpoint {
+        margin-bottom: 40px;
+      }
+      .required {
+        color: red;
+      }
+      .request,
+      .response {
+        border-left: 4px solid #ddd;
+        padding-left: 10px;
+        margin-bottom: 20px;
+      }
+      .example {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>SSC API Documentation</h1>
+    <p>
+      This document provides an overview of the endpoints available in the SSC
+      API for managing questions and categories, including request methods,
+      content types, and example requests and responses.
+    </p>
 
-  <!-- Category Management Endpoints -->
-  <h2>Category Management</h2>
+    <!-- Category Management Endpoints -->
+    <h2>Category Management</h2>
 
-  <div class="endpoint">
-    <h3>GET /api/category.php</h3>
-    <div class="request">
-      <h4>Request</h4>
-      <p>Method: <code>GET</code></p>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre><code>Example: GET /api/category.php?id=1</code></pre>
+    <div class="endpoint">
+      <h3>GET /api/category.php</h3>
+      <div class="request">
+        <h4>Request</h4>
+        <p>Method: <code>GET</code></p>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre><code>Example: GET /api/category.php?id=1</code></pre>
+        </div>
+        <div class="example">
+          <pre><code>Example: GET /api/category.php?keyword=general</code></pre>
+        </div>
       </div>
-      <div class="example">
-        <pre><code>Example: GET /api/category.php?keyword=general</code></pre>
-      </div>
-    </div>
-    <div class="response">
-      <h4>Response</h4>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre>
+      <div class="response">
+        <h4>Response</h4>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre>
           <code>{
             "status": 200,
             "message": "Data fetched successfully",
@@ -79,117 +93,478 @@
             ]
           }</code>
         </pre>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="endpoint">
-    <h3>POST /api/category.php</h3>
-    <div class="request">
-      <h4>Request</h4>
-      <p>Method: <code>POST</code></p>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre>
+    <div class="endpoint">
+      <h3>POST /api/category.php</h3>
+      <div class="request">
+        <h4>Request</h4>
+        <p>Method: <code>POST</code></p>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre>
           <code>{
             "category_name": "General Knowledge", <span class="required">*</span>
             "image": ""
           }</code>
         </pre>
+        </div>
       </div>
-    </div>
-    <div class="response">
-      <h4>Response</h4>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre>
+      <div class="response">
+        <h4>Response</h4>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre>
           <code>{
             "status": 200,
             "message": "Category created successfully",
             "data": []
           }</code>
         </pre>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="endpoint">
-    <h3>PUT /api/category.php?id=1</h3>
-    <div class="request">
-      <h4>Request</h4>
-      <p>Method: <code>PUT</code></p>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre>
+    <div class="endpoint">
+      <h3>PUT /api/category.php?id=1</h3>
+      <div class="request">
+        <h4>Request</h4>
+        <p>Method: <code>PUT</code></p>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre>
           <code>{
             "category_name": "General Knowledge", <span class="required">*</span>
             "image": ""
           }</code>
         </pre>
+        </div>
       </div>
-    </div>
-    <div class="response">
-      <h4>Response</h4>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre>
+      <div class="response">
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1.0"
+            />
+            <title>API Documentation</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+              }
+              h1,
+              h2,
+              h3 {
+                color: #333;
+              }
+              pre {
+                background-color: #f4f4f4;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                white-space: pre-wrap;
+                word-wrap: break-word;
+              }
+              table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+              }
+              table,
+              th,
+              td {
+                border: 1px solid #ddd;
+              }
+              th,
+              td {
+                padding: 10px;
+                text-align: left;
+              }
+              th {
+                background-color: #f8f8f8;
+              }
+            </style>
+          </head>
+          <body>
+            <h1>API Documentation</h1>
+
+            <h2>Category API</h2>
+
+            <h3>GET /category.php</h3>
+            <p>Fetch categories based on query parameters.</p>
+            <h4>Request Parameters:</h4>
+            <ul>
+              <li><strong>id</strong>: (optional) Category ID.</li>
+              <li><strong>type</strong>: (optional) Category type.</li>
+              <li>
+                <strong>keyword</strong>: (optional) Search keyword for category
+                name.
+              </li>
+              <li>
+                <strong>table</strong>: (optional) If set, fetch paginated
+                results.
+              </li>
+              <li>
+                <strong>page</strong>: (optional) Page number for paginated
+                results.
+              </li>
+              <li>
+                <strong>limit</strong>: (optional) Number of records per page.
+              </li>
+            </ul>
+
+            <h4>Example Request:</h4>
+            <pre>GET /category.php?type=1&keyword=Science</pre>
+
+            <h4>Example Response:</h4>
+            <pre>
+{
+  "status": 200,
+  "message": "Data fetched successfully",
+  "data": [
+    {
+      "id": 1,
+      "category_name": "Science",
+      "type": 1,
+      "questions": 10,
+      "total_duration": 600000
+    }
+  ]
+}</pre
+            >
+
+            <h3>POST /category.php</h3>
+            <p>Create a new category.</p>
+            <h4>Request Body:</h4>
+            <pre>
+{
+  "category_name": "Mathematics",
+  "type": 2,
+  "image": "math.png",
+  "instructions": "Solve the following problems|Answer correctly"
+}</pre
+            >
+
+            <h4>Example Response:</h4>
+            <pre>
+{
+  "status": 200,
+  "message": "Category created successfully",
+  "data": []
+}</pre
+            >
+
+            <h3>PUT /category.php?id=1</h3>
+            <p>Update an existing category by ID.</p>
+            <h4>Request Body:</h4>
+            <pre>
+{
+  "category_name": "Physics",
+  "image": "physics.png",
+  "instructions": "Follow instructions|Complete all tasks"
+}</pre
+            >
+
+            <h4>Example Response:</h4>
+            <pre>
+{
+  "status": 200,
+  "message": "Category updated successfully",
+  "data": []
+}</pre
+            >
+
+            <h3>DELETE /category.php</h3>
+            <p>Delete a category by ID.</p>
+            <h4>Request Body:</h4>
+            <pre>
+{
+  "id": 1
+}</pre
+            >
+
+            <h4>Example Response:</h4>
+            <pre>
+{
+  "status": 200,
+  "message": "Category deleted successfully",
+  "data": []
+}</pre
+            >
+
+            <hr />
+
+            <h2>Question API</h2>
+
+            <h3>GET /question.php</h3>
+            <p>Fetch questions based on query parameters.</p>
+            <h4>Request Parameters:</h4>
+            <ul>
+              <li><strong>id</strong>: (optional) Question ID.</li>
+              <li><strong>category</strong>: (optional) Category ID.</li>
+              <li><strong>type</strong>: (optional) Category type.</li>
+              <li>
+                <strong>table</strong>: (optional) If set, fetch paginated
+                results.
+              </li>
+              <li>
+                <strong>page</strong>: (optional) Page number for paginated
+                results.
+              </li>
+              <li>
+                <strong>limit</strong>: (optional) Number of records per page.
+              </li>
+            </ul>
+
+            <h4>Example Request:</h4>
+            <pre>GET /question.php?category=1&type=1</pre>
+
+            <h4>Example Response:</h4>
+            <pre>
+{
+  "status": 200,
+  "response": [
+    {
+      "id": 1,
+      "question": "What is the capital of France?",
+      "optiona": "Paris",
+      "optionb": "Berlin",
+      "optionc": "Madrid",
+      "optiond": "Rome",
+      "answer": "Paris",
+      "duration": 60000,
+      "category_name": "Geography",
+      "type": 1
+    }
+  ]
+}</pre
+            >
+
+            <h3>POST /question.php</h3>
+            <p>Create a new question.</p>
+            <h4>Request Body:</h4>
+            <pre>
+{
+  "category_id": 1,
+  "question": "What is 2 + 2?",
+  "optiona": "3",
+  "optionb": "4",
+  "optionc": "5",
+  "optiond": "6",
+  "answer": "4",
+  "duration": 1
+}</pre
+            >
+
+            <h4>Example Response:</h4>
+            <pre>
+{
+  "status": 200,
+  "message": "Question created successfully"
+}</pre
+            >
+
+            <h3>PUT /question.php?id=1</h3>
+            <p>Update an existing question by ID.</p>
+            <h4>Request Body:</h4>
+            <pre>
+{
+  "question": "What is 3 + 3?",
+  "answer": "6",
+  "duration": 2
+}</pre
+            >
+
+            <h4>Example Response:</h4>
+            <pre>
+{
+  "status": 200,
+  "message": "Question updated successfully"
+}</pre
+            >
+
+            <h3>DELETE /question.php</h3>
+            <p>Delete a question by ID.</p>
+            <h4>Request Body:</h4>
+            <pre>
+{
+  "id": 1
+}</pre
+            >
+
+            <h4>Example Response:</h4>
+            <pre>
+{
+  "status": 200,
+  "message": "Question deleted successfully"
+}</pre
+            >
+
+            <hr />
+
+            <h2>PDF API</h2>
+
+            <h3>GET /pdf.php</h3>
+            <p>Fetch PDFs based on query parameters.</p>
+            <h4>Request Parameters:</h4>
+            <ul>
+              <li><strong>id</strong>: (optional) Category ID.</li>
+              <li><strong>type</strong>: (optional) Category type.</li>
+              <li>
+                <strong>keyword</strong>: (optional) Search keyword for PDFs.
+              </li>
+              <li>
+                <strong>table</strong>: (optional) If set, fetch paginated
+                results.
+              </li>
+              <li>
+                <strong>page</strong>: (optional) Page number for paginated
+                results.
+              </li>
+              <li>
+                <strong>limit</strong>: (optional) Number of records per page.
+              </li>
+            </ul>
+
+            <h4>Example Request:</h4>
+            <pre>GET /pdf.php?type=1&keyword=Science</pre>
+
+            <h4>Example Response:</h4>
+            <pre>
+{
+  "status": 200,
+  "data": [
+    {
+      "id": 1,
+      "category_name": "Science",
+      "pdf": "http://localhost/uploads/currentaffairs/science.pdf",
+      "type": 1
+    }
+  ],
+  "message": "PDF fetched successfully"
+}</pre
+            >
+
+            <h3>POST /pdf.php</h3>
+            <p>Create a new PDF entry.</p>
+            <h4>Request Body:</h4>
+            <pre>
+{
+  "pdf": "http://localhost/uploads/currentaffairs/newfile.pdf",
+  "type": 2
+}</pre
+            >
+
+            <h4>Example Response:</h4>
+            <pre>
+{
+  "status": 200,
+  "message": "PDF added successfully"
+}</pre
+            >
+
+            <h3>PUT /pdf.php?id=1</h3>
+            <p>Update an existing PDF entry by ID.</p>
+            <h4>Request Body:</h4>
+            <pre>
+{
+  "pdf": "http://localhost/uploads/currentaffairs/updatedfile.pdf"
+}</pre
+            >
+
+            <h4>Example Response:</h4>
+            <pre>
+{
+  "status": 200,
+  "message": "PDF updated successfully"
+}</pre
+            >
+
+            <h3>DELETE /pdf.php</h3>
+            <p>Delete a PDF entry by ID.</p>
+            <h4>Request Body:</h4>
+            <pre>
+{
+  "id": 1
+}</pre
+            >
+
+            <h4>Example Response:</h4>
+            <pre>
+{
+  "status": 200,
+  "message": "PDF deleted successfully"
+}</pre
+            >
+          </body>
+        </html>
+
+        <h4>Response</h4>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre>
           <code>{
             "status": 200,
             "message": "Category updated successfully",
             "data": []
           }</code>
         </pre>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="endpoint">
-    <h3>DELETE /api/category.php?id=1</h3>
-    <div class="request">
-      <h4>Request</h4>
-      <p>Method: <code>DELETE</code></p>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre>
+    <div class="endpoint">
+      <h3>DELETE /api/category.php?id=1</h3>
+      <div class="request">
+        <h4>Request</h4>
+        <p>Method: <code>DELETE</code></p>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre>
           <code>{
             "id": 1 <span class="required">*</span>
           }</code>
         </pre>
+        </div>
       </div>
-    </div>
-    <div class="response">
-      <h4>Response</h4>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre>
+      <div class="response">
+        <h4>Response</h4>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre>
           <code>{
             "status": 200,
             "message": "Category deleted successfully",
             "data": []
           }</code>
         </pre>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Question Management Endpoints -->
-  <h2>Question Management</h2>
+    <!-- Question Management Endpoints -->
+    <h2>Question Management</h2>
 
-  <div class="endpoint">
-    <h3>GET /api/question.php</h3>
-    <div class="request">
-      <h4>Request</h4>
-      <p>Method: <code>GET</code></p>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre><code>Example: GET /api/question.php?id=1</code></pre>
+    <div class="endpoint">
+      <h3>GET /api/question.php</h3>
+      <div class="request">
+        <h4>Request</h4>
+        <p>Method: <code>GET</code></p>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre><code>Example: GET /api/question.php?id=1</code></pre>
+        </div>
       </div>
-    </div>
-    <div class="response">
-      <h4>Response</h4>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre>
+      <div class="response">
+        <h4>Response</h4>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre>
           <code>{
             "response": [
               {
@@ -208,18 +583,18 @@
             "status": 200,
           }</code>
         </pre>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="endpoint">
-    <h3>POST /api/question.php</h3>
-    <div class="request">
-      <h4>Request</h4>
-      <p>Method: <code>POST</code></p>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre>
+    <div class="endpoint">
+      <h3>POST /api/question.php</h3>
+      <div class="request">
+        <h4>Request</h4>
+        <p>Method: <code>POST</code></p>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre>
           <code>{
             "ssc_category": "General Knowledge", <span class="required">*</span>
             "question": "What is the capital of Germany?", <span class="required">*</span>
@@ -232,13 +607,13 @@
             "image": ""
           }</code>
         </pre>
+        </div>
       </div>
-    </div>
-    <div class="response">
-      <h4>Response</h4>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre>
+      <div class="response">
+        <h4>Response</h4>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre>
           <code>{
             "response": {
                 "status": 200,
@@ -247,18 +622,18 @@
             "status": 200
           }</code>
         </pre>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="endpoint">
-    <h3>PUT /api/question.php?id=1</h3>
-    <div class="request">
-      <h4>Request</h4>
-      <p>Method: <code>PUT</code></p>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre>
+    <div class="endpoint">
+      <h3>PUT /api/question.php?id=1</h3>
+      <div class="request">
+        <h4>Request</h4>
+        <p>Method: <code>PUT</code></p>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre>
           <code>{
             "ssc_category": "General Knowledge", <span class="required">*</span>
             "question": "What is the capital of Germany?", <span class="required">*</span>
@@ -271,13 +646,13 @@
             "image": ""
           }</code>
         </pre>
+        </div>
       </div>
-    </div>
-    <div class="response">
-      <h4>Response</h4>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre>
+      <div class="response">
+        <h4>Response</h4>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre>
           <code>{
             "response": {
                 "status": 200,
@@ -286,25 +661,25 @@
             "status": 200
           }</code>
         </pre>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="endpoint">
-    <h3>DELETE /api/question.php?id=1</h3>
-    <div class="request">
-      <h4>Request</h4>
-      <p>Method: <code>DELETE</code></p>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre><code>Example: DELETE /api/question.php?id=1</code></pre>
+    <div class="endpoint">
+      <h3>DELETE /api/question.php?id=1</h3>
+      <div class="request">
+        <h4>Request</h4>
+        <p>Method: <code>DELETE</code></p>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre><code>Example: DELETE /api/question.php?id=1</code></pre>
+        </div>
       </div>
-    </div>
-    <div class="response">
-      <h4>Response</h4>
-      <p>Content-Type: <code>application/json</code></p>
-      <div class="example">
-        <pre>
+      <div class="response">
+        <h4>Response</h4>
+        <p>Content-Type: <code>application/json</code></p>
+        <div class="example">
+          <pre>
           <code>{
             "response": {
                 "status": 200,
@@ -313,9 +688,8 @@
             "status": 200
           }</code>
         </pre>
+        </div>
       </div>
     </div>
-  </div>
-
-</body>
+  </body>
 </html>

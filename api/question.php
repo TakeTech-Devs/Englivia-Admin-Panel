@@ -32,13 +32,15 @@ function validateParams($data, $requiredFields)
 switch ($action) {
     case 'GET':
         $type = isset($_GET['type']) ? intval($_GET['type']) : 1;
+        $table = $type == 2 ? 'tbl_subcategories' : 'tbl_categories';
+        // echo $table;
 
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']);
             $db->sql("
                     SELECT q.*, c.type , c.category_name
                     FROM tbl_questions q 
-                    JOIN tbl_categories c ON q.category_id = c.id 
+                    JOIN " . $table . " c ON q.category_id = c.id 
                     WHERE q.id = $id AND c.type = $type
                 ");
             respond($db->getResult());
@@ -47,7 +49,7 @@ switch ($action) {
             $db->sql("
                     SELECT q.*, c.type , c.category_name
                     FROM tbl_questions q 
-                    JOIN tbl_categories c ON q.category_id = c.id 
+                    JOIN " . $table . " c ON q.category_id = c.id 
                     WHERE q.category_id = $category_id AND c.type = $type
                 ");
             respond($db->getResult());
@@ -61,7 +63,7 @@ switch ($action) {
             $totalQuery = "
                     SELECT COUNT(*) AS total 
                     FROM tbl_questions q 
-                    JOIN tbl_categories c ON q.category_id = c.id 
+                    JOIN " . $table . " c ON q.category_id = c.id 
                     WHERE (c.category_name LIKE '%$category%' OR c.id LIKE '%$category%') AND q.question LIKE '%$search%' AND c.type = $type
                 ";
             $db->sql($totalQuery);
@@ -71,7 +73,7 @@ switch ($action) {
             $query = "
                     SELECT q.*, c.type , c.category_name
                     FROM tbl_questions q 
-                    JOIN tbl_categories c ON q.category_id = c.id 
+                    JOIN " . $table . " c ON q.category_id = c.id 
                     WHERE (c.category_name LIKE '%$category%' OR c.id LIKE '%$category%') AND c.type = $type 
                     LIMIT $limit OFFSET $offset
                 ";
@@ -89,7 +91,7 @@ switch ($action) {
             $db->sql("
                     SELECT q.*, c.type , c.category_name
                     FROM tbl_questions q 
-                    JOIN tbl_categories c ON q.category_id = c.id 
+                    JOIN " . $table . " c ON q.category_id = c.id 
                     WHERE c.type = $type
                 ");
             respond($db->getResult());
@@ -145,7 +147,7 @@ switch ($action) {
         }
         break;
 
-    case 'DELETE':
+    case 'DELETE':  
         $data = getParamsFromBody();
         if (!isset($data['id']) || empty($data['id'])) {
             respond(['error' => 'ID is required'], 400);

@@ -2,7 +2,6 @@
 session_start();
 if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
     header("location:index.php");
-    return false;
     exit();
 }
 $type = 2;
@@ -49,20 +48,31 @@ $type = 2;
                                                 for="category">Category</label>
                                             <div class="col-md-10 col-sm-6 col-xs-12">
                                                 <?php
-                                                $sql = "SELECT * FROM `tbl_categories` where `type` = 2 ORDER BY id DESC";
+                                                $sql = "SELECT tbl_subcategories.*, tbl_categories.category_name AS parent_category, tbl_categories.Tag
+            FROM `tbl_subcategories` JOIN `tbl_categories` ON tbl_subcategories.category = tbl_categories.id 
+            WHERE tbl_subcategories.type = 2 
+            ORDER BY tbl_subcategories.id DESC";
                                                 $db->sql($sql);
                                                 $categories = $db->getResult();
                                                 ?>
-                                                <select id="current-affairs_category_id" name="current-affairs_category_id" required
-                                                    class="form-control">
+                                                <select id="current-affairs_category_id"
+                                                    name="current-affairs_category_id" required class="form-control">
                                                     <option value="">Select Category</option>
-                                                    <?php foreach ($categories as $category) { ?>
-                                                        <option value='<?= $category['id'] ?>'>
-                                                            <?= $category['category_name'] ?>
-                                                        </option>
+                                                    <?php
+                                                    if (!empty($categories)) {
+                                                        foreach ($categories as $category) { ?>
+                                                            <option value='<?= htmlspecialchars($category['id']) ?>'>
+                                                                <?= strtoupper($category['Tag']) ?> -
+                                                                <?= $category['parent_category'] ?> -
+                                                                <?= $category['category_name'] ?>
+                                                            </option>
+                                                        <?php }
+                                                    } else { ?>
+                                                        <option value="">No categories available</option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
+
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-1 col-sm-3 col-xs-12"
@@ -189,7 +199,8 @@ $type = 2;
                                 </div>
                                 <div class='row'>
                                     <div class='col-md-12'>
-                                        <h2>Questions of Current Affairs mock test <small>View / Update / Delete</small></h2>
+                                        <h2>Questions of Current Affairs mock test <small>View / Update / Delete</small>
+                                        </h2>
                                     </div>
                                     <div class='col-md-12'>
                                         <div class='col-md-3'>
@@ -264,6 +275,7 @@ $type = 2;
                                                 <th>#</th>
                                                 <th>Id</th>
                                                 <th>Category</th>
+                                                <th>Test Name</th>
                                                 <th>Question</th>
                                                 <th>Optiona</th>
                                                 <th>Optionb</th>
@@ -301,7 +313,8 @@ $type = 2;
                     <div class="modal-body">
                         <form id="update_form" method="POST" data-parsley-validate
                             class="form-horizontal form-label-left">
-                            <input type='hidden' name="current_affairs_question_id" id="current_affairs_question_id" value='' />
+                            <input type='hidden' name="current_affairs_question_id" id="current_affairs_question_id"
+                                value='' />
                             <input type='hidden' name="update_question" id="update_question" value='1' />
 
                             <!-- Category Dropdown -->
