@@ -54,6 +54,11 @@ function handleGetRequest($db, &$response)
         $conditions[] = 'category_name LIKE "%' . $keyword . '%"';
     }
 
+    // New filter for 'category' field
+    if (isset($_GET['category'])) {
+        $conditions[] = 'category = ' . intval($_GET['category']);
+    }
+
     $whereClause = !empty($conditions) ? implode(' AND ', $conditions) : null;
 
     if (isset($_GET['table'])) {
@@ -62,12 +67,12 @@ function handleGetRequest($db, &$response)
         $search = isset($_GET['search']) ? $db->escapeString($_GET['search']) : '';
 
         $offset = ($page - 1) * $limit;
-        $totalQuery = "SELECT COUNT(*) AS total FROM tbl_categories WHERE category_name LIKE '%$search%'" . ($whereClause ? " AND $whereClause" : '');
+        $totalQuery = "SELECT COUNT(*) AS total FROM tbl_subcategories WHERE category_name LIKE '%$search%'" . ($whereClause ? " AND $whereClause" : '');
         $db->sql($totalQuery);
         $totalResult = $db->getResult();
         $totalRecords = $totalResult[0]['total'];
 
-        $query = "SELECT * FROM tbl_categories WHERE category_name LIKE '%$search%'" . ($whereClause ? " AND $whereClause" : '') . " LIMIT $limit OFFSET $offset";
+        $query = "SELECT * FROM tbl_subcategories WHERE category_name LIKE '%$search%'" . ($whereClause ? " AND $whereClause" : '') . " LIMIT $limit OFFSET $offset";
         $db->sql($query);
         $data = $db->getResult();
 
@@ -88,7 +93,7 @@ function handleGetRequest($db, &$response)
         sendResponse($response);
         return; // Ensure the response is sent immediately
     } else {
-        $db->select('tbl_categories', '*', null, $whereClause);
+        $db->select('tbl_subcategories', '*', null, $whereClause);
     }
     $result = $db->getResult();
 
@@ -115,14 +120,6 @@ function handlePostRequest($db, &$response)
         'type' => intval($data['type']),
     ];
 
-    if (isset($data['image'])) {
-        $params['image'] = $db->escapeString($data['image']);
-    }
-
-    if (isset($data['instructions'])) {
-        $params['instructions'] = $data['instructions'];
-    }
-
     // Generate a custom ID
     // Get the current day, hour, minute, and second
     $currentDateTime = date('dmyHis');
@@ -132,10 +129,16 @@ function handlePostRequest($db, &$response)
 
     $params['id'] = intval($new_id); // Convert to integer if needed
 
-    // die($new_id);
+    if (isset($data['image'])) {
+        $params['image'] = $db->escapeString($data['image']);
+    }
+
+    if (isset($data['instructions'])) {
+        $params['instructions'] = $data['instructions'];
+    }
 
     if (!empty($params['category_name'])) {
-        $db->insert('tbl_categories', $params);
+        $db->insert('tbl_subcategories', $params);
         outputResponse($db, $response, 'Category created successfully');
     } else {
         $response['status'] = 400;
@@ -170,7 +173,7 @@ function handlePutRequest($db, &$response)
     }
 
     if (!empty($params)) {
-        $db->update('tbl_categories', $params, 'id = ' . $id);
+        $db->update('tbl_subcategories', $params, 'id = ' . $id);
         outputResponse($db, $response, 'Category updated successfully');
     } else {
         $response['status'] = 400;
@@ -188,7 +191,7 @@ function handleDeleteRequest($db, &$response)
         respond(['error' => 'ID is required'], 400);
     }
     $id = intval($data['id']);
-    $db->delete('tbl_categories', 'id = ' . $id);
+    $db->delete('tbl_subcategories', 'id = ' . $id);
     outputResponse($db, $response, 'Category deleted successfully');
 }
 

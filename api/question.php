@@ -41,7 +41,7 @@ switch ($action) {
                     SELECT q.*, c.type , c.category_name
                     FROM tbl_questions q 
                     JOIN " . $table . " c ON q.category_id = c.id 
-                    WHERE q.id = $id AND c.type = $type
+                    WHERE q.id = $id
                 ");
             respond($db->getResult());
         } elseif (isset($_GET['category']) && !isset($_GET['table'])) {
@@ -100,10 +100,18 @@ switch ($action) {
 
     case 'POST':
         $data = getParamsFromBody();
+        // print_r($data);
+        // exit();
+
         $requiredFields = ['category_id', 'question', 'optiona', 'optionb', 'optionc', 'optiond', 'answer', 'duration'];
         validateParams($data, $requiredFields);
 
+        // Generate a custom ID based on the current timestamp
+        $currentDateTime = date('dmyHis'); // Day, Month, Year, Hour, Minute, Second
+        $custom_id = intval($currentDateTime);
+
         $params = [
+            'id' => $custom_id, // Custom ID
             'category_id' => $db->escapeString($data['category_id']),
             'question' => $db->escapeString($data['question']),
             'optiona' => $db->escapeString($data['optiona']),
@@ -121,9 +129,11 @@ switch ($action) {
         if (isset($data['note']))
             $params['note'] = $db->escapeString($data['note']);
 
+
         $db->insert('tbl_questions', $params);
         respond(['status' => 200, 'message' => 'Question created successfully']);
         break;
+
 
     case 'PUT':
         $id = intval($_GET['id']);
@@ -147,7 +157,7 @@ switch ($action) {
         }
         break;
 
-    case 'DELETE':  
+    case 'DELETE':
         $data = getParamsFromBody();
         if (!isset($data['id']) || empty($data['id'])) {
             respond(['error' => 'ID is required'], 400);

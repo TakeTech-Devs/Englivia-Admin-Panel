@@ -43,20 +43,20 @@ $type = 2;
 
                                         <?php $db->sql("SET NAMES 'utf8'"); ?>
 
-                                        <div class="form-group d-none">
+                                        <div class="form-group">
                                             <label class="control-label col-md-1 col-sm-3 col-xs-12"
                                                 for="category">Category</label>
                                             <div class="col-md-10 col-sm-6 col-xs-12">
                                                 <?php
                                                 $sql = "SELECT tbl_subcategories.*, tbl_categories.category_name AS parent_category, tbl_categories.Tag
-            FROM `tbl_subcategories` JOIN `tbl_categories` ON tbl_subcategories.category = tbl_categories.id 
-            WHERE tbl_subcategories.type = 2 
-            ORDER BY tbl_subcategories.id DESC";
+                                                FROM `tbl_subcategories` JOIN `tbl_categories` ON tbl_subcategories.category = tbl_categories.id 
+                                                WHERE tbl_subcategories.type = 2 
+                                                ORDER BY tbl_subcategories.id DESC";
                                                 $db->sql($sql);
                                                 $categories = $db->getResult();
                                                 ?>
-                                                <select id="current-affairs_category_id"
-                                                    name="current-affairs_category_id" required class="form-control">
+                                                <select id="current_affairs_category_id"
+                                                    name="current_affairs_category_id" required class="form-control">
                                                     <option value="">Select Category</option>
                                                     <?php
                                                     if (!empty($categories)) {
@@ -199,15 +199,25 @@ $type = 2;
                                 </div>
                                 <div class='row'>
                                     <div class='col-md-12'>
-                                        <h2>Questions of Current Affairs mock test <small>View / Update / Delete</small>
+                                        <h2>Questions of Current Affairs test <small>View / Update / Delete</small>
                                         </h2>
                                     </div>
                                     <div class='col-md-12'>
                                         <div class='col-md-3'>
-                                            <select id='filter_category' class='form-control' required>
-                                                <option value=''>Select Category</option>
-                                                <?php foreach ($categories as $row) { ?>
-                                                    <option value='<?= $row['id'] ?>'><?= $row['category_name'] ?></option>
+                                            <select id="edit_current_affairs_category_id"
+                                                name="edit_current_affairs_category_id" required class="form-control">
+                                                <option value="">Select Category</option>
+                                                <?php
+                                                if (!empty($categories)) {
+                                                    foreach ($categories as $category) { ?>
+                                                        <option value='<?= htmlspecialchars($category['id']) ?>'>
+                                                            <?= strtoupper($category['Tag']) ?> -
+                                                            <?= $category['parent_category'] ?> -
+                                                            <?= $category['category_name'] ?>
+                                                        </option>
+                                                    <?php }
+                                                } else { ?>
+                                                    <option value="">No Questions available</option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -242,11 +252,11 @@ $type = 2;
 
                                     </div>
                                     <div class="table__sub__header">
-                                        <div class="table__length" id="table__length">
+                                        <div class="table__length">
                                             <label>
                                                 Show
                                                 <select name="table__length" class="table__length__selector"
-                                                    id="question__table__length">
+                                                    id="table__length">
                                                     <option value="10">10</option>
                                                     <option value="25">25</option>
                                                     <option value="50">50</option>
@@ -258,7 +268,7 @@ $type = 2;
                                         <div id="tables_filter" class="tables__filter">
                                             <label>
                                                 Search:
-                                                <input type="search" id="question__data__search" class="table__search"
+                                                <input type="search" id="data__search" class="table__search"
                                                     aria-controls="datatables">
                                             </label>
                                         </div>
@@ -289,8 +299,8 @@ $type = 2;
                                         <tbody id="current_affairs_question_management_table"></tbody>
                                     </table>
                                     <div class="table__clearfix">
-                                        <div class="hint-text" id="current_affairs_question__hint__text"></div>
-                                        <ul class="pagination" id="current_affairs_question__table__pagination"></ul>
+                                        <div class="hint-text" id="table__hint__text"></div>
+                                        <ul class="pagination" id="table__pagination"></ul>
                                     </div>
                                 </div>
                             </div>
@@ -300,8 +310,7 @@ $type = 2;
             </div>
         </div>
         <!-- Edit Question Modal -->
-        <div class="modal fade" id="editQuestionModal" tabindex="-1" role="dialog"
-            aria-labelledby="editQuestionModalLabel">
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editQuestionModalLabel">
             <div class="modal-dialog" role="document" style="width: 850px;">
                 <div class="modal-content" style="border-radius: 10px;">
                     <div class="modal-header">
@@ -318,25 +327,36 @@ $type = 2;
                             <input type='hidden' name="update_question" id="update_question" value='1' />
 
                             <!-- Category Dropdown -->
-                            <div class="form-group">
-                                <label for="update_category_id"
-                                    class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
-                                <div class="col-md-9 col-sm-9 col-xs-12">
+                            <div class="form-group d-none">
+                                <label class="control-label col-md-1 col-sm-3 col-xs-12"
+                                    for="edit_current_affairs_category_id">Category</label>
+                                <div class="col-md-10 col-sm-6 col-xs-12">
                                     <?php
-                                    $sql = "SELECT * FROM `tbl_categories` where `type` = 1 ORDER BY id DESC";
+                                    $sql = "SELECT tbl_subcategories.*, tbl_categories.category_name AS parent_category, tbl_categories.Tag
+                                                FROM `tbl_subcategories` JOIN `tbl_categories` ON tbl_subcategories.category = tbl_categories.id 
+                                                WHERE tbl_subcategories.type = 2 
+                                                ORDER BY tbl_subcategories.id DESC";
                                     $db->sql($sql);
                                     $categories = $db->getResult();
                                     ?>
-                                    <select id="update_category_id" name="update_category_id" required
-                                        class="form-control">
+                                    <select id="edit_current_affairs_category_id"
+                                        name="edit_current_affairs_category_id" required class="form-control">
                                         <option value="">Select Category</option>
-                                        <?php foreach ($categories as $category) { ?>
-                                            <option value='<?= $category['id'] ?>'>
-                                                <?= $category['category_name'] ?>
-                                            </option>
+                                        <?php
+                                        if (!empty($categories)) {
+                                            foreach ($categories as $category) { ?>
+                                                <option value='<?= htmlspecialchars($category['id']) ?>'>
+                                                    <?= strtoupper($category['Tag']) ?> -
+                                                    <?= $category['parent_category'] ?> -
+                                                    <?= $category['category_name'] ?>
+                                                </option>
+                                            <?php }
+                                        } else { ?>
+                                            <option value="">No Questions available</option>
                                         <?php } ?>
                                     </select>
                                 </div>
+
                             </div>
 
                             <!-- Question -->

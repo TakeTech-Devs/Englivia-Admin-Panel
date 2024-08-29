@@ -2,7 +2,6 @@
 session_start();
 if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
     header("location:index.php");
-    return false;
     exit();
 }
 $type = 3;
@@ -156,11 +155,6 @@ $type = 3;
                                 <label>Category Name</label>
                                 <input type="text" name="name" id="edit_category_name" placeholder="Category Name"
                                     class='form-control' required>
-                            </div>
-                            <div class="form-group">
-                                <label>Category Instructions</label>
-                                <textarea rows=6 type="text" name="edit_instructions" id="edit_instructions"
-                                    placeholder="Category Name" class='form-control'></textarea>
                             </div>
                             <div style="display: none">
                                 <label class="" for="image">Image <small>( Leave it blank for no change

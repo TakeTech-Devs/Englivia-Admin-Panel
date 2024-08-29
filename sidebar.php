@@ -118,8 +118,7 @@ if (basename($_SERVER['PHP_SELF']) == 'languages.php' && !$fn->is_language_mode_
                         </ul>
                     </li>
                     <li>
-                        <a><em class="fas fa-book"></em> Current Affairs Mock Test<span
-                                class="fas fa-caret-down"></span></a>
+                        <a><em class="fas fa-book"></em> Current Affairs<span class="fas fa-caret-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="current-affairs-categories.php">Manage Categories</a></li>
                             <li><a href="current-affairs-subcategories.php">Manage Tests</a></li>
@@ -128,23 +127,24 @@ if (basename($_SERVER['PHP_SELF']) == 'languages.php' && !$fn->is_language_mode_
 
                             <li><a href="current-affairs-questions.php">Manage Questions</a></li>
                         </ul>
-                    </li>                            
-                            <li>
-                                <a><em class="fas fa-book"></em> Sentence Structure <span
-                                        class="fas fa-caret-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="sentence_structure.php">Manage Categories</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a><em class="fas fa-book"></em> Translation <span
-                                        class="fas fa-caret-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="one_linear_translation.php">One Linear Translation </a></li>
+                    </li>
+                    <li>
+                        <a><em class="fas fa-book"></em> Sentence Structure <span class="fas fa-caret-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="sentence-structure-categories.php">Manage Categories</a></li>
+                            <li><a href="sentence-structure-pdf.php">Manage PDF</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a><em class="fas fa-book"></em> Translation <span class="fas fa-caret-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="one_linear_translation.php">One Liner Category </a></li>
 
-                                    <li><a href="paragraph_translation.php">Paragraph Translation </a></li>
-                                </ul>
-                            </li>
+                            <li><a href="oneliner-translation-pdf.php">One Liner PDF </a></li>
+                            <li><a href="paragraph_translation.php">Paragraph Category </a></li>
+                            <li><a href="paragraph-translation-pdf.php">Paragraph PDF </a></li>
+                        </ul>
+                    </li>
                     <li><a href="dictionary.php"><em class="fas fa-question"></em> Newspapers Words</a></li>
 
 

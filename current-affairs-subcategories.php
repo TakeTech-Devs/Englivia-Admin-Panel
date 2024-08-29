@@ -40,6 +40,27 @@ $type = 2;
                                         <form id="category_form" class="form-horizontal form-label-left">
                                             <input type="hidden" id="category_type" name="category_type" value="2">
 
+                                            <div class="form-group row ">
+                                                <div class="col-md-10 col-sm-6 col-xs-12">
+                                                    <?php
+                                                    $sql = "SELECT * FROM `tbl_categories` where `type` = 2 ORDER BY id DESC";
+                                                    $db->sql($sql);
+                                                    $categories = $db->getResult();
+                                                    ?>
+                                                    <label for="category_name">Parent Category</label>
+                                                    <select id="current_affairs_category_id"
+                                                        name="current_affairs_category_id" required
+                                                        class="form-control">
+                                                        <option value="">Select Parent Category</option>
+                                                        <?php foreach ($categories as $category) { ?>
+                                                            <option value='<?= $category['id'] ?>'>
+                                                                <?= $category['category_name'] ?>
+                                                            </option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
                                             <div class="form-group row">
                                                 <div class="col-md-6 col-sm-12">
                                                     <label for="category_name">Category Name</label>
@@ -51,24 +72,6 @@ $type = 2;
                                                     <input type='file' name="image" id="image" class="form-control">
                                                 </div>
                                             </div>
-                                            <!-- <div class="form-group row">
-                                                <div class="col-md-6 col-sm-12">
-                                                    <label for="category_instructions">Instructions</label>
-                                                    <textarea type="text" id="category_instructions"
-                                                        name="category_instructions" rows=5 required
-                                                        class="form-control"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-6 col-sm-12">
-                                                    <div id="instruction_notice" class="alert alert-info">
-                                                        <h5 style="color:white">Please separate each instruction
-                                                            with a pipe
-                                                            (" | ").<br> For example:
-                                                            "Instruction 1 | Instruction 2 | Instruction 3"</h5>
-                                                    </div>
-                                                </div>
-                                            </div> -->
 
                                             <div class="ln_solid"></div>
                                             <div id="result"></div>
@@ -106,6 +109,7 @@ $type = 2;
                                                         Show
                                                         <select name="table__length" class="table__length__selector"
                                                             id="current_affairs_category__table__length">
+                                                            <option value="5">5</option>
                                                             <option value="10">10</option>
                                                             <option value="25">25</option>
                                                             <option value="50">50</option>
@@ -134,12 +138,15 @@ $type = 2;
                                                         <th>#</th>
                                                         <th>Id</th>
                                                         <th>Category</th>
+                                                        <th>Test Name</th>
                                                         <th>Type</th>
+                                                        <th>Total Questions</th>
+                                                        <th>Total Duration</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="current_affairs_category_management_table"></tbody>
+                                                <tbody id="current_affairs_subcategory_management_table"></tbody>
                                             </table>
                                             <div class="table__clearfix">
                                                 <div class="hint-text" id="current_affairs_category__hint__text"></div>

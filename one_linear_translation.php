@@ -2,7 +2,6 @@
 session_start();
 if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
     header("location:index.php");
-    return false;
     exit();
 }
 $type = 4;
@@ -40,6 +39,7 @@ $type = 4;
                                     <div class='col-md-12'>
                                         <form id="category_form" class="form-horizontal form-label-left">
                                             <input type="hidden" id="category_type" name="category_type" value="4">
+                                            <input type="hidden" id="category_tag" name="category_tag" value="oneliner">
 
                                             <div class="form-group row">
                                                 <div class="col-md-6 col-sm-12">
@@ -157,11 +157,6 @@ $type = 4;
                                 <label>Category Name</label>
                                 <input type="text" name="name" id="edit_category_name" placeholder="Category Name"
                                     class='form-control' required>
-                            </div>
-                            <div class="form-group">
-                                <label>Category Instructions</label>
-                                <textarea rows=6 type="text" name="edit_instructions" id="edit_instructions"
-                                    placeholder="Category Name" class='form-control'></textarea>
                             </div>
                             <div style="display: none">
                                 <label class="" for="image">Image <small>( Leave it blank for no change

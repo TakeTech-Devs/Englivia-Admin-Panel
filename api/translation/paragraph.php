@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: application/json");
-require_once '../library/crud.php';
+require_once '../../library/crud.php';
 
 $db = new Database();
 $db->connect();
@@ -12,9 +12,15 @@ $response = [
     'data' => []
 ];
 
+// Determine the environment and set the base URL for the PDF path
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+$host = $_SERVER['HTTP_HOST'];
+$basePath = ($host === 'localhost') ? '/cl.englivia.com/uploads/pdf/' : '/uploads/pdf/';
+$baseURL = $protocol . $host . $basePath;
+
 switch ($action) {
     case 'GET':
-        handleGetRequest($db, $response);
+        handleGetRequest($db, $response, $baseURL);
         break;
 
     case 'POST':
@@ -39,22 +45,26 @@ switch ($action) {
 echo json_encode($response);
 $db->disconnect();
 
-function handleGetRequest($db, &$response)
+function handleGetRequest($db, &$response, $baseURL)
 {
     $conditions = [];
 
     if (isset($_GET['id'])) {
         $conditions[] = 'id = ' . intval($_GET['id']);
     }
-    if (isset($_GET['type'])) {
-        $conditions[] = 'type = ' . intval($_GET['type']);
-    }
+
+    // Adding type = 4 condition
+    $conditions[] = 'type = 4';
+
+    // Adding Tag = 'paragraph' condition
+    $conditions[] = "Tag = 'paragraph'";
+
     if (isset($_GET['keyword'])) {
         $keyword = $db->escapeString($_GET['keyword']);
         $conditions[] = 'category_name LIKE "%' . $keyword . '%"';
     }
 
-    $whereClause = !empty($conditions) ? implode(' AND ', $conditions) : null;
+    $whereClause = !empty($conditions) ? implode(' AND ', $conditions) : '1'; // '1' ensures a valid WHERE clause
 
     if (isset($_GET['table'])) {
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
@@ -62,12 +72,12 @@ function handleGetRequest($db, &$response)
         $search = isset($_GET['search']) ? $db->escapeString($_GET['search']) : '';
 
         $offset = ($page - 1) * $limit;
-        $totalQuery = "SELECT COUNT(*) AS total FROM tbl_categories WHERE category_name LIKE '%$search%'" . ($whereClause ? " AND $whereClause" : '');
+        $totalQuery = "SELECT COUNT(*) AS total FROM tbl_categories WHERE category_name LIKE '%$search%' AND $whereClause";
         $db->sql($totalQuery);
         $totalResult = $db->getResult();
         $totalRecords = $totalResult[0]['total'];
 
-        $query = "SELECT * FROM tbl_categories WHERE category_name LIKE '%$search%'" . ($whereClause ? " AND $whereClause" : '') . " LIMIT $limit OFFSET $offset";
+        $query = "SELECT * FROM tbl_categories WHERE category_name LIKE '%$search%' AND $whereClause LIMIT $limit OFFSET $offset";
         $db->sql($query);
         $data = $db->getResult();
 
@@ -77,6 +87,9 @@ function handleGetRequest($db, &$response)
             }
             $item['questions'] = getTotalQuestions($db, $item['id']);
             $item['total_duration'] = getTotalDuration($db, $item['id']);
+            if (isset($item['pdf'])) {
+                $item['pdf'] = $baseURL . $item['pdf'];
+            }
         }
 
         $response = [
@@ -99,6 +112,9 @@ function handleGetRequest($db, &$response)
             }
             $item['questions'] = getTotalQuestions($db, $item['id']);
             $item['total_duration'] = getTotalDuration($db, $item['id']);
+            if (isset($item['pdf'])) {
+                $item['pdf'] = $baseURL . $item['pdf'];
+            }
         }
     }
 
@@ -110,9 +126,16 @@ function handleGetRequest($db, &$response)
 function handlePostRequest($db, &$response)
 {
     $data = json_decode(file_get_contents("php://input"), true);
+
+    // Generate a custom ID based on the type and current datetime
+    $currentDateTime = date('dmyHis'); // Get the current day, month, year, hour, minute, second
+    $customId = $data['type'] . '0' . $currentDateTime; // Combine type with datetime
+
     $params = [
+        'id' => $customId, // Set the custom ID
         'category_name' => $db->escapeString($data['category_name']),
         'type' => intval($data['type']),
+        'tag' => $db->escapeString($data['tag']),
     ];
 
     if (isset($data['image'])) {
@@ -122,17 +145,6 @@ function handlePostRequest($db, &$response)
     if (isset($data['instructions'])) {
         $params['instructions'] = $data['instructions'];
     }
-
-    // Generate a custom ID
-    // Get the current day, hour, minute, and second
-    $currentDateTime = date('dmyHis');
-
-    // Combine the type with the current datetime components
-    $new_id = $data['type'] . '0' . $currentDateTime;
-
-    $params['id'] = intval($new_id); // Convert to integer if needed
-
-    // die($new_id);
 
     if (!empty($params['category_name'])) {
         $db->insert('tbl_categories', $params);
@@ -144,7 +156,6 @@ function handlePostRequest($db, &$response)
         exit();
     }
 }
-
 
 
 function handlePutRequest($db, &$response)
@@ -180,12 +191,14 @@ function handlePutRequest($db, &$response)
     }
 }
 
-
 function handleDeleteRequest($db, &$response)
 {
     $data = json_decode(file_get_contents("php://input"), true);
     if (!isset($data['id']) || empty($data['id'])) {
-        respond(['error' => 'ID is required'], 400);
+        $response['status'] = 400;
+        $response['message'] = 'ID is required';
+        echo json_encode($response);
+        exit();
     }
     $id = intval($data['id']);
     $db->delete('tbl_categories', 'id = ' . $id);

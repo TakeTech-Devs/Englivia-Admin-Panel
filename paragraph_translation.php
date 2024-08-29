@@ -2,7 +2,6 @@
 session_start();
 if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
     header("location:index.php");
-    return false;
     exit();
 }
 $type = 4;
@@ -40,6 +39,8 @@ $type = 4;
                                     <div class='col-md-12'>
                                         <form id="category_form" class="form-horizontal form-label-left">
                                             <input type="hidden" id="category_type" name="category_type" value="4">
+                                            <input type="hidden" id="category_tag" name="category_tag"
+                                                value="paragraph">
 
 
                                             <div class="form-group row">
@@ -102,7 +103,8 @@ $type = 4;
                                                 <div id="tables_filter" class="tables__filter">
                                                     <label>
                                                         Search:
-                                                        <input type="search" id="paragraph_translation_category__data__search"
+                                                        <input type="search"
+                                                            id="paragraph_translation_category__data__search"
                                                             class="table__search" aria-controls="datatables">
                                                     </label>
                                                 </div>
@@ -120,9 +122,6 @@ $type = 4;
                                                         <th>Id</th>
                                                         <th>Category</th>
                                                         <th>Type</th>
-                                                        <th>Instructions</th>
-                                                        <th>Total Questions</th>
-                                                        <th>Total Duration</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -130,8 +129,10 @@ $type = 4;
                                                 <tbody id="paragraph_translation_category_management_table"></tbody>
                                             </table>
                                             <div class="table__clearfix">
-                                                <div class="hint-text" id="paragraph_translation_category__hint__text"></div>
-                                                <ul class="pagination" id="paragraph_translation_category__table__pagination"></ul>
+                                                <div class="hint-text" id="paragraph_translation_category__hint__text">
+                                                </div>
+                                                <ul class="pagination"
+                                                    id="paragraph_translation_category__table__pagination"></ul>
                                             </div>
                                         </div>
                                     </div>
@@ -161,11 +162,6 @@ $type = 4;
                                 <label>Category Name</label>
                                 <input type="text" name="name" id="edit_category_name" placeholder="Category Name"
                                     class='form-control' required>
-                            </div>
-                            <div class="form-group">
-                                <label>Category Instructions</label>
-                                <textarea rows=6 type="text" name="edit_instructions" id="edit_instructions"
-                                    placeholder="Category Name" class='form-control'></textarea>
                             </div>
                             <div style="display: none">
                                 <label class="" for="image">Image <small>( Leave it blank for no change
