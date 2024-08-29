@@ -41,14 +41,15 @@ $db->disconnect();
 
 function handleGetRequest($db, &$response)
 {
+    $type = isset($_GET['type']) ? intval($_GET['type']) : 1;
+
     $conditions = [];
+    $conditions[] = 'type = ' . $type;
 
     if (isset($_GET['id'])) {
         $conditions[] = 'id = ' . intval($_GET['id']);
     }
-    if (isset($_GET['type'])) {
-        $conditions[] = 'type = ' . intval($_GET['type']);
-    }
+
     if (isset($_GET['keyword'])) {
         $keyword = $db->escapeString($_GET['keyword']);
         $conditions[] = 'category_name LIKE "%' . $keyword . '%"';
