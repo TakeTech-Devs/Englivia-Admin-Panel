@@ -124,6 +124,7 @@
                                     <li><a href="current-affairs-categories.php">Manage Categories</a></li>
 
                                     <li><a href="current-affairs-questions.php">Manage Questions</a></li>
+                                    <li><a href="current_affairs_test_management.php">Test Management</a></li>
                                 </ul>
                             </li>                            
                             <li>

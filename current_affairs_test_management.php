@@ -5,8 +5,7 @@ if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
     return false;
     exit();
 }
-$type = 4;
-$Tag = "oneliner";
+$type = 2;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +16,7 @@ $Tag = "oneliner";
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>One Linear Translation Category Management | <?= ucwords($_SESSION['company_name']) ?> - Admin Panel </title>
+    <title>Questions for Quiz | <?= ucwords($_SESSION['company_name']) ?> - Admin Panel </title>
     <?php include 'include-css.php'; ?>
 </head>
 
@@ -40,8 +39,28 @@ $Tag = "oneliner";
                                 <div class='row'>
                                     <div class='col-md-12'>
                                         <form id="category_form" class="form-horizontal form-label-left">
-                                            <input type="hidden" id="category_type" name="category_type" value="4">
-                                            <input type="hidden" id="category_tag" name="category_tag" value="oneliner">
+                                            <input type="hidden" id="category_type" name="category_type" value="2">
+
+                                            <div class="form-group row ">
+                                                <!-- <label class="control-label col-md-1 col-sm-3 col-xs-12"
+                                                    for="category">Category</label> -->
+                                                <div class="col-md-10 col-sm-6 col-xs-12">
+                                                    <?php
+                                                    $sql = "SELECT * FROM `category` where `type` = 2 ORDER BY id DESC";
+                                                    $db->sql($sql);
+                                                    $categories = $db->getResult();
+                                                    ?>
+                                                    <select id="current_affairs_category_id" name="current_affairs_category_id" required
+                                                        class="form-control">
+                                                        <option value="">Select Parent Category</option>
+                                                        <?php foreach ($categories as $category) { ?>
+                                                            <option value='<?= $category['id'] ?>'>
+                                                                <?= $category['category_name'] ?>
+                                                            </option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
 
                                             <div class="form-group row">
                                                 <div class="col-md-6 col-sm-12">
@@ -54,12 +73,22 @@ $Tag = "oneliner";
                                                     <input type='file' name="image" id="image" class="form-control">
                                                 </div>
                                             </div>
-                                           
-                                            <!-- New field for PDF upload -->
                                             <div class="form-group row">
                                                 <div class="col-md-6 col-sm-12">
-                                                    <label for="category_pdf">Upload PDF</label>
-                                                    <input type="file" id="category_pdf" name="category_pdf" accept="application/pdf" class="form-control">
+                                                    <label for="category_instructions">Instructions</label>
+                                                    <textarea type="text" id="category_instructions"
+                                                        name="category_instructions" rows=5 required
+                                                        class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-md-6 col-sm-12">
+                                                    <div id="instruction_notice" class="alert alert-info">
+                                                        <h5 style="color:white">Please separate each instruction
+                                                            with a pipe
+                                                            (" | ").<br> For example:
+                                                            "Instruction 1 | Instruction 2 | Instruction 3"</h5>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -98,7 +127,7 @@ $Tag = "oneliner";
                                                     <label>
                                                         Show
                                                         <select name="table__length" class="table__length__selector"
-                                                            id="one_linear_translation_category__table__length">
+                                                            id="current_affairs_category__table__length">
                                                             <option value="5">5</option>
                                                             <option value="10">10</option>
                                                             <option value="25">25</option>
@@ -111,13 +140,13 @@ $Tag = "oneliner";
                                                 <div id="tables_filter" class="tables__filter">
                                                     <label>
                                                         Search:
-                                                        <input type="search" id="one_linear_translation_category__data__search"
+                                                        <input type="search" id="current_affairs_test__data__search"
                                                             class="table__search" aria-controls="datatables">
                                                     </label>
                                                 </div>
                                                 <div class="table__buttons" style="display:none">
                                                     <button class="add_new" id="openAddNewModalBtn"><a
-                                                            href="{{ route('admin.one_linear_translation_category.add.view') }}"><i
+                                                            href="{{ route('admin.current_affairs_test.add.view') }}"><i
                                                                 class="fa-solid fa-circle-plus"></i> Add New
                                                             Question</a></button>
                                                 </div>
@@ -129,15 +158,18 @@ $Tag = "oneliner";
                                                         <th>Id</th>
                                                         <th>Category</th>
                                                         <th>Type</th>
+                                                        <th>Instructions</th>
+                                                        <th>Total Questions</th>
+                                                        <th>Total Duration</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="one_linear_translation_category_management_table"></tbody>
+                                                <tbody id="current_affairs_test_management_table"></tbody>
                                             </table>
                                             <div class="table__clearfix">
-                                                <div class="hint-text" id="one_linear_translation_category__hint__text"></div>
-                                                <ul class="pagination" id="one_linear_translation_category__table__pagination"></ul>
+                                                <div class="hint-text" id="current_affairs_test__hint__text"></div>
+                                                <ul class="pagination" id="current_affairs_test__table__pagination"></ul>
                                             </div>
                                         </div>
                                     </div>
@@ -162,19 +194,17 @@ $Tag = "oneliner";
                         <form id="update_form" class="form-horizontal form-label-left">
                             <input type="hidden" id="edit_id" name="edit_id">
                             <input type="hidden" id="edit_type" name="edit_category_type" value="1">
-                            <input type="hidden" id="edit_tag" name="edit_category_tag">
 
                             <div class="form-group">
                                 <label>Category Name</label>
                                 <input type="text" name="name" id="edit_category_name" placeholder="Category Name"
                                     class='form-control' required>
                             </div>
-                           
                             <div class="form-group">
-                                <label for="edit_pdf_file">Upload PDF <small>(Leave it blank for no change)</small></label>
-                                <input type="file" name="edit_pdf_file" id="edit_pdf_file" accept="application/pdf" class="form-control">
+                                <label>Category Instructions</label>
+                                <textarea rows=6 type="text" name="edit_instructions" id="edit_instructions"
+                                    placeholder="Category Name" class='form-control'></textarea>
                             </div>
-
                             <div style="display: none">
                                 <label class="" for="image">Image <small>( Leave it blank for no change
                                         )</small></label>
