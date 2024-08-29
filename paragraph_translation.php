@@ -5,6 +5,7 @@ if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
     exit();
 }
 $type = 4;
+$Tag = "paragraph";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,6 +53,14 @@ $type = 4;
                                                 <div style="display: none">
                                                     <label for="image">Image</label>
                                                     <input type='file' name="image" id="image" class="form-control">
+                                                </div>
+                                            </div>
+
+                                              <!-- New field for PDF upload -->
+                                              <div class="form-group row">
+                                                <div class="col-md-6 col-sm-12">
+                                                    <label for="category_pdf">Upload PDF</label>
+                                                    <input type="file" id="category_pdf" name="category_pdf" accept="application/pdf" class="form-control">
                                                 </div>
                                             </div>
 
