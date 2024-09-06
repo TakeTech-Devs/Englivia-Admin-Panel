@@ -48,7 +48,7 @@ $(document).ready(function () {
     }
 
     function fetchQuestions(page, limit, search, category = null) {
-      console.log(page, limit, search);
+      console.log(page, limit, search,category);
       let data = {
         page: page,
         limit: limit,
@@ -64,6 +64,8 @@ $(document).ready(function () {
         method: "GET",
         data: data,
         success: function (data) {
+          console.log(data);
+
           if (data.response.total !== "0") {
             $("#question_management_table").empty();
             data.response.data.forEach((question, index) => {
@@ -481,7 +483,6 @@ $(document).ready(function () {
         method: "GET",
         data: data,
         success: function (data) {
-
           if (data.response.total !== "0") {
             $("#ssc_category_management_table").empty();
             data.response.data.forEach((category, index) => {
@@ -1086,7 +1087,6 @@ $(document).ready(function () {
         url: `${apiUrl}?type=2&id=${questionId}`,
         method: "GET",
         success: function (data) {
-
           if (data.status === 200) {
             const question = data.response[0];
             $("#current_affairs_question_id").val(question.id);

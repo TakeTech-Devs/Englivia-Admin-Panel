@@ -64,7 +64,7 @@ switch ($action) {
                     SELECT COUNT(*) AS total 
                     FROM tbl_questions q 
                     JOIN " . $table . " c ON q.category_id = c.id 
-                    WHERE (c.category_name LIKE '%$category%' OR c.id LIKE '%$category%') AND q.question LIKE '%$search%' AND c.type = $type
+                    WHERE (q.question LIKE '%$search%' OR q.optiona LIKE '%$search%' OR q.optionb LIKE '%$search%' OR q.optionc LIKE '%$search%' OR q.optiond LIKE '%$search%') AND c.id LIKE '%$category%' AND q.question LIKE '%$search%' AND c.type = $type
                 ";
             $db->sql($totalQuery);
             $totalResult = $db->getResult();
@@ -74,7 +74,7 @@ switch ($action) {
                     SELECT q.*, c.type , c.category_name
                     FROM tbl_questions q 
                     JOIN " . $table . " c ON q.category_id = c.id 
-                    WHERE (c.category_name LIKE '%$category%' OR c.id LIKE '%$category%') AND c.type = $type 
+                    WHERE (q.question LIKE '%$search%' OR q.optiona LIKE '%$search%' OR q.optionb LIKE '%$search%' OR q.optionc LIKE '%$search%' OR q.optiond LIKE '%$search%') AND c.id LIKE '%$category%' AND c.type = $type 
                     LIMIT $limit OFFSET $offset
                 ";
             $db->sql($query);
