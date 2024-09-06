@@ -56,13 +56,33 @@ $Tag = "paragraph";
                                                 </div>
                                             </div>
 
-                                              <!-- New field for PDF upload -->
-                                              <div class="form-group row">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 col-sm-12">
+                                                    <?php
+                                                    $sql = "SELECT * FROM `languages` ORDER BY id DESC";
+                                                    $db->sql($sql);
+                                                    $languages = $db->getResult();
+                                                    ?>
+                                                    <label for="category_language">Category Language</label>
+                                                    <select id="category_language" name="category_language" required
+                                                        class="form-control">
+                                                        <option value='3'>Select language</option>
+                                                        <?php foreach ($languages as $language) { ?>
+                                                            <option value='<?= $language['id'] ?>'>
+                                                                <?= $language['language'] ?>
+                                                            </option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- New field for PDF upload -->
+                                            <!-- <div class="form-group row">
                                                 <div class="col-md-6 col-sm-12">
                                                     <label for="category_pdf">Upload PDF</label>
                                                     <input type="file" id="category_pdf" name="category_pdf" accept="application/pdf" class="form-control">
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="ln_solid"></div>
                                             <div id="result"></div>
@@ -130,6 +150,7 @@ $Tag = "paragraph";
                                                         <th>#</th>
                                                         <th>Id</th>
                                                         <th>Category</th>
+                                                        <th>Language</th>
                                                         <th>Type</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
@@ -177,6 +198,25 @@ $Tag = "paragraph";
                                         )</small></label>
                                 <input type="file" name="image" id="edit_image" class="form-control"
                                     aria-required="true">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 col-sm-12">
+                                    <?php
+                                    $sql = "SELECT * FROM `languages` ORDER BY id DESC";
+                                    $db->sql($sql);
+                                    $languages = $db->getResult();
+                                    ?>
+                                    <label for="edit_category_language">Category Language</label>
+                                    <select id="edit_category_language" name="edit_category_language" required
+                                        class="form-control">
+                                        <option value='3'>Select language</option>
+                                        <?php foreach ($languages as $language) { ?>
+                                            <option value='<?= $language['id'] ?>'>
+                                                <?= $language['language'] ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>

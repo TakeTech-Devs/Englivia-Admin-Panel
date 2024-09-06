@@ -68,7 +68,7 @@ function handleGetRequest($db, &$response)
         $totalResult = $db->getResult();
         $totalRecords = $totalResult[0]['total'];
 
-        $query = "SELECT * FROM tbl_categories WHERE category_name LIKE '%$search%'" . ($whereClause ? " AND $whereClause" : '') . " LIMIT $limit OFFSET $offset";
+        $query = "SELECT * FROM tbl_categories WHERE category_name LIKE '%$search%'" . ($whereClause ? " AND $whereClause" : '') . " ORDER BY time_created LIMIT $limit OFFSET $offset";
         $db->sql($query);
         $data = $db->getResult();
 
@@ -113,7 +113,9 @@ function handlePostRequest($db, &$response)
     $data = json_decode(file_get_contents("php://input"), true);
     $params = [
         'category_name' => $db->escapeString($data['category_name']),
+        'tag' => $db->escapeString($data['tag']),
         'type' => intval($data['type']),
+        'language' => intval($data['language']),
     ];
 
     if (isset($data['image'])) {
@@ -156,6 +158,9 @@ function handlePutRequest($db, &$response)
 
     if (isset($data['category_name'])) {
         $params['category_name'] = $db->escapeString($data['category_name']);
+    }
+    if (isset($data['language'])) {
+        $params['language'] = $db->escapeString($data['language']);
     }
     if (isset($data['image'])) {
         $params['image'] = $db->escapeString($data['image']);

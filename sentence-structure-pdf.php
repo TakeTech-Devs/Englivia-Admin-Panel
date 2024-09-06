@@ -85,6 +85,7 @@ $type = 1;
                                                 <th>#</th>
                                                 <th>Id</th>
                                                 <th>Category</th>
+                                                <th>Language</th>
                                                 <th>Type</th>
                                                 <th>Pdf</th>
                                                 <th>Action</th>

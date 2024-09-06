@@ -56,6 +56,10 @@ function handleGetRequest($db, &$response, $baseURL)
     // Adding type = 4 condition
     $conditions[] = 'type = 4';
 
+    if (isset($_GET['language'])) {
+        $conditions[] = 'language = ' . $_GET['language'];
+    }
+
     // Adding Tag = 'paragraph' condition
     $conditions[] = "Tag = 'paragraph'";
 
@@ -136,6 +140,7 @@ function handlePostRequest($db, &$response)
         'category_name' => $db->escapeString($data['category_name']),
         'type' => intval($data['type']),
         'tag' => $db->escapeString($data['tag']),
+        'language' => intval($data['language']),
     ];
 
     if (isset($data['image'])) {
@@ -166,6 +171,9 @@ function handlePutRequest($db, &$response)
 
     if (isset($data['category_name'])) {
         $params['category_name'] = $db->escapeString($data['category_name']);
+    }
+    if (isset($data['language'])) {
+        $params['language'] = $db->escapeString($data['language']);
     }
     if (isset($data['image'])) {
         $params['image'] = $db->escapeString($data['image']);

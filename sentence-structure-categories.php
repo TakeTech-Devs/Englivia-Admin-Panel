@@ -51,6 +51,24 @@ $type = 3;
                                                     <input type='file' name="image" id="image" class="form-control">
                                                 </div>
                                             </div>
+                                            <div class="form-group row">
+                                                <div class="col-md-6 col-sm-12">
+                                                    <?php
+                                                    $sql = "SELECT * FROM `languages` ORDER BY id DESC";
+                                                    $db->sql($sql);
+                                                    $languages = $db->getResult();
+                                                    ?>
+                                                    <label for="category_language">Category Language</label>
+                                                    <select id="category_language" name="category_language" required class="form-control">
+                                                        <option value='3'>Select language</option>
+                                                        <?php foreach ($languages as $language) { ?>
+                                                            <option value='<?= $language['id'] ?>'>
+                                                                <?= $language['language'] ?>
+                                                            </option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
                                             <div class="ln_solid"></div>
                                             <div id="result"></div>
                                             <div class="form-group">
@@ -116,6 +134,7 @@ $type = 3;
                                                         <th>#</th>
                                                         <th>Id</th>
                                                         <th>Category</th>
+                                                        <th>Language</th>
                                                         <th>Type</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
@@ -149,7 +168,7 @@ $type = 3;
                     <div class="modal-body">
                         <form id="update_form" class="form-horizontal form-label-left">
                             <input type="hidden" id="edit_id" name="edit_id">
-                            <input type="hidden" id="edit_type" name="edit_category_type" value="1">
+                            <input type="hidden" id="edit_category_type" name="edit_category_type" value="3">
 
                             <div class="form-group">
                                 <label>Category Name</label>
@@ -161,6 +180,24 @@ $type = 3;
                                         )</small></label>
                                 <input type="file" name="image" id="edit_image" class="form-control"
                                     aria-required="true">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 col-sm-12">
+                                    <?php
+                                    $sql = "SELECT * FROM `languages` ORDER BY id DESC";
+                                    $db->sql($sql);
+                                    $languages = $db->getResult();
+                                    ?>
+                                    <label for="edit_category_language">Category Language</label>
+                                    <select id="edit_category_language" name="edit_category_language" required class="form-control">
+                                        <option value='3'>Select language</option>
+                                        <?php foreach ($languages as $language) { ?>
+                                            <option value='<?= $language['id'] ?>'>
+                                                <?= $language['language'] ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>

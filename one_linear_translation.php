@@ -53,14 +53,34 @@ $Tag = "oneliner";
                                                     <input type='file' name="image" id="image" class="form-control">
                                                 </div>
                                             </div>
-                                           
-                                            <!-- New field for PDF upload -->
+
                                             <div class="form-group row">
+                                                <div class="col-md-6 col-sm-12">
+                                                    <?php
+                                                    $sql = "SELECT * FROM `languages` ORDER BY id DESC";
+                                                    $db->sql($sql);
+                                                    $languages = $db->getResult();
+                                                    ?>
+                                                    <label for="category_language">Category Language</label>
+                                                    <select id="category_language" name="category_language" required
+                                                        class="form-control">
+                                                        <option value='3'>Select language</option>
+                                                        <?php foreach ($languages as $language) { ?>
+                                                            <option value='<?= $language['id'] ?>'>
+                                                                <?= $language['language'] ?>
+                                                            </option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- New field for PDF upload -->
+                                            <!-- <div class="form-group row">
                                                 <div class="col-md-6 col-sm-12">
                                                     <label for="category_pdf">Upload PDF</label>
                                                     <input type="file" id="category_pdf" name="category_pdf" accept="application/pdf" class="form-control">
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="ln_solid"></div>
                                             <div id="result"></div>
@@ -110,7 +130,8 @@ $Tag = "oneliner";
                                                 <div id="tables_filter" class="tables__filter">
                                                     <label>
                                                         Search:
-                                                        <input type="search" id="one_linear_translation_category__data__search"
+                                                        <input type="search"
+                                                            id="one_linear_translation_category__data__search"
                                                             class="table__search" aria-controls="datatables">
                                                     </label>
                                                 </div>
@@ -127,6 +148,7 @@ $Tag = "oneliner";
                                                         <th>#</th>
                                                         <th>Id</th>
                                                         <th>Category</th>
+                                                        <th>Language</th>
                                                         <th>Type</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
@@ -135,8 +157,10 @@ $Tag = "oneliner";
                                                 <tbody id="one_linear_translation_category_management_table"></tbody>
                                             </table>
                                             <div class="table__clearfix">
-                                                <div class="hint-text" id="one_linear_translation_category__hint__text"></div>
-                                                <ul class="pagination" id="one_linear_translation_category__table__pagination"></ul>
+                                                <div class="hint-text" id="one_linear_translation_category__hint__text">
+                                                </div>
+                                                <ul class="pagination"
+                                                    id="one_linear_translation_category__table__pagination"></ul>
                                             </div>
                                         </div>
                                     </div>
@@ -160,8 +184,8 @@ $Tag = "oneliner";
                     <div class="modal-body">
                         <form id="update_form" class="form-horizontal form-label-left">
                             <input type="hidden" id="edit_id" name="edit_id">
-                            <input type="hidden" id="edit_type" name="edit_category_type" value="1">
-                            <input type="hidden" id="edit_tag" name="edit_category_tag">
+                            <input type="hidden" id="edit_category_type" name="edit_category_type" value="4">
+                            <input type="hidden" id="edit_category_tag" name="edit_category_tag">
 
                             <div class="form-group">
                                 <label>Category Name</label>
@@ -173,6 +197,25 @@ $Tag = "oneliner";
                                         )</small></label>
                                 <input type="file" name="image" id="edit_image" class="form-control"
                                     aria-required="true">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 col-sm-12">
+                                    <?php
+                                    $sql = "SELECT * FROM `languages` ORDER BY id DESC";
+                                    $db->sql($sql);
+                                    $languages = $db->getResult();
+                                    ?>
+                                    <label for="edit_category_language">Category Language</label>
+                                    <select id="edit_category_language" name="edit_category_language" required
+                                        class="form-control">
+                                        <option value='3'>Select language</option>
+                                        <?php foreach ($languages as $language) { ?>
+                                            <option value='<?= $language['id'] ?>'>
+                                                <?= $language['language'] ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>

@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: application/json");
-require_once '../library/crud.php';
+require_once '../../library/crud.php';
 
 $db = new Database();
 $db->connect();
@@ -47,8 +47,8 @@ $db->disconnect();
 
 function handleGetRequest($db, &$response, $baseURL)
 {
-    $type = isset($_GET['type']) ? intval($_GET['type']) : 2;
-    $whereClauses[] = 'type = ' . $type;
+    $whereClauses[] = 'type = 4';
+    $whereClauses[] = 'tag = "oneliner"'; // Corrected the condition to use the 'tag' column
 
     if (isset($_GET['language'])) {
         $whereClauses[] = 'language = ' . $_GET['language'];
@@ -163,7 +163,6 @@ function handlePostRequest($db, &$response)
             $db->update('tbl_categories', ['category_name' => $category_name, 'pdf' => $newFileName], 'id = ' . $id);
             $response['message'] = 'Category name and PDF updated successfully';
             $response['data'] = $newFileName;
-            // $response['data'] = $db->getResult();
         } else {
             // Handle error
             $response['status'] = 500;
@@ -178,7 +177,6 @@ function handlePostRequest($db, &$response)
 
     echo json_encode($response);
     exit();
-
 }
 
 function handlePutRequest($db, &$response)
@@ -221,47 +219,29 @@ function handleDeleteRequest($db, &$response)
     $host = $_SERVER['HTTP_HOST'];
     $baseDir = ($host === 'localhost') ? $_SERVER['DOCUMENT_ROOT'] . '/cl.englivia.com/uploads/pdf/' : $_SERVER['DOCUMENT_ROOT'] . '/uploads/pdf/';
 
-    // First, fetch the current PDF file name from the database
-    $db->select('tbl_categories', 'pdf', null, 'id = ' . $id . ' AND pdf IS NOT NULL');
+    // Fetch the current PDF name from the database
+    $db->select('tbl_categories', 'pdf', null, 'id = ' . $id);
     $result = $db->getResult();
 
-    if (!empty($result) && isset($result[0]['pdf'])) {
-        $pdfFileName = $result[0]['pdf'];
-        $targetFile = $baseDir . $pdfFileName;
+    if (!empty($result[0]['pdf'])) {
+        $pdfPath = $baseDir . $result[0]['pdf'];
 
-        // Delete the file from the server
-        if (file_exists($targetFile)) {
-            if (unlink($targetFile)) {
-                // If the file is successfully deleted, update the database
-                $query = "UPDATE tbl_categories SET pdf = NULL WHERE id = $id AND pdf IS NOT NULL";
-                if ($db->sql($query)) {
-                    $response['message'] = 'PDF deleted successfully from both server and database';
-                } else {
-                    $response['status'] = 500;
-                    $response['message'] = 'Error updating the database after file deletion';
-                }
-            } else {
-                $response['status'] = 500;
-                $response['message'] = 'Error deleting the file from the server';
-            }
-        } else {
-            $response['status'] = 404;
-            $response['message'] = 'File not found on the server';
+        // Delete the PDF file from the server
+        if (file_exists($pdfPath)) {
+            unlink($pdfPath);
         }
-    } else {
-        $response['status'] = 404;
-        $response['message'] = 'PDF not found in the database';
     }
 
-    echo json_encode($response);
-    exit();
+    // Delete the record from the database
+    $db->delete('tbl_categories', 'id = ' . $id);
+    outputResponse($db, $response, 'PDF and category deleted successfully');
 }
-
 
 function outputResponse($db, &$response, $message)
 {
-    $response['data'] = $db->getResult();
+    $result = $db->getResult();
     $response['message'] = $message;
-    http_response_code($response['status']);
+    $response['data'] = $result;
+    echo json_encode($response);
+    exit();
 }
-?>

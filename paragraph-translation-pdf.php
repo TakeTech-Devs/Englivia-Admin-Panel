@@ -85,12 +85,13 @@ $type = 1;
                                                 <th>#</th>
                                                 <th>Id</th>
                                                 <th>Category</th>
+                                                <th>Language</th>
                                                 <th>Type</th>
                                                 <th>Pdf</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="sentence_structure_pdf_management_table"></tbody>
+                                        <tbody id="paragraph_translation_pdf_management_table"></tbody>
                                     </table>
                                     <div class="table__clearfix">
                                         <div class="hint-text" id="table__hint__text"></div>

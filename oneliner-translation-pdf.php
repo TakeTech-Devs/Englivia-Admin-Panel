@@ -85,12 +85,13 @@ $type = 1;
                                                 <th>#</th>
                                                 <th>Id</th>
                                                 <th>Category</th>
+                                                <th>Language</th>
                                                 <th>Type</th>
                                                 <th>Pdf</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="sentence_structure_pdf_management_table"></tbody>
+                                        <tbody id="oneliner_translation_pdf_management_table"></tbody>
                                     </table>
                                     <div class="table__clearfix">
                                         <div class="hint-text" id="table__hint__text"></div>
@@ -117,7 +118,7 @@ $type = 1;
                         <form id="update_form" method="POST" data-parsley-validate
                             class="form-horizontal form-label-left">
                             <input type='hidden' name="edit_id" id="edit_id" value='' />
-                            <input type='hidden' name="update_question" id="update_question" value='1' />
+                            <input type='hidden' name="update_question" id="update_question" value='4' />
 
                             <!-- Category Name -->
                             <div class="form-group">

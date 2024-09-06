@@ -39,6 +39,7 @@ $type = 2;
                                     <div class='col-md-12'>
                                         <form id="category_form" class="form-horizontal form-label-left">
                                             <input type="hidden" id="category_type" name="category_type" value="2">
+                                            <input type="hidden" id="category_tag" name="category_tag" value="CA">
 
                                             <div class="form-group row">
                                                 <div class="col-md-6 col-sm-12">
@@ -49,6 +50,25 @@ $type = 2;
                                                 <div style="display: none">
                                                     <label for="image">Image</label>
                                                     <input type='file' name="image" id="image" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-md-6 col-sm-12">
+                                                    <?php
+                                                    $sql = "SELECT * FROM `languages` ORDER BY id DESC";
+                                                    $db->sql($sql);
+                                                    $languages = $db->getResult();
+                                                    ?>
+                                                    <label for="category_language">Category Language</label>
+                                                    <select id="category_language" name="category_language" required
+                                                        class="form-control">
+                                                        <option value='3'>Select language</option>
+                                                        <?php foreach ($languages as $language) { ?>
+                                                            <option value='<?= $language['id'] ?>'>
+                                                                <?= $language['language'] ?>
+                                                            </option>
+                                                        <?php } ?>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <!-- <div class="form-group row">
@@ -101,11 +121,11 @@ $type = 2;
 
                                             </div>
                                             <div class="table__sub__header">
-                                                <div class="table__length" id="table__length">
+                                                <div class="table__length">
                                                     <label>
                                                         Show
                                                         <select name="table__length" class="table__length__selector"
-                                                            id="current_affairs_category__table__length">
+                                                            id="table__length">
                                                             <option value="10">10</option>
                                                             <option value="25">25</option>
                                                             <option value="50">50</option>
@@ -117,8 +137,8 @@ $type = 2;
                                                 <div id="tables_filter" class="tables__filter">
                                                     <label>
                                                         Search:
-                                                        <input type="search" id="current_affairs_category__data__search"
-                                                            class="table__search" aria-controls="datatables">
+                                                        <input type="search" id="data__search" class="table__search"
+                                                            aria-controls="datatables">
                                                     </label>
                                                 </div>
                                                 <div class="table__buttons" style="display:none">
@@ -134,16 +154,16 @@ $type = 2;
                                                         <th>#</th>
                                                         <th>Id</th>
                                                         <th>Category</th>
+                                                        <th>Language</th>
                                                         <th>Type</th>
-                                                        <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="current_affairs_category_management_table"></tbody>
                                             </table>
                                             <div class="table__clearfix">
-                                                <div class="hint-text" id="current_affairs_category__hint__text"></div>
-                                                <ul class="pagination" id="current_affairs_category__table__pagination">
+                                                <div class="hint-text" id="table__hint__text"></div>
+                                                <ul class="pagination" id="table__pagination">
                                                 </ul>
                                             </div>
                                         </div>
@@ -180,6 +200,25 @@ $type = 2;
                                         )</small></label>
                                 <input type="file" name="image" id="edit_image" class="form-control"
                                     aria-required="true">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 col-sm-12">
+                                    <?php
+                                    $sql = "SELECT * FROM `languages` ORDER BY id DESC";
+                                    $db->sql($sql);
+                                    $languages = $db->getResult();
+                                    ?>
+                                    <label for="edit_category_language">Category Language</label>
+                                    <select id="edit_category_language" name="edit_category_language" required
+                                        class="form-control">
+                                        <option value='3'>Select language</option>
+                                        <?php foreach ($languages as $language) { ?>
+                                            <option value='<?= $language['id'] ?>'>
+                                                <?= $language['language'] ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
