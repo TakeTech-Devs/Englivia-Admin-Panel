@@ -48,7 +48,7 @@ $(document).ready(function () {
     }
 
     function fetchQuestions(page, limit, search, category = null) {
-      console.log(page, limit, search,category);
+      console.log(page, limit, search, category);
       let data = {
         page: page,
         limit: limit,
@@ -65,6 +65,14 @@ $(document).ready(function () {
         data: data,
         success: function (data) {
           console.log(data);
+          // List categories
+          let categoryList = {};
+          $("#ssc_category_id option").each(function () {
+            categoryList[$(this).val()] = $(this)
+              .text()
+              .replace(/\s+/g, " ") // Replace multiple spaces and newlines with a single space
+              .trim(); // Trim any leading or trailing spaces
+          });
 
           if (data.response.total !== "0") {
             $("#question_management_table").empty();
@@ -73,7 +81,7 @@ $(document).ready(function () {
               <tr>
                   <td>${index + 1}</td>
                   <td>${question.id}</td>
-                  <td>${question.category_id}</td>
+                  <td>${categoryList[question.category_id]}</td>
                   <td>${question.question}</td>
                   <td>${question.optiona}</td>
                   <td>${question.optionb}</td>
@@ -863,6 +871,17 @@ $(document).ready(function () {
         method: "GET",
         data: data,
         success: function (data) {
+          // List Tests
+          let testList = {};
+          $("#current_affairs_category_id option").each(function () {
+            testList[$(this).val()] = $(this)
+              .text()
+              .replace(/^(ca\s*-\s*)/i, "") // Remove any form of "CA -" at the start (case-insensitive)
+              .replace(/\s+/g, " ") // Replace multiple spaces and newlines with a single space
+              .trim(); // Trim any leading or trailing spaces
+          });
+          console.log(testList);
+
           if (data.response.total !== "0") {
             $("#current_affairs_question_management_table").empty();
             data.response.data.forEach((question, index) => {
@@ -871,8 +890,10 @@ $(document).ready(function () {
                 <tr>
                     <td>${index + 1}</td>
                     <td>${question.id}</td>
+                    <td style="min-width: 100px;">${
+                      testList[question.category_id]
+                    }</td>
                     <td style="min-width: 100px;">${question.category_name}</td>
-                    <td style="min-width: 100px;"></td>
                     <td>${question.question}</td>
                     <td>${question.optiona}</td>
                     <td>${question.optionb}</td>
@@ -1021,7 +1042,7 @@ $(document).ready(function () {
       const page = $(this).data("page");
       const limit = $("#table__length").val();
       const search = $("#data__search").val();
-      const category = $("#filter_category").val();
+      const category = $("#edit_current_affairs_category_id").val();
       fetchcurrent_affairsQuestions(page, limit, search, category);
     });
 
@@ -1030,7 +1051,7 @@ $(document).ready(function () {
       const page = 1;
       const limit = $(this).val();
       const search = $("#data__search").val();
-      const category = $("#filter_category").val();
+      const category = $("#edit_current_affairs_category_id").val();
       fetchcurrent_affairsQuestions(page, limit, search, category);
     });
 
@@ -1039,7 +1060,7 @@ $(document).ready(function () {
       const page = 1;
       const limit = $("#table__length").val();
       const search = $(this).val();
-      const category = $("#filter_category").val();
+      const category = $("#edit_current_affairs_category_id").val();
       fetchcurrent_affairsQuestions(page, limit, search, category);
     });
 
@@ -1048,7 +1069,7 @@ $(document).ready(function () {
       const page = 1;
       const limit = $("#table__length").val();
       const search = $("#data__search").val();
-      const category = $("#filter_category").val();
+      const category = $("#edit_current_affairs_category_id").val();
       console.log(page, limit, search, category);
       fetchcurrent_affairsQuestions(page, limit, search, category);
     });
@@ -1068,7 +1089,7 @@ $(document).ready(function () {
               const page = 1;
               const limit = $("#table__length").val();
               const search = $("#data__search").val();
-              const category = $("#filter_category").val();
+              const category = $("#edit_current_affairs_category_id").val();
               fetchcurrent_affairsQuestions(page, limit, search, category);
             } else {
               alert("Failed to delete question.");
@@ -1177,7 +1198,7 @@ $(document).ready(function () {
               const page = $("#table__pagination .active span").data("page");
               const limit = $("#table__length").val();
               const search = $("#data__search").val();
-              const category = $("#filter_category").val();
+              const category = $("#edit_current_affairs_category_id").val();
               fetchcurrent_affairsQuestions(page, limit, search, category);
             }, 2000);
           } else {
@@ -1249,7 +1270,7 @@ $(document).ready(function () {
             const page = 1;
             const limit = $("#table__length").val();
             const search = $("#data__search").val();
-            const category = $("#filter_category").val();
+            const category = $("#edit_current_affairs_category_id").val();
             fetchcurrent_affairsQuestions(page, limit, search, category);
 
             alert(response.response.message);
@@ -1676,6 +1697,11 @@ $(document).ready(function () {
         data: data,
         success: function (data) {
           console.log(data.response.data);
+          // List Parent Category
+          let parentList = {};
+          $("#current_affairs_category_id option").each(function () {
+            parentList[$(this).val()] = $(this).text().trim();
+          });
 
           if (data.response.total !== "0") {
             $("#current_affairs_subcategory_management_table").empty();
@@ -1684,7 +1710,9 @@ $(document).ready(function () {
               <tr>
                   <td>${index + 1}</td>
                   <td>${category.id}</td>
-                  <td style="min-width:100px"></td>
+                  <td style="min-width:100px">${
+                    parentList[category.category]
+                  }</td>
                   <td style="min-width:100px">${category.category_name}</td>
                   <td style="min-width:100px">${category.type}</td>
                   <td>${category.questions}</td>
@@ -1892,6 +1920,15 @@ $(document).ready(function () {
             const category = data.data[0];
             $("#edit_id").val(category.id);
 
+            // Preselect category
+            $("#update_current_affairs_category_id option").each(function () {
+              if ($(this).val() == category.category) {
+                $(this).attr("selected", "selected");
+              } else {
+                $(this).removeAttr("selected");
+              }
+            });
+
             $("#edit_category_name").val(category.category_name);
             // Set the status radio button
             if (category.status == 1) {
@@ -1935,6 +1972,7 @@ $(document).ready(function () {
       const formData = {
         category_name: $("#edit_category_name").val(),
         type: $("#edit_category_type").val(),
+        category: $("#update_current_affairs_category_id").val(),
         status: parseInt($("input[name='status']:checked").val()),
       };
       if ($("#edit_instructions").val()) {
@@ -1996,6 +2034,8 @@ $(document).ready(function () {
           category: $("#current_affairs_category_id").val(),
         };
 
+        console.log(data);
+
         $.ajax({
           url: apiUrl,
           type: "POST",
@@ -2044,7 +2084,7 @@ $(document).ready(function () {
         method: "GET",
         data: data,
         success: function (data) {
-          console.log(data.data.length);
+          console.log(data.data);
 
           if (data.total !== "0") {
             $("#pdf_management_table").empty();
@@ -2060,15 +2100,15 @@ $(document).ready(function () {
                 url: `${languageApiUrl}?language=${category.language}`,
                 method: "GET",
                 success: function (data) {
-                  language = data.data[0].language;
-
                   $("#pdf_management_table").append(`
                     <tr>
                       <td>${index + 1}</td>
                       <td>${category.id}</td>
                       <td style="min-width:100px">${category.category_name}</td>
                       <td style="min-width:100px">${
-                        category.language == null ? "N/A" : language
+                        category.language == null
+                          ? "N/A"
+                          : getLanguage(category.language)
                       }</td>
                       <td style="min-width:100px">${category.type}</td>
                       <td>${category.pdf}</td>

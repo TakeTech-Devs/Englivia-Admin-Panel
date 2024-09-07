@@ -41,7 +41,7 @@ $type = 2;
                                             <input type="hidden" id="category_type" name="category_type" value="2">
 
                                             <div class="form-group row ">
-                                                <div class="col-md-10 col-sm-6 col-xs-12">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
                                                     <?php
                                                     $sql = "SELECT * FROM `tbl_categories` where `type` = 2 ORDER BY id DESC";
                                                     $db->sql($sql);
@@ -178,15 +178,36 @@ $type = 2;
                             <input type="hidden" id="edit_type" name="edit_category_type" value="1">
 
                             <div class="form-group">
-                                <label>Category Name</label>
-                                <input type="text" name="name" id="edit_category_name" placeholder="Category Name"
-                                    class='form-control' required>
+                                <div class="col-md-12 col-sm-6 col-xs-12">
+                                    <label>Category Name</label>
+                                    <input type="text" name="name" id="edit_category_name" placeholder="Category Name"
+                                        class='form-control' required>
+                                </div>
                             </div>
                             <div style="display: none">
                                 <label class="" for="image">Image <small>( Leave it blank for no change
                                         )</small></label>
                                 <input type="file" name="image" id="edit_image" class="form-control"
                                     aria-required="true">
+                            </div>
+                            <div class="form-group row ">
+                                <div class="col-md-12 col-sm-6 col-xs-12">
+                                    <?php
+                                    $sql = "SELECT * FROM `tbl_categories` where `type` = 2 ORDER BY id DESC";
+                                    $db->sql($sql);
+                                    $categories = $db->getResult();
+                                    ?>
+                                    <label for="update_current_affairs_category_id">Parent Category</label>
+                                    <select id="update_current_affairs_category_id"
+                                        name="update_current_affairs_category_id" required class="form-control">
+                                        <option value="">Update Parent Category</option>
+                                        <?php foreach ($categories as $category) { ?>
+                                            <option value='<?= $category['id'] ?>'>
+                                                <?= $category['category_name'] ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>

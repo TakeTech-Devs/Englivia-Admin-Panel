@@ -118,6 +118,7 @@ function handlePostRequest($db, &$response)
     $params = [
         'category_name' => $db->escapeString($data['category_name']),
         'type' => intval($data['type']),
+        'category' => intval($data['category']),
     ];
 
     // Generate a custom ID
@@ -171,6 +172,9 @@ function handlePutRequest($db, &$response)
     if (isset($data['type'])) {
         $params['type'] = intval($data['type']);
     }
+    if (isset($data['category'])) {
+        $params['category'] = intval($data['category']);
+    }
 
     if (!empty($params)) {
         $db->update('tbl_subcategories', $params, 'id = ' . $id);
@@ -191,6 +195,10 @@ function handleDeleteRequest($db, &$response)
         respond(['error' => 'ID is required'], 400);
     }
     $id = intval($data['id']);
+
+    // Delete all questions related to this category in a single query
+    $db->delete('tbl_questions', 'category_id = ' . $id);
+
     $db->delete('tbl_subcategories', 'id = ' . $id);
     outputResponse($db, $response, 'Category deleted successfully');
 }

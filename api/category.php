@@ -135,8 +135,6 @@ function handlePostRequest($db, &$response)
 
     $params['id'] = intval($new_id); // Convert to integer if needed
 
-    // die($new_id);
-
     if (!empty($params['category_name'])) {
         $db->insert('tbl_categories', $params);
         outputResponse($db, $response, 'Category created successfully');
@@ -190,13 +188,31 @@ function handlePutRequest($db, &$response)
 function handleDeleteRequest($db, &$response)
 {
     $data = json_decode(file_get_contents("php://input"), true);
+
     if (!isset($data['id']) || empty($data['id'])) {
         respond(['error' => 'ID is required'], 400);
     }
+
     $id = intval($data['id']);
+
+    $db->select('tbl_subcategories', '*', null, 'category = ' . $id);
+    $subCategories = $db->getResult();
+
+    foreach ($subCategories as $category) {
+        // Step 1: Delete all questions related to this category in a single query
+        $db->delete('tbl_questions', 'category_id = ' . $category['id']);
+    
+        // Step 2: Delete all questions related to this category in a single query
+        $db->delete('tbl_subcategories', 'id = ' . $category['id']);
+    }
+
+
+    // Step 3: Delete the category itself
     $db->delete('tbl_categories', 'id = ' . $id);
+
     outputResponse($db, $response, 'Category deleted successfully');
 }
+
 
 function parseInstructions($instructions)
 {

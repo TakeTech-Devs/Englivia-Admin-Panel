@@ -145,6 +145,20 @@ function handlePostRequest($db, &$response)
     // Determine the base directory dynamically
     $baseDir = ($host === 'localhost') ? $_SERVER['DOCUMENT_ROOT'] . '/cl.englivia.com/uploads/pdf/' : $_SERVER['DOCUMENT_ROOT'] . '/uploads/pdf/';
 
+    // Fetch the current PDF from the database
+    $db->select('tbl_categories', 'pdf', null, 'id = ' . $id . ' AND pdf IS NOT NULL');
+    $result = $db->getResult();
+
+    if (!empty($result) && isset($result[0]['pdf'])) {
+        $oldPdfFileName = $result[0]['pdf'];
+        $oldPdfPath = $baseDir . $oldPdfFileName;
+
+        // Delete the old PDF file from the server
+        if (file_exists($oldPdfPath)) {
+            unlink($oldPdfPath);
+        }
+    }
+    
     // Check if a file is selected
     if (isset($_FILES["pdf"]) && $_FILES["pdf"]["error"] == UPLOAD_ERR_OK) {
         // Define the tag

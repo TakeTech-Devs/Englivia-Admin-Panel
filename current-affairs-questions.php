@@ -62,13 +62,13 @@ $type = 2;
                                                     if (!empty($categories)) {
                                                         foreach ($categories as $category) { ?>
                                                             <option value='<?= htmlspecialchars($category['id']) ?>'>
-                                                                <?= strtoupper($category['Tag']) ?> -
-                                                                <?= $category['parent_category'] ?> -
-                                                                <?= $category['category_name'] ?>
+                                                                <?= strtoupper(trim($category['Tag'])) ?> -
+                                                                <?= trim($category['parent_category']) ?> -
+                                                                <?= trim($category['category_name']) ?>
                                                             </option>
                                                         <?php }
                                                     } else { ?>
-                                                        <option value="">No categories available</option>
+                                                        <option value="">No category available</option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -217,7 +217,7 @@ $type = 2;
                                                         </option>
                                                     <?php }
                                                 } else { ?>
-                                                    <option value="">No Questions available</option>
+                                                    <option value="">No Category available</option>
                                                 <?php } ?>
                                             </select>
                                         </div>
