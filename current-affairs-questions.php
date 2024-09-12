@@ -329,7 +329,7 @@ $type = 2;
                             <!-- Category Dropdown -->
                             <div class="form-group d-none">
                                 <label class="control-label col-md-1 col-sm-3 col-xs-12"
-                                    for="edit_current_affairs_category_id">Category</label>
+                                    for="update_category_id">Category</label>
                                 <div class="col-md-10 col-sm-6 col-xs-12">
                                     <?php
                                     $sql = "SELECT tbl_subcategories.*, tbl_categories.category_name AS parent_category, tbl_categories.Tag
@@ -339,8 +339,8 @@ $type = 2;
                                     $db->sql($sql);
                                     $categories = $db->getResult();
                                     ?>
-                                    <select id="edit_current_affairs_category_id"
-                                        name="edit_current_affairs_category_id" required class="form-control">
+                                    <select id="update_category_id"
+                                        name="update_category_id" required class="form-control">
                                         <option value="">Select Category</option>
                                         <?php
                                         if (!empty($categories)) {

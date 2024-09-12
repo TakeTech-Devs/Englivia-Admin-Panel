@@ -112,7 +112,7 @@ $type = 1;
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title" id="editModalLabel">Edit Question Details</h4>
+                        <h4 class="modal-title" id="editModalLabel">Edit Pdf Details</h4>
                     </div>
                     <div class="modal-body">
                         <form id="update_form" method="POST" data-parsley-validate
@@ -143,8 +143,7 @@ $type = 1;
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3" style="margin:0 0 0 50%">
-                                    <button type="button" id="update_btn" class="btn btn-success">Update
-                                        Question</button>
+                                    <button type="button" id="update_btn" class="btn btn-success">Update</button>
                                 </div>
                             </div>
                         </form>
