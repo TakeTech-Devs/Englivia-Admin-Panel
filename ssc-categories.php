@@ -96,7 +96,7 @@ $type = 1;
                                         <div class="table__container">
                                             <div class="table__header">
                                                 <div class="table__title">
-                                                    <h2>Questions</h2>
+                                                    <h2>SSC Categories</h2>
                                                 </div>
 
                                             </div>

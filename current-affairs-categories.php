@@ -116,7 +116,7 @@ $type = 2;
                                         <div class="table__container">
                                             <div class="table__header">
                                                 <div class="table__title">
-                                                    <h2>Questions</h2>
+                                                    <h2>Current Affairs Categories</h2>
                                                 </div>
 
                                             </div>

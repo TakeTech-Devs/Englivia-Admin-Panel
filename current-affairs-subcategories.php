@@ -31,7 +31,7 @@ $type = 2;
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Create Categories</h2>
+                                <h2>Create Tests</h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
@@ -63,7 +63,7 @@ $type = 2;
 
                                             <div class="form-group row">
                                                 <div class="col-md-6 col-sm-12">
-                                                    <label for="category_name">Category Name</label>
+                                                    <label for="category_name">Test Name</label>
                                                     <input type="text" id="category_name" name="category_name" required
                                                         class="form-control">
                                                 </div>
@@ -99,7 +99,7 @@ $type = 2;
                                         <div class="table__container">
                                             <div class="table__header">
                                                 <div class="table__title">
-                                                    <h2>Questions</h2>
+                                                    <h2>Current Affairs Test</h2>
                                                 </div>
 
                                             </div>
@@ -170,20 +170,13 @@ $type = 2;
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title" id="editQuestionModalLabel">Edit Category Details</h4>
+                        <h4 class="modal-title" id="editQuestionModalLabel">Edit Test Details</h4>
                     </div>
                     <div class="modal-body">
                         <form id="update_form" class="form-horizontal form-label-left">
                             <input type="hidden" id="edit_id" name="edit_id">
                             <input type="hidden" id="edit_type" name="edit_category_type" value="1">
 
-                            <div class="form-group">
-                                <div class="col-md-12 col-sm-6 col-xs-12">
-                                    <label>Category Name</label>
-                                    <input type="text" name="name" id="edit_category_name" placeholder="Category Name"
-                                        class='form-control' required>
-                                </div>
-                            </div>
                             <div style="display: none">
                                 <label class="" for="image">Image <small>( Leave it blank for no change
                                         )</small></label>
@@ -209,6 +202,14 @@ $type = 2;
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-md-12 col-sm-6 col-xs-12">
+                                    <label>Test Name</label>
+                                    <input type="text" name="name" id="edit_category_name" placeholder="Category Name"
+                                        class='form-control' required>
+                                </div>
+                            </div>
+                            
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
