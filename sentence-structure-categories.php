@@ -168,6 +168,7 @@ $type = 3;
                     <div class="modal-body">
                         <form id="update_form" class="form-horizontal form-label-left">
                             <input type="hidden" id="edit_id" name="edit_id">
+                            <input type="hidden" id="edit_tag" name="edit_tag" value="SS">
                             <input type="hidden" id="edit_category_type" name="edit_category_type" value="3">
 
                             <div class="form-group">

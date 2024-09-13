@@ -26,6 +26,9 @@ $(document).ready(function () {
 
   // Function to get language name by ID
   function getLanguage(language) {
+    if (language == 0 || language > 3) {
+      return "Language not available";
+    }
     return languages[language - 1].language;
   }
 
@@ -2789,6 +2792,8 @@ $(document).ready(function () {
           category_name: $("#category_name").val(),
           type: $("#category_type").val(),
           instructions: $("#category_instructions").val() || null,
+          language: $("#category_language").val(),
+          tag: $("#edit_tag").val(),
         };
 
         $.ajax({
