@@ -118,6 +118,7 @@ $type = 1;
                         <form id="update_form" method="POST" data-parsley-validate
                             class="form-horizontal form-label-left">
                             <input type='hidden' name="edit_id" id="edit_id" value='' />
+                            <input type='hidden' name="edit_tag" id="edit_tag" value='CA' />
                             <input type='hidden' name="update_question" id="update_question" value='1' />
 
                             <!-- Category Name -->

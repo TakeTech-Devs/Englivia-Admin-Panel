@@ -162,7 +162,7 @@ function handlePostRequest($db, &$response)
     // Check if a file is selected
     if (isset($_FILES["pdf"]) && $_FILES["pdf"]["error"] == UPLOAD_ERR_OK) {
         // Define the tag
-        $tag = "CA";
+        $tag = "Paragraph";
 
         // Generate the new file name
         $fileExtension = strtolower(pathinfo($_FILES["pdf"]["name"], PATHINFO_EXTENSION));

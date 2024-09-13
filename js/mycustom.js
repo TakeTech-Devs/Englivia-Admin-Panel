@@ -2332,6 +2332,7 @@ $(document).ready(function () {
 
       // Append text fields to formData
       formData.append("id", $("#edit_id").val());
+      formData.append("tag", $("#edit_tag").val());
       formData.append("category_name", $("#edit_category_name").val());
 
       // Append the file to formData
@@ -3088,6 +3089,7 @@ $(document).ready(function () {
 
       // Append text fields to formData
       formData.append("id", $("#edit_id").val());
+      formData.append("tag", $("#edit_tag").val());
       formData.append("category_name", $("#edit_category_name").val());
 
       // Append the file to formData
@@ -3185,7 +3187,7 @@ $(document).ready(function () {
                     : getLanguage(category.language)
                 }</td>
                 <td style="min-width:100px">${category.type}</td>
-                <td>${category.status == 1 ? "Active" : "Deactive"}</td>
+                <td>${category.status == 1 ? "Active" : "Deactive"}</td>oo
                 <td style="width:80px">
                     <a class='btn btn-xs btn-primary edit-admin' data-id='${
                       category.id
