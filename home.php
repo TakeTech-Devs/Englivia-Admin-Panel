@@ -3,7 +3,6 @@ session_start();
 if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
     header("location:index.php");
     return false;
-    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -101,7 +100,7 @@ if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
                                         <div id="columnchart_material_2" style="width:100%;height:350px;"></div>
                                     </div>
                                 </div>
-                           <div style="visibility:hidden">
+                                <div style="visibility:hidden">
                                     <?php
                                     $year = date("Y");
                                     $sql = "SELECT COUNT(id) AS month_wise_count,MONTHNAME(date_created) AS month_name FROM monthly_leaderboard WHERE YEAR(date_created) = '$year' GROUP BY MONTH(date_created)";

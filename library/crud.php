@@ -198,7 +198,7 @@ class Database
     }
 
     // Function to update row in database
-    public function update($table, $params = array(), $where)
+    public function update($table, $where, $params = array())
     {
         // Check to see if table exists
         if ($this->tableExists($table)) {
