@@ -813,6 +813,8 @@ $(document).ready(function () {
           category_name: $("#category_name").val(),
           type: $("#category_type").val(),
           instructions: $("#category_instructions").val() || null,
+          language: $("#edit_language").val(),
+          tag: $("#edit_tag").val(),
         };
 
         $.ajax({
