@@ -1378,6 +1378,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'learning_zone') {
     $tempRow = array();
 
     foreach ($res as $row) {
+        $operate = "";
         $operate .= "<a class='btn btn-xs btn-success edit-data' data-id='" . $row['id'] . "' title='Edit'><i class='fas fa-edit'></i></a>";
 
         $operate = "<a class='btn btn-sm btn-primary' href='learning-questions.php?id=" . $row['id'] . "' title='Add question'><i class='fas fa-plus'></i> Practice MCQ With Definition</a>";

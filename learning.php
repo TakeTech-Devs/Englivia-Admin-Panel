@@ -3,7 +3,6 @@ session_start();
 if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
     header("location:index.php");
     return false;
-    exit();
 }
 $type = '2';
 ?>
@@ -63,9 +62,6 @@ $type = '2';
                                                     <label>Subjects</label>
                                                     <select id="category" name="category" required class="form-control">
                                                         <option value=''>Select Options</option>
-                                                        <?php foreach ($categories as $category) { ?>
-                                                            <option value='<?= $category['id'] ?>'><?= $category['category_name'] ?></option>
-                                                        <?php } ?>
                                                     </select>
                                                 </div>
                                             </div>

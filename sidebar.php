@@ -105,7 +105,7 @@ if (basename($_SERVER['PHP_SELF']) == 'languages.php' && !$fn->is_language_mode_
                         <a><em class="fas fa-book"></em> Learning-Quiz-Exam<span class="fas fa-caret-down"></span></a>
                         <ul class="nav child_menu">
 
-                            <li><a href="questions.php">Manage Questions</a></li>
+                            <li><a href="learning.php"> Learning-Quiz-Sections</a></li>
 
                         </ul>
                     </li>
