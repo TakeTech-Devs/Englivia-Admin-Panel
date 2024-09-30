@@ -6,7 +6,7 @@
  * @Version 1.0
  * @Package Database
  */
-define('DOMAIN_URL', 'http://cl.englivia.com/');
+define('DOMAIN_URL', 'https://cl.englivia.com/');
 define('JWT_SECRET_KEY', '9874849845198498465998191984984561981498465498459945');
 
 class Database
@@ -198,7 +198,7 @@ class Database
     }
 
     // Function to update row in database
-    public function update($table, $where, $params = array())
+    public function update($table, $params = array(), $where = null)
     {
         // Check to see if table exists
         if ($this->tableExists($table)) {

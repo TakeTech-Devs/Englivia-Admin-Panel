@@ -50,6 +50,10 @@ function handleGetRequest($db, &$response)
         $conditions[] = 'id = ' . intval($_GET['id']);
     }
 
+    if (isset($_GET['language'])) {
+        $conditions[] = 'language = ' . intval(value: $_GET['language']);
+    }
+
     if (isset($_GET['keyword'])) {
         $keyword = $db->escapeString($_GET['keyword']);
         $conditions[] = 'category_name LIKE "%' . $keyword . '%"';

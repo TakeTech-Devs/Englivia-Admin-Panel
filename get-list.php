@@ -2,10 +2,10 @@
 
 
 session_start();
-if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
-    header("location:index.php");
-    return false;
-}
+// if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
+//     header("location:index.php");
+//     return false;
+// }
 header("Content-Type: application/json");
 header("Expires: 0");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
@@ -79,7 +79,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'category') {
         $where = ' WHERE `type` = ' . $type;
         if ($type == 1 || $type == '1') {
             $total_question = ", (SELECT count(id) FROM question WHERE question.category = c.id ) as no_of_que";
-        }        
+        }
         if ($type == 2 || $type == '2') {
             $total_question = ", (SELECT count(id) FROM tbl_learning WHERE tbl_learning.category = c.id ) as no_of_que";
         }
@@ -125,7 +125,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'category') {
         $tempRow['image'] = (!empty($row['image'])) ? '<a href="' . $image . '" data-lightbox="Category Images"><img src="' . $image . '" height=30 ></a>' : '<img src="images/logo-half.png" height=30>';
         $tempRow['no_of_que'] = $row['no_of_que'];
         $tempRow['operate'] = $operate;
-       $tempRow['note'] = $row['note'];
+        $tempRow['note'] = $row['note'];
         $rows[] = $tempRow;
     }
 
@@ -141,6 +141,8 @@ if (isset($_GET['table']) && $_GET['table'] == 'subcategory') {
     $order = 'ASC';
     $where = '';
     $table = $_GET['table'];
+    $total_question = "";
+
 
     if (isset($_GET['sort'])) {
         $sort = $_GET['sort'];
@@ -190,9 +192,10 @@ if (isset($_GET['table']) && $_GET['table'] == 'subcategory') {
     }
 
     $sql = "SELECT s.*, l.language, c.`category_name` " . $total_question . " FROM `subcategory` s " . $left_join . " " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
-
     $db->sql($sql);
     $res = $db->getResult();
+    // echo $sql;
+    // print_r($res);
 
     $bulkData = array();
     $bulkData['total'] = $total;
@@ -213,8 +216,8 @@ if (isset($_GET['table']) && $_GET['table'] == 'subcategory') {
         $tempRow['row_order'] = $row['row_order'];
         $tempRow['image'] = (!empty($row['image'])) ? '<a href="' . $image . '" data-lightbox="Sub Category Images"><img src="' . $image . '" height=30 ></a>' : '<img src="images/logo-half.png" height=30>';
         $tempRow['status'] = ($row['status']) ? '<label class="label label-success">Active</label>' : '<label class="label label-danger">Deactive</label>';
-        $tempRow['no_of_que'] = $row['no_of_que'];
-       $tempRow['note'] = $row['note'];
+        $tempRow['no_of_que'] = isset($row['no_of_que']) ? $row['no_of_que'] : 'N/A'; // Check if 'no_of_que' keys exist
+        $tempRow['note'] = isset($row['note']) ? $row['note'] : 'N/A'; // Check if 'note' keys exist
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
     }
@@ -283,7 +286,6 @@ if (isset($_GET['table']) && $_GET['table'] == 'users') {
 
     foreach ($res as $row) {
         $operate = "<a class='btn btn-xs btn-primary edit-users' data-id='" . $row['id'] . "' data-toggle='modal' data-target='#editUserModal' title='Edit'><i class='far fa-edit'></i></a>";
-        
 
         if (filter_var($row['profile'], FILTER_VALIDATE_URL) === FALSE) {
             // Not a valid URL. Its a image only or empty
@@ -653,10 +655,10 @@ if (isset($_GET['table']) && $_GET['table'] == 'question') {
 
     foreach ($res as $row) {
         $image = (!empty($row['image'])) ? 'images/questions/' . $row['image'] : '';
-      
-    //this is adammy section need to add funtion hrf change 
-       $operate = "<a class='btn btn-xs btn-primary edit-question' href='#?id=" . $row['id'] . "' title='Edit' data-toggle='modal' data-target='#editQuestionModal'><i class='far fa-edit'></i></a>";
-       
+
+        //this is adammy section need to add funtion hrf change 
+        $operate = "<a class='btn btn-xs btn-primary edit-question' href='#?id=" . $row['id'] . "' title='Edit' data-toggle='modal' data-target='#editQuestionModal'><i class='far fa-edit'></i></a>";
+
         $operate .= "<a class='btn btn-xs btn-danger delete-question' data-id='" . $row['id'] . "' data-image='" . $image . "' title='Delete'><i class='fas fa-trash'></i></a>";
 
         $tempRow['id'] = $row['id'];
@@ -814,7 +816,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'notifications') {
         $tempRow['type_id'] = ucwords($row['type_id']);
         $tempRow['date_sent'] = $row['date_sent'];
         $tempRow['operate'] = $operate;
-       $tempRow['note'] = $row['note'];
+        $tempRow['note'] = $row['note'];
         $rows[] = $tempRow;
     }
 
@@ -1003,7 +1005,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'contest') {
         $tempRow['status'] = ($row['status']) ? "<label class='label label-success'>Active</label>" : "<label class='label label-danger'>Deactive</label>";
         $tempRow['prize_status'] = ($row['prize_status'] == 0) ? '<label class="label label-warning">Not Distributed</label>' : '<label class="label label-success">Distributed</label>';
         $tempRow['operate'] = $operate;
-       $tempRow['note'] = $row['note'];
+        $tempRow['note'] = $row['note'];
         $rows[] = $tempRow;
     }
 
@@ -1287,14 +1289,14 @@ if (isset($_GET['table']) && $_GET['table'] == 'dictionary_zone') {
 
     foreach ($res as $row) {
         $operate = "<a class='btn btn-xs btn-warning' href='add-dictionary.php?id=" . $row['id'] . "' title='Add Word'><i class='fas fa-plus'></i></a>";
-      //dammy data
-       $operate .= "<a class='btn btn-xs btn-success edit-data' data-id='" . $row['id'] . "' data-toggle='modal' data-target='#editDictionaryModal' title='Edit'><i class='fas fa-edit'></i></a>";
-      
+        //dammy data
+        $operate .= "<a class='btn btn-xs btn-success edit-data' data-id='" . $row['id'] . "' data-toggle='modal' data-target='#editDictionaryModal' title='Edit'><i class='fas fa-edit'></i></a>";
+
         $operate .= "<a class='btn btn-xs btn-danger delete-data' data-id='" . $row['id'] . "' title='Delete'><i class='fas fa-trash'></i></a>";
-      
-      
-      
-       
+
+
+
+
 
         $tempRow['id'] = $row['id'];
         $tempRow['language_id'] = $row['language_id'];
@@ -1376,50 +1378,25 @@ if (isset($_GET['table']) && $_GET['table'] == 'learning_zone') {
     $tempRow = array();
 
     foreach ($res as $row) {
-         $operate .= "<a class='btn btn-xs btn-success edit-data' data-id='" . $row['id'] . "' title='Edit'><i class='fas fa-edit'></i></a>";
+        $operate .= "<a class='btn btn-xs btn-success edit-data' data-id='" . $row['id'] . "' title='Edit'><i class='fas fa-edit'></i></a>";
 
         $operate = "<a class='btn btn-sm btn-primary' href='learning-questions.php?id=" . $row['id'] . "' title='Add question'><i class='fas fa-plus'></i> Practice MCQ With Definition</a>";
-      
+
         $operate .= "<a class='btn btn-xs btn-primary edit-data' data-id='" . $row['id'] . "' data-toggle='modal' data-target='#editDataModal' title='Edit'><i class='fas fa-edit'></i></a>";
         $operate .= "<a class='btn btn-xs btn-success edit-status' data-id='" . $row['id'] . "' data-toggle='modal' data-target='#editStatusModal' title='Edit Status'><i class='fas fa-edit'></i></a>";
-        $operate .=  "<a class='btn btn-sm btn-primary' href='learning-details.php?id=" . $row['id'] . "' title='Add Details'><i class='fas fa-plus'></i> Learning With Image</a>";
-        $operate .=  "<a class='btn btn-sm btn-primary' href='exam-questions.php?id=" . $row['id'] . "' title='Add Exam Questions'><i class='fas fa-plus'></i> Final MCQ Exam</a>";
+        $operate .= "<a class='btn btn-sm btn-primary' href='learning-details.php?id=" . $row['id'] . "' title='Add Details'><i class='fas fa-plus'></i> Learning With Image</a>";
+        $operate .= "<a class='btn btn-sm btn-primary' href='exam-questions.php?id=" . $row['id'] . "' title='Add Exam Questions'><i class='fas fa-plus'></i> Final MCQ Exam</a>";
 
         $operate .= "<a class='btn btn-xs btn-danger delete-data' data-id='" . $row['id'] . "' title='Delete'><i class='fas fa-trash'></i></a>";
 
         $tempRow['id'] = $row['id'];
-      
-      
-      
-      
-      
-      
-      
-      
-      
-         $sql = "SELECT * FROM `category` where id='".$row['category']."' ";
-    $db->sql($sql);
-    $res = $db->getResult();
-    foreach ($res as $ro1) {
-        $total = $ro1['category_name'];
-    }
-      
-      
+        $sql = "SELECT * FROM `category` where id='" . $row['category'] . "' ";
+        $db->sql($sql);
+        $res = $db->getResult();
+        foreach ($res as $ro1) {
+            $total = $ro1['category_name'];
+        }
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
         $tempRow['category'] = $total;
         $tempRow['language_id'] = $row['language_id'];
         $tempRow['language'] = $row['language'];
@@ -1434,25 +1411,6 @@ if (isset($_GET['table']) && $_GET['table'] == 'learning_zone') {
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // 18. learnning_question
 if (isset($_GET['table']) && $_GET['table'] == 'learnning_detail') {
@@ -1478,11 +1436,11 @@ if (isset($_GET['table']) && $_GET['table'] == 'learnning_detail') {
         $order = $_GET['order'];
 
 
-    if(isset($_GET['learning_id'])){
+    if (isset($_GET['learning_id'])) {
         $learning_id = $_GET['learning_id'];
-        $where = " WHERE learning_id=".$learning_id;
+        $where = " WHERE learning_id=" . $learning_id;
     }
-    
+
     if (isset($_GET['search'])) {
         $search = $_GET['search'];
         $where .= " AND (q.`id` like '%" . $search . "%' OR `question` like '%" . $search . "%' OR `optiona` like '%" . $search . "%' OR `optionb` like '%" . $search . "%' OR `optionc` like '%" . $search . "%' OR `optiond` like '%" . $search . "%' OR `answer` like '%" . $search . "%' )";
@@ -1506,34 +1464,34 @@ if (isset($_GET['table']) && $_GET['table'] == 'learnning_detail') {
     $tempRow = array();
 
     foreach ($res as $row) {
-    
-             $operate = "<a class='btn btn-xs btn-primary edit-learnings' data-id='" . $row['id'] . "' data-toggle='modal' data-target='#editLearningModal' title='Edit'><i class='fas fa-edit'></i></a>";
 
-       $operate .= "<a class='btn btn-xs btn-danger delete-question' data-id='" . $row['id'] . "' title='Delete learnings'><i class='fas fa-trash'></i></a>";
+        $operate = "<a class='btn btn-xs btn-primary edit-learnings' data-id='" . $row['id'] . "' data-toggle='modal' data-target='#editLearningModal' title='Edit'><i class='fas fa-edit'></i></a>";
+
+        $operate .= "<a class='btn btn-xs btn-danger delete-question' data-id='" . $row['id'] . "' title='Delete learnings'><i class='fas fa-trash'></i></a>";
 
         $tempRow['id'] = $row['id'];
         $tempRow['learning_id'] = $row['learning_id'];
         $tempRow['detail'] = $row['detail'];
         $tempRow['headline'] = $row['headline'];
         $tempRow['headline_meaning'] = $row['headline_meaning'];
-		
-       // $tempRow['image'] = $row['image'];
-         //     $tempRow['image'] = (!empty($row['image'])) ? '<a href="' . $image . '" data-lightbox="Category Images"><img src="' . $image . '" height=30 ></a>' : '<img src="images/logo-half.png" height=30>';
+
+        // $tempRow['image'] = $row['image'];
+        //     $tempRow['image'] = (!empty($row['image'])) ? '<a href="' . $image . '" data-lightbox="Category Images"><img src="' . $image . '" height=30 ></a>' : '<img src="images/logo-half.png" height=30>';
 
 
-      
-      
-      
-              $image = (!empty($row['image'])) ? 'images/category/' . $row['image'] : '';
+
+
+
+        $image = (!empty($row['image'])) ? 'images/category/' . $row['image'] : '';
 
         $tempRow['image'] = (!empty($row['image'])) ? '<a href="' . $image . '" data-lightbox="Category Images"><img src="' . $image . '" height=30 ></a>' : '<img src="images/logo-half.png" height=30>';
 
-      
-      
-      
+
+
+
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
-       $tempRow['note'] = $row['note'];
+        $tempRow['note'] = $row['note'];
     }
 
     $bulkData['rows'] = $rows;
@@ -1573,11 +1531,11 @@ if (isset($_GET['table']) && $_GET['table'] == 'dictionary_data') {
         $order = $_GET['order'];
 
 
-    if(isset($_GET['learning_id'])){
+    if (isset($_GET['learning_id'])) {
         $learning_id = $_GET['learning_id'];
-        $where = " WHERE dictionary_id=".$learning_id;
+        $where = " WHERE dictionary_id=" . $learning_id;
     }
-    
+
     if (isset($_GET['search'])) {
         $search = $_GET['search'];
         $where .= " AND (q.`id` like '%" . $search . "%' OR `question` like '%" . $search . "%' OR `optiona` like '%" . $search . "%' OR `optionb` like '%" . $search . "%' OR `optionc` like '%" . $search . "%' OR `optiond` like '%" . $search . "%' OR `answer` like '%" . $search . "%' )";
@@ -1601,37 +1559,37 @@ if (isset($_GET['table']) && $_GET['table'] == 'dictionary_data') {
     $tempRow = array();
 
     foreach ($res as $row) {
-      
-      $operate = "<a class='btn btn-xs btn-primary edit-meaning' data-id='" . $row['id'] . "' data-toggle='modal' data-target='#editDictionaryModal' title='Edit'><i class='fas fa-edit'></i></a>";
 
-      
-       $operate .= "<a class='btn btn-xs btn-danger delete-question' data-id='" . $row['id'] . "' title='Delete'><i class='fas fa-trash'></i></a>";
+        $operate = "<a class='btn btn-xs btn-primary edit-meaning' data-id='" . $row['id'] . "' data-toggle='modal' data-target='#editDictionaryModal' title='Edit'><i class='fas fa-edit'></i></a>";
+
+
+        $operate .= "<a class='btn btn-xs btn-danger delete-question' data-id='" . $row['id'] . "' title='Delete'><i class='fas fa-trash'></i></a>";
 
 
         $tempRow['id'] = $row['id'];
         $tempRow['learning_id'] = $row['dictionary_id'];
         $tempRow['word'] = $row['word'];
         $tempRow['meaning'] = $row['meaning'];
-       // $tempRow['image'] = $row['image'];
-       //$tempRow['image'] = (!empty($row['image'])) ? '<a href="' . $image . '" data-lightbox="Category Images"><img src="' . $image . '" height=30 ></a>' : '<img src="images/logo-half.png" height=30>';
+        // $tempRow['image'] = $row['image'];
+        //$tempRow['image'] = (!empty($row['image'])) ? '<a href="' . $image . '" data-lightbox="Category Images"><img src="' . $image . '" height=30 ></a>' : '<img src="images/logo-half.png" height=30>';
 
 
-      
- $image = (!empty($row['image'])) ? 'images/category/' . $row['image'] : '';
+
+        $image = (!empty($row['image'])) ? 'images/category/' . $row['image'] : '';
 
         $tempRow['image'] = (!empty($row['image'])) ? '<a href="' . $image . '" data-lightbox="Category Images"><img src="' . $image . '" height=30 ></a>' : '<img src="images/logo-half.png" height=30>';
 
-      
-      
-      
+
+
+
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
-       $tempRow['note'] = $row['note'];
+        $tempRow['note'] = $row['note'];
     }
 
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
-  //die();
+    //die();
 }
 
 
@@ -1661,11 +1619,11 @@ if (isset($_GET['table']) && $_GET['table'] == 'learnning_question') {
         $order = $_GET['order'];
 
 
-    if(isset($_GET['learning_id'])){
+    if (isset($_GET['learning_id'])) {
         $learning_id = $_GET['learning_id'];
-        $where = " WHERE learning_id=".$learning_id;
+        $where = " WHERE learning_id=" . $learning_id;
     }
-    
+
     if (isset($_GET['search'])) {
         $search = $_GET['search'];
         $where .= " AND (q.`id` like '%" . $search . "%' OR `question` like '%" . $search . "%' OR `optiona` like '%" . $search . "%' OR `optionb` like '%" . $search . "%' OR `optionc` like '%" . $search . "%' OR `optiond` like '%" . $search . "%' OR `answer` like '%" . $search . "%' )";
@@ -1739,11 +1697,11 @@ if (isset($_GET['table']) && $_GET['table'] == 'exam_question') {
         $order = $_GET['order'];
 
 
-    if(isset($_GET['learning_id'])){
+    if (isset($_GET['learning_id'])) {
         $learning_id = $_GET['learning_id'];
-        $where = " WHERE learning_id=".$learning_id;
+        $where = " WHERE learning_id=" . $learning_id;
     }
-    
+
     if (isset($_GET['search'])) {
         $search = $_GET['search'];
         $where .= " AND (q.`id` like '%" . $search . "%' OR `question` like '%" . $search . "%' OR `optiona` like '%" . $search . "%' OR `optionb` like '%" . $search . "%' OR `optionc` like '%" . $search . "%' OR `optiond` like '%" . $search . "%' OR `answer` like '%" . $search . "%' )";
@@ -1779,7 +1737,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'exam_question') {
         $tempRow['optiond'] = $row['optiond'];
         $tempRow['optione'] = $row['optione'];
         $tempRow['answer'] = $row['answer'];
-         $tempRow['note'] = $row['note'];
+        $tempRow['note'] = $row['note'];
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
     }
@@ -1787,17 +1745,5 @@ if (isset($_GET['table']) && $_GET['table'] == 'exam_question') {
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 ?>

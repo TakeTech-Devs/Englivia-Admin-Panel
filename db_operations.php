@@ -9,7 +9,6 @@ session_start();
 if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
     header("location:index.php");
     return false;
-    exit();
 }
 include('library/crud.php');
 include('library/functions.php');
@@ -97,7 +96,8 @@ define('ALLOW_MODIFICATION', 1);
   1. checkadmin($auth_username)
  */
 
-function checkadmin($auth_username) {
+function checkadmin($auth_username)
+{
     $db = new Database();
     $db->connect();
     $db->sql("SELECT `auth_username`,`role` FROM `authenticate` WHERE `auth_username`='$auth_username' LIMIT 1");
@@ -144,15 +144,15 @@ if (isset($_POST['get_subcategories_of_category']) && $_POST['get_subcategories_
 
 // 29. get_categories_of_language - ajax dropdown menu options 
 if (isset($_POST['get_categories_of_language']) && $_POST['get_categories_of_language'] != '') {
-    
+
     $id = $_POST['language_id'];
     $type = (isset($_POST['type'])) ? $_POST['type'] : 1;
     if (empty($id)) {
         echo '<option value="">Select Category</option>';
         return false;
     }
-    // $sql = 'SELECT * FROM `category` WHERE `language_id`=' . $id . ' AND `type`=' . $type . ' ORDER BY row_order + 0 ASC';
-       $sql = 'SELECT * FROM `category` WHERE `language_id`=' . $id . ' ORDER BY row_order + 0 ASC';
+    $sql = 'SELECT * FROM `category` WHERE `language_id`=' . $id . ' AND `type`=' . $type . ' ORDER BY row_order + 0 ASC';
+    // $sql = 'SELECT * FROM `category` WHERE `language_id`=' . $id . ' ORDER BY row_order + 0 ASC';
     $db->sql($sql);
     $res = $db->getResult();
 
@@ -201,7 +201,7 @@ if (isset($_POST['get_selected_date']) && !empty($_POST['get_selected_date']) &&
         $response['language_id'] = $language_id;
         $response['questions_list'] = $html;
     } else {
-//        $html .= "<li id='' class='ui-state-default ui-sortable-handle'>There are no questions added today<a class='btn btn-danger btn-xs remove-row pull-right'>x</a></li>";
+        //        $html .= "<li id='' class='ui-state-default ui-sortable-handle'>There are no questions added today<a class='btn btn-danger btn-xs remove-row pull-right'>x</a></li>";
         $response['error'] = false;
         $response['questions_list'] = $html;
         $response['language_id'] = '';
@@ -296,7 +296,7 @@ if (isset($_POST['category_id']) && isset($_POST['update_category'])) {
 
         $sql2 = "Update question set `language_id`='" . $language_id . "' where `category`=" . $id;
         $db->sql($sql2);
-        
+
         $sql3 = "UPDATE tbl_learning set `language_id`='" . $language_id . "' where `category`=" . $id;
         $db->sql($sql3);
     }
@@ -726,9 +726,9 @@ if (isset($_POST['title']) && isset($_POST['send_notifications'])) {
             'type_id' => $maincat_id,
             'maxlevel' => $maxlevel,
             'no_of' => $no_of
-                //'image' => $server_url.''.$full_path
-                //'sound' => "default",
-                // 'color' => "#203E78" 
+            //'image' => $server_url.''.$full_path
+            //'sound' => "default",
+            // 'color' => "#203E78" 
         );
         $newMsg['data'] = $fcmMsg;
     } else {
@@ -741,8 +741,8 @@ if (isset($_POST['title']) && isset($_POST['send_notifications'])) {
             'type_id' => $maincat_id,
             'maxlevel' => $maxlevel,
             'no_of' => $no_of
-                //'sound' => "default",
-                // 'color' => "#203E78" 
+            //'sound' => "default",
+            // 'color' => "#203E78" 
         );
         $newMsg['data'] = $fcmMsg;
     }
@@ -1075,7 +1075,7 @@ if (isset($_POST['app_link']) && isset($_POST['system_configurations'])) {
     $date = $db->escapeString(date('Y-m-d'));
     if (!empty($_POST['system_configurations_id'])) {
         $_POST['system_timezone_gmt'] = preg_replace('/\s+/', '', $_POST['system_timezone_gmt']);
-        $_POST['system_timezone_gmt'] = ($_POST['system_timezone_gmt'] == '00:00' ) ? "+" . $_POST['system_timezone_gmt'] : $_POST['system_timezone_gmt'];
+        $_POST['system_timezone_gmt'] = ($_POST['system_timezone_gmt'] == '00:00') ? "+" . $_POST['system_timezone_gmt'] : $_POST['system_timezone_gmt'];
         $sql = "UPDATE settings SET message='" . json_encode($_POST, JSON_UNESCAPED_UNICODE) . "' WHERE type='system_configurations'";
     } else {
         $sql = "INSERT INTO settings (type,message,status) VALUES ('system_configurations','" . json_encode($_POST, JSON_UNESCAPED_UNICODE) . "','1')";
@@ -1650,7 +1650,15 @@ if (isset($_POST['import_contest_questions']) && $_POST['import_contest_question
 if (isset($_POST['web_firebase_settings']) && isset($_POST['databaseURL'])) {
 
     $setting = [
-        'apiKey', 'authDomain', 'databaseURL', 'projectId', 'storageBucket', 'messagingSenderId', 'appId', 'client_id_google', 'app_id_fb'
+        'apiKey',
+        'authDomain',
+        'databaseURL',
+        'projectId',
+        'storageBucket',
+        'messagingSenderId',
+        'appId',
+        'client_id_google',
+        'app_id_fb'
     ];
     foreach ($setting as $row) {
         $sql = "SELECT * FROM settings WHERE type='" . $row . "' LIMIT 1";
@@ -1694,31 +1702,32 @@ if (isset($_POST['title']) && isset($_POST['add_dictionary'])) {
 
 
 //54-2. edit_dictionary
-  
-  
+
+
 if (isset($_POST['update_dictionary'])) {
-  
+
     $title = $db->escapeString($_POST['edit_title']);
-   
+
     $dictionary_id = $_POST['dictionary_id'];
-  
- 	$language_id = $db->escapeString($_POST['update_language_id']);
- 
 
- 	$sql1='';$sql2='';
-  		$sql = 'SELECT id FROM `tbl_dictionary` WHERE `id`='. $dictionary_id;
-        $db->sql($sql);
-        $res = $db->getResult();
-        if (empty($res)) {
-            echo "<p class='alert alert-danger'>No enought question for active Learning!</p>";
-        } else {
-        $sql1 = "Update `tbl_dictionary` set `language_id`=" . $language_id . ",`title`='".$title."' where `id`=" . $dictionary_id;
-            $db->sql($sql1);
-    
-            echo "<p class='alert alert-success'>Dictionary updated successfully!</p>";
-        }
+    $language_id = $db->escapeString($_POST['update_language_id']);
 
-    
+
+    $sql1 = '';
+    $sql2 = '';
+    $sql = 'SELECT id FROM `tbl_dictionary` WHERE `id`=' . $dictionary_id;
+    $db->sql($sql);
+    $res = $db->getResult();
+    if (empty($res)) {
+        echo "<p class='alert alert-danger'>No enought question for active Learning!</p>";
+    } else {
+        $sql1 = "Update `tbl_dictionary` set `language_id`=" . $language_id . ",`title`='" . $title . "' where `id`=" . $dictionary_id;
+        $db->sql($sql1);
+
+        echo "<p class='alert alert-success'>Dictionary updated successfully!</p>";
+    }
+
+
 }
 
 
@@ -1805,19 +1814,19 @@ if (isset($_GET['delete_learning']) && $_GET['delete_learning'] != '') {
 
 
 // 46-2. add_learning_detail
-  
-  
+
+
 if (isset($_POST['detail']) && isset($_POST['add_learning_detail'])) {
     $headline = $db->escapeString($_POST['headline']);
     $headline_meaning = $db->escapeString($_POST['headline_meaning']);
     $detail = $db->escapeString($_POST['detail']);
     $image = $db->escapeString($_POST['image']);
     $learning_id = $db->escapeString($_POST['learning_id']);
-  $filename = '';
-  
-  
-  
-   if ($_FILES['image']['error'] == 0 && $_FILES['image']['size'] > 0) {
+    $filename = '';
+
+
+
+    if ($_FILES['image']['error'] == 0 && $_FILES['image']['size'] > 0) {
         if (!is_dir('images/category')) {
             mkdir('images/category', 0777, true);
         }
@@ -1840,11 +1849,11 @@ if (isset($_POST['detail']) && isset($_POST['add_learning_detail'])) {
         }
     }
 
-  
-  
-  
-  
-  
+
+
+
+
+
 
     $sql = "INSERT INTO `tbl_learning_detail`(`learning_id`, `detail`, `image`, `headline`, `headline_meaning`) VALUES 
 	('" . $learning_id . "','" . $detail . "','" . $filename . "','" . $headline . "','" . $headline_meaning . "')";
@@ -1856,20 +1865,20 @@ if (isset($_POST['detail']) && isset($_POST['add_learning_detail'])) {
 
 
 // 46-3. edit_learning_detail
-  
-  
+
+
 if (isset($_POST['edit_detail']) && isset($_POST['update_learning_detail'])) {
     $headline = $db->escapeString($_POST['edit_headline']);
     $headline_meaning = $db->escapeString($_POST['edit_headline_meaning']);
     $detail = $db->escapeString($_POST['edit_detail']);
-   
+
     $learning_id = $db->escapeString($_POST['learning_id']);
- 	$ld_id = $_POST['ld_id'];
- 	$filename = '';
-  
-  
-  
-   if ($_FILES['image']['error'] == 0 && $_FILES['image']['size'] > 0) {
+    $ld_id = $_POST['ld_id'];
+    $filename = '';
+
+
+
+    if ($_FILES['image']['error'] == 0 && $_FILES['image']['size'] > 0) {
         if (!is_dir('images/category')) {
             mkdir('images/category', 0777, true);
         }
@@ -1892,23 +1901,24 @@ if (isset($_POST['edit_detail']) && isset($_POST['update_learning_detail'])) {
         }
     }
 
- $sql1='';$sql2='';
-  $sql = 'SELECT id FROM `tbl_learning_detail` WHERE `id`=' . $ld_id.' and `learning_id`='. $learning_id;
-        $db->sql($sql);
-        $res = $db->getResult();
-        if (empty($res)) {
-            echo "<p class='alert alert-danger'>No enought question for active Learning!</p>";
-        } else {
-        $sql1 = "Update `tbl_learning_detail` set `detail`='" . $detail . "',`headline`='".$headline."',`headline_meaning`='".$headline_meaning."' where `id`=" . $ld_id." and `learning_id`=". $learning_id;
-            $db->sql($sql1);
-          if($filename!=''){
-           $sql2 = "Update `tbl_learning_detail` set `image`='" . $$filename . "' where `id`=" . $ld_id." and `learning_id`=". $learning_id;
+    $sql1 = '';
+    $sql2 = '';
+    $sql = 'SELECT id FROM `tbl_learning_detail` WHERE `id`=' . $ld_id . ' and `learning_id`=' . $learning_id;
+    $db->sql($sql);
+    $res = $db->getResult();
+    if (empty($res)) {
+        echo "<p class='alert alert-danger'>No enought question for active Learning!</p>";
+    } else {
+        $sql1 = "Update `tbl_learning_detail` set `detail`='" . $detail . "',`headline`='" . $headline . "',`headline_meaning`='" . $headline_meaning . "' where `id`=" . $ld_id . " and `learning_id`=" . $learning_id;
+        $db->sql($sql1);
+        if ($filename != '') {
+            $sql2 = "Update `tbl_learning_detail` set `image`='" . $$filename . "' where `id`=" . $ld_id . " and `learning_id`=" . $learning_id;
             $db->sql($sql2);
-          }
-            echo "<p class='alert alert-success'>Detail updated successfully!</p>";
         }
+        echo "<p class='alert alert-success'>Detail updated successfully!</p>";
+    }
 
-    
+
 }
 
 
@@ -1996,22 +2006,22 @@ if (isset($_POST['meaning_id']) && isset($_POST['update_dictionary_word'])) {
         echo "<label class='alert alert-danger'>Access denied - You are not authorized to access this page.</label>";
         return false;
     }
-    $id =  $db->escapeString($_POST['meaning_id']);
-  	$dictionary_id =  $db->escapeString($_POST['dictionary_id']);
-   	$word = $db->escapeString($_POST['edit_word']);
+    $id = $db->escapeString($_POST['meaning_id']);
+    $dictionary_id = $db->escapeString($_POST['dictionary_id']);
+    $word = $db->escapeString($_POST['edit_word']);
     $meaning = $db->escapeString($_POST['edit_meaning']);
-  
-        $sql = 'SELECT id FROM `tbl_dictionary_data` WHERE `id`=' . $id.' and `dictionary_id`='. $dictionary_id;
+
+    $sql = 'SELECT id FROM `tbl_dictionary_data` WHERE `id`=' . $id . ' and `dictionary_id`=' . $dictionary_id;
+    $db->sql($sql);
+    $res = $db->getResult();
+    if (empty($res)) {
+        echo "<p class='alert alert-danger'>No enought question for active Learning!</p>";
+    } else {
+        $sql = "Update `tbl_dictionary_data` set `word`='" . $word . "',`meaning`='" . $meaning . "' where `id`=" . $id . " and `dictionary_id`=" . $dictionary_id;
         $db->sql($sql);
-        $res = $db->getResult();
-        if (empty($res)) {
-            echo "<p class='alert alert-danger'>No enought question for active Learning!</p>";
-        } else {
-            $sql = "Update `tbl_dictionary_data` set `word`='" . $word . "',`meaning`='".$meaning."' where `id`=" . $id." and `dictionary_id`=". $dictionary_id;
-            $db->sql($sql);
-            echo "<p class='alert alert-success'>Word and Meaning updated successfully!</p>";
-        }
-    
+        echo "<p class='alert alert-success'>Word and Meaning updated successfully!</p>";
+    }
+
 }
 
 
@@ -2049,7 +2059,7 @@ if (isset($_POST['question_id']) && isset($_POST['update_exam_question'])) {
     $sql = "UPDATE `tbl_exam_question` set `question`='" . $question . "',`note`='" . $note . "',`question_type`='" . $question_type . "',`optiona`='" . $a . "',`optionb`='" . $b . "' ,`optionc`='" . $c . "' ,`optiond`='" . $d . "', `answer`='" . $answer . "'";
     $sql .= ($fn->is_option_e_mode_enabled()) ? ",`optione`='" . $e . "'" : "";
     $sql .= " WHERE `id`=" . $id;
-  
+
     $db->sql($sql);
     echo "<p class='alert alert-success'>Question updated successfully!</p>";
 }
@@ -2084,7 +2094,7 @@ if (isset($_POST['question_id']) && isset($_POST['update_learning_question'])) {
     $sql = "UPDATE `tbl_learning_question` set `question`='" . $question . "',`note`='" . $note . "',`question_type`='" . $question_type . "',`optiona`='" . $a . "',`optionb`='" . $b . "' ,`optionc`='" . $c . "' ,`optiond`='" . $d . "', `answer`='" . $answer . "'";
     $sql .= ($fn->is_option_e_mode_enabled()) ? ",`optione`='" . $e . "'" : "";
     $sql .= " WHERE `id`=" . $id;
-  
+
     $db->sql($sql);
     echo "<p class='alert alert-success'>Question updated successfully!</p>";
 }
@@ -2122,7 +2132,7 @@ if (isset($_GET['delete-exam']) && $_GET['delete-exam'] != '') {
 
 // 54. delete_learning_detail
 if (isset($_GET['delete_learning_detail']) && $_GET['delete_learning_detail'] != '') {
-    
+
     $id = $_GET['id'];
 
     $sql = 'DELETE FROM `tbl_learning_detail` WHERE `id`=' . $id;
@@ -2136,7 +2146,7 @@ if (isset($_GET['delete_learning_detail']) && $_GET['delete_learning_detail'] !=
 
 // 54. delete_learning_detail
 if (isset($_GET['delete_dictionary']) && $_GET['delete_dictionary'] != '') {
-    
+
     $id = $_GET['id'];
 
     $sql = 'DELETE FROM `tbl_dictionary` WHERE `id`=' . $id;
@@ -2151,7 +2161,7 @@ if (isset($_GET['delete_dictionary']) && $_GET['delete_dictionary'] != '') {
 
 // 54. delete_learning_detail
 if (isset($_GET['delete_dictionary_data']) && $_GET['delete_dictionary_data'] != '') {
-    
+
     $id = $_GET['id'];
 
     $sql = 'DELETE FROM `tbl_dictionary_data` WHERE `id`=' . $id;
@@ -2210,7 +2220,7 @@ if (isset($_POST['update_system'])) {
                                     if (rename($ver_file1, $ver_file) && rename($source_path1, $source_path) && rename($sql_file1, $sql_file)) {
                                         DeleteDir($target_path1);
 
-                                        $version_file = require_once ($ver_file);
+                                        $version_file = require_once($ver_file);
                                         $db->sql("select * from `settings` where type='quiz_version'");
                                         $res = $db->getResult();
                                         $current_version = (!empty($res)) ? $res[0]['message'] : '';
@@ -2287,7 +2297,8 @@ if (isset($_POST['update_system'])) {
     echo $result;
 }
 
-function DeleteDir($dir) {
+function DeleteDir($dir)
+{
     if (is_dir($dir)) {
         $objects = scandir($dir);
         foreach ($objects as $object) {
@@ -2321,17 +2332,17 @@ if (isset($_POST['import_dictionary_data']) && $_POST['import_dictionary_data'] 
         while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE) {
             if (count($emapData) > 2) {
                 $emapData[0] = $db->escapeString($emapData[0]); //dictionary_id
-                 $emapData[1] = $db->escapeString($emapData[1]); //dictionary_id
-                  $emapData[2] = $db->escapeString($emapData[2]); //dictionary_id
+                $emapData[1] = $db->escapeString($emapData[1]); //dictionary_id
+                $emapData[2] = $db->escapeString($emapData[2]); //dictionary_id
                 $count++;
                 if ($count > 1) {
                     if ($emapData[0] != '' && $emapData[1] != '' && $emapData[2] != '') {
-                            $empty_value_found = true;
-                        } else {
-                            $empty_value_found = false;
-                            echo '<p class="text-danger">Please Check ' . $count . ' row</p>';
-                            break;
-                        }
+                        $empty_value_found = true;
+                    } else {
+                        $empty_value_found = false;
+                        echo '<p class="text-danger">Please Check ' . $count . ' row</p>';
+                        break;
+                    }
                 }
             }
         }
@@ -2390,12 +2401,12 @@ if (isset($_POST['tbl_learning_question']) && $_POST['tbl_learning_question'] ==
                 $count++;
                 if ($count > 1) {
                     if ($emapData[0] != '' && $emapData[1] != '' && $emapData[2] != '' && !empty($emapData[3]) && $emapData[4] != '' && $emapData[5] != '' && $emapData[6] != '' && !empty($emapData[7])) {
-                            $empty_value_found = true;
-                        } else {
-                            $empty_value_found = false;
-                            echo '<p class="text-danger">Please Check ' . $count . ' row</p>';
-                            break;
-                        }
+                        $empty_value_found = true;
+                    } else {
+                        $empty_value_found = false;
+                        echo '<p class="text-danger">Please Check ' . $count . ' row</p>';
+                        break;
+                    }
                 }
             }
         }
@@ -2405,15 +2416,15 @@ if (isset($_POST['tbl_learning_question']) && $_POST['tbl_learning_question'] ==
             while (($emapData1 = fgetcsv($file, 10000, ",")) !== FALSE) {
                 if (count($emapData1) > 2) {
                     $emapData1[0] = $db->escapeString($emapData1[0]); //learning_id
-                $emapData1[1] = $db->escapeString($emapData1[1]);     //question
-                $emapData1[2] = $db->escapeString(trim($emapData1[2]));   //question_type
-                $emapData1[3] = $db->escapeString($emapData1[3]);    // optiona
-                $emapData1[4] = $db->escapeString($emapData1[4]);    // optionb
-                $emapData1[5] = $db->escapeString($emapData1[5]);    // optionc
-                $emapData1[6] = $db->escapeString($emapData1[6]);    // optiond
-                $emapData1[7] = (empty($db->escapeString($emapData1[7]))) ? "" : $db->escapeString($emapData1[7]);  // optione
-                $emapData1[8] = $db->escapeString(trim($emapData1[8]));  //answer
-                $emapData1[9] = $db->escapeString($emapData1[9]);      // note
+                    $emapData1[1] = $db->escapeString($emapData1[1]);     //question
+                    $emapData1[2] = $db->escapeString(trim($emapData1[2]));   //question_type
+                    $emapData1[3] = $db->escapeString($emapData1[3]);    // optiona
+                    $emapData1[4] = $db->escapeString($emapData1[4]);    // optionb
+                    $emapData1[5] = $db->escapeString($emapData1[5]);    // optionc
+                    $emapData1[6] = $db->escapeString($emapData1[6]);    // optiond
+                    $emapData1[7] = (empty($db->escapeString($emapData1[7]))) ? "" : $db->escapeString($emapData1[7]);  // optione
+                    $emapData1[8] = $db->escapeString(trim($emapData1[8]));  //answer
+                    $emapData1[9] = $db->escapeString($emapData1[9]);      // note
                     $count1++;
                     if ($count1 > 1) {
                         if (count($emapData1) > 2) {
@@ -2452,19 +2463,19 @@ if (isset($_POST['tbl_learning_detail']) && $_POST['tbl_learning_detail'] == 1) 
         while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE) {
             if (count($emapData) > 2) {
                 $emapData[0] = $db->escapeString($emapData[0]); //learning_id
-                 $emapData[1] = $db->escapeString($emapData[1]); //detail
-                  $emapData[2] = $db->escapeString($emapData[2]); //image
-                  $emapData[3] = $db->escapeString($emapData[3]); //headline
-                  $emapData[4] = $db->escapeString($emapData[4]); //headline_meaning
+                $emapData[1] = $db->escapeString($emapData[1]); //detail
+                $emapData[2] = $db->escapeString($emapData[2]); //image
+                $emapData[3] = $db->escapeString($emapData[3]); //headline
+                $emapData[4] = $db->escapeString($emapData[4]); //headline_meaning
                 $count++;
                 if ($count > 1) {
-                    if ($emapData[0] != '' && $emapData[1] != '' && $emapData[2] != ''&& $emapData[3] != ''&& $emapData[4] != '') {
-                            $empty_value_found = true;
-                        } else {
-                            $empty_value_found = false;
-                            echo '<p class="text-danger">Please Check ' . $count . ' row</p>';
-                            break;
-                        }
+                    if ($emapData[0] != '' && $emapData[1] != '' && $emapData[2] != '' && $emapData[3] != '' && $emapData[4] != '') {
+                        $empty_value_found = true;
+                    } else {
+                        $empty_value_found = false;
+                        echo '<p class="text-danger">Please Check ' . $count . ' row</p>';
+                        break;
+                    }
                 }
             }
         }
@@ -2527,12 +2538,12 @@ if (isset($_POST['tbl_exam_question']) && $_POST['tbl_exam_question'] == 1) {
                 $count++;
                 if ($count > 1) {
                     if ($emapData[0] != '' && $emapData[1] != '' && $emapData[2] != '' && !empty($emapData[3]) && $emapData[4] != '' && $emapData[5] != '' && $emapData[6] != '' && !empty($emapData[7])) {
-                            $empty_value_found = true;
-                        } else {
-                            $empty_value_found = false;
-                            echo '<p class="text-danger">Please Check ' . $count . ' row</p>';
-                            break;
-                        }
+                        $empty_value_found = true;
+                    } else {
+                        $empty_value_found = false;
+                        echo '<p class="text-danger">Please Check ' . $count . ' row</p>';
+                        break;
+                    }
                 }
             }
         }
@@ -2542,15 +2553,15 @@ if (isset($_POST['tbl_exam_question']) && $_POST['tbl_exam_question'] == 1) {
             while (($emapData1 = fgetcsv($file, 10000, ",")) !== FALSE) {
                 if (count($emapData1) > 2) {
                     $emapData1[0] = $db->escapeString($emapData1[0]); //learning_id
-                $emapData1[1] = $db->escapeString($emapData1[1]);     //question
-                $emapData1[2] = $db->escapeString(trim($emapData1[2]));   //question_type
-                $emapData1[3] = $db->escapeString($emapData1[3]);    // optiona
-                $emapData1[4] = $db->escapeString($emapData1[4]);    // optionb
-                $emapData1[5] = $db->escapeString($emapData1[5]);    // optionc
-                $emapData1[6] = $db->escapeString($emapData1[6]);    // optiond
-                $emapData1[7] = (empty($db->escapeString($emapData1[7]))) ? "" : $db->escapeString($emapData1[7]);  // optione
-                $emapData1[8] = $db->escapeString(trim($emapData1[8]));  //answer
-                $emapData1[9] = $db->escapeString($emapData1[9]);      // note
+                    $emapData1[1] = $db->escapeString($emapData1[1]);     //question
+                    $emapData1[2] = $db->escapeString(trim($emapData1[2]));   //question_type
+                    $emapData1[3] = $db->escapeString($emapData1[3]);    // optiona
+                    $emapData1[4] = $db->escapeString($emapData1[4]);    // optionb
+                    $emapData1[5] = $db->escapeString($emapData1[5]);    // optionc
+                    $emapData1[6] = $db->escapeString($emapData1[6]);    // optiond
+                    $emapData1[7] = (empty($db->escapeString($emapData1[7]))) ? "" : $db->escapeString($emapData1[7]);  // optione
+                    $emapData1[8] = $db->escapeString(trim($emapData1[8]));  //answer
+                    $emapData1[9] = $db->escapeString($emapData1[9]);      // note
                     $count1++;
                     if ($count1 > 1) {
                         if (count($emapData1) > 2) {
