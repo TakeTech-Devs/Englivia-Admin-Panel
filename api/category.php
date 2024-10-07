@@ -72,6 +72,14 @@ function handleGetRequest($db, &$response)
         $totalResult = $db->getResult();
         $totalRecords = $totalResult[0]['total'];
 
+        if ($totalRecords == 0) {
+            // Return 206 Partial Content if no complete match but some partial data exists
+            $data = ["message" => "No data available", "status" => 206];
+            http_response_code(206);
+            echo json_encode($data);
+            exit();
+        }
+
         $query = "SELECT * FROM tbl_categories WHERE category_name LIKE '%$search%'" . ($whereClause ? " AND $whereClause" : '') . " ORDER BY time_created LIMIT $limit OFFSET $offset";
         $db->sql($query);
         $data = $db->getResult();
@@ -105,6 +113,12 @@ function handleGetRequest($db, &$response)
             $item['questions'] = getTotalQuestions($db, $item['id']);
             $item['total_duration'] = getTotalDuration($db, $item['id']);
         }
+    } else {
+        // Return 206 Partial Content if no complete match but some partial data exists
+        $data = ["message" => "No data available", "status" => 206];
+        http_response_code(206);
+        echo json_encode($data);
+        exit();
     }
 
     $response['data'] = $result;
@@ -205,7 +219,7 @@ function handleDeleteRequest($db, &$response)
     foreach ($subCategories as $category) {
         // Step 1: Delete all questions related to this category in a single query
         $db->delete('tbl_questions', 'category_id = ' . $category['id']);
-    
+
         // Step 2: Delete all questions related to this category in a single query
         $db->delete('tbl_subcategories', 'id = ' . $category['id']);
     }

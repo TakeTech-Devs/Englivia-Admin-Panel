@@ -2,10 +2,10 @@
 
 
 session_start();
-// if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
-//     header("location:index.php");
-//     return false;
-// }
+if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
+    header("location:index.php");
+    return false;
+}
 header("Content-Type: application/json");
 header("Expires: 0");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");

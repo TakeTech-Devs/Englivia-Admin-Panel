@@ -9,8 +9,13 @@ $action = $_SERVER['REQUEST_METHOD'];
 
 function respond($data, $code = 200)
 {
-    $data = ["response" => $data, "status" => $code];
-    http_response_code($code);
+    if (empty($data)) {
+        $data = ["response" => $data, "message" => "No data available", "status" => 206];
+        http_response_code(206);
+    } else {
+        $data = ["response" => $data, "message" => "Data fetched successfully", "status" => $code];
+        http_response_code($code);
+    }
     echo json_encode($data);
     exit();
 }
@@ -69,6 +74,14 @@ switch ($action) {
             $db->sql($totalQuery);
             $totalResult = $db->getResult();
             $totalRecords = $totalResult[0]['total'];
+
+            if ($totalRecords == 0) {
+                // Return 206 Partial Content if no complete match but some partial data exists
+                $data = [ "message" => "No data available", "status" => 206];
+                http_response_code(206);
+                echo json_encode($data);
+                return;
+            }
 
             $query = "
                     SELECT q.*, c.type , c.category_name

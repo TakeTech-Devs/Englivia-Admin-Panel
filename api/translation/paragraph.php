@@ -81,6 +81,14 @@ function handleGetRequest($db, &$response, $baseURL)
         $totalResult = $db->getResult();
         $totalRecords = $totalResult[0]['total'];
 
+        if ($totalRecords == 0) {
+            // Return 206 Partial Content if no complete match but some partial data exists
+            $response['status'] = 206;
+            $response['message'] = 'Partial data available';
+            sendResponse($response, 206); // Send response and exit
+            return;
+        }
+
         $query = "SELECT * FROM tbl_categories WHERE category_name LIKE '%$search%' AND $whereClause LIMIT $limit OFFSET $offset";
         $db->sql($query);
         $data = $db->getResult();
@@ -107,6 +115,7 @@ function handleGetRequest($db, &$response, $baseURL)
     } else {
         $db->select('tbl_categories', '*', null, $whereClause);
     }
+
     $result = $db->getResult();
 
     if (!empty($result)) {
@@ -120,6 +129,12 @@ function handleGetRequest($db, &$response, $baseURL)
                 $item['pdf'] = $baseURL . $item['pdf'];
             }
         }
+    } else {
+        // No full data found, so return 206 Partial Content
+        $response['data'] = $result;
+        $response['message'] = 'No data available';
+        http_response_code(206);
+        return;
     }
 
     $response['data'] = $result;

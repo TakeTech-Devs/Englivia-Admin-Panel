@@ -57,11 +57,11 @@ function handleGetRequest($db, &$response, $baseURL)
     $conditions[] = 'type = 4';
 
     if (isset($_GET['language'])) {
-        $conditions[] = 'language = ' . $_GET['language'];
+        $conditions[] = 'language = ' . $db->escapeString($_GET['language']);
     }
 
     // Adding Tag = 'oneliner' condition
-    $conditions[] = "Tag = 'oneliner'";
+    $conditions[] = "tag = 'oneliner'";
 
     if (isset($_GET['keyword'])) {
         $keyword = $db->escapeString($_GET['keyword']);
@@ -80,6 +80,14 @@ function handleGetRequest($db, &$response, $baseURL)
         $db->sql($totalQuery);
         $totalResult = $db->getResult();
         $totalRecords = $totalResult[0]['total'];
+
+        if ($totalRecords == 0) {
+            // Return 206 Partial Content if no complete match but there might be some partial data
+            $response['status'] = 206;
+            $response['message'] = 'Partial data available';
+            sendResponse($response, 206); // Send response and exit
+            return;
+        }
 
         $query = "SELECT * FROM tbl_categories WHERE category_name LIKE '%$search%' AND $whereClause LIMIT $limit OFFSET $offset";
         $db->sql($query);
@@ -102,29 +110,38 @@ function handleGetRequest($db, &$response, $baseURL)
             'limit' => $limit,
             'data' => $data,
         ];
-        sendResponse($response);
-        return; // Ensure the response is sent immediately
+
+        sendResponse($response); // Send success response if data found
+        return;
     } else {
         $db->select('tbl_categories', '*', null, $whereClause);
     }
+
     $result = $db->getResult();
 
-    if (!empty($result)) {
-        foreach ($result as &$item) {
-            if (isset($item['instructions'])) {
-                $item['instructions'] = parseInstructions($item['instructions']);
-            }
-            $item['questions'] = getTotalQuestions($db, $item['id']);
-            $item['total_duration'] = getTotalDuration($db, $item['id']);
-            if (isset($item['pdf'])) {
-                $item['pdf'] = $baseURL . $item['pdf'];
-            }
+    if (empty($result)) {
+        // Return 206 Partial Content if no full data match but partial results
+        $response['status'] = 206;
+        $response['message'] = 'No data available';
+        sendResponse($response, 206); // Send response and exit
+        return;
+    }
+
+    foreach ($result as &$item) {
+        if (isset($item['instructions'])) {
+            $item['instructions'] = parseInstructions($item['instructions']);
+        }
+        $item['questions'] = getTotalQuestions($db, $item['id']);
+        $item['total_duration'] = getTotalDuration($db, $item['id']);
+        if (isset($item['pdf'])) {
+            $item['pdf'] = $baseURL . $item['pdf'];
         }
     }
 
     $response['data'] = $result;
     $response['message'] = 'Data fetched successfully';
-    http_response_code($response['status']);
+    http_response_code(200); // Ensure success status code
+    sendResponse($response); // Send the response
 }
 
 function handlePostRequest($db, &$response)
