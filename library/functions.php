@@ -12,6 +12,8 @@ require 'mail/Exception.php';
 require 'mail/PHPMailer.php';
 require 'mail/SMTP.php';
 
+require 'secrets.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -399,19 +401,20 @@ class Functions
 
         // Send the email
         $mail = new PHPMailer(true);
+        $secrets = new Secrets();
 
         try {
             // SMTP configuration
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'saikatdutta713@gmail.com'; // Replace with your Gmail address
-            $mail->Password = 'rhlaewczwmxkksuj';   // Replace with your Gmail App Password
+            $mail->Username = $secrets->getvar('mail_username'); // Replace with your Gmail address
+            $mail->Password = $secrets->getvar('mail_password');   // Replace with your Gmail App Password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587; // Use 465 for SSL if preferred
 
             // Sender and recipient settings
-            $mail->setFrom('saikatdutta713@gmail.com', 'Englivia'); // Replace with your details
+            $mail->setFrom('englivia21@gmail.com', 'Englivia'); // Replace with your details
             $mail->addAddress($user_email); // Replace with recipient's email
 
             // Email content
