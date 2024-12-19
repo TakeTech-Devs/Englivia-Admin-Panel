@@ -59,7 +59,7 @@ function handleGetRequest($db, &$response, $baseURL)
         $whereClauses[] = 'id = ' . $id;
 
         $whereClause = implode(' AND ', $whereClauses);
-        $db->select('tbl_categories', 'id, category_name, language, pdf, type', null, $whereClause);
+        $db->select('tbl_categories', 'id, category_name, language, pdf, type', null, $whereClause, 'time_created');
         $result = $db->getResult();
 
         if ($result) {
@@ -76,7 +76,7 @@ function handleGetRequest($db, &$response, $baseURL)
         $whereClauses[] = 'pdf IS NOT NULL';
 
         $whereClause = implode(' AND ', $whereClauses);
-        $db->select('tbl_categories', 'id, category_name, language, pdf, type', null, $whereClause);
+        $db->select('tbl_categories', 'id, category_name, language, pdf, type', null, $whereClause, 'time_created');
         $data = $db->getResult();
         foreach ($data as &$item) {
             $item['pdf'] = $item['pdf'] != null ? $baseURL . $item['pdf'] : 'Not Set';
@@ -99,7 +99,7 @@ function handleGetRequest($db, &$response, $baseURL)
         $totalResult = $db->getResult();
         $totalRecords = $totalResult[0]['total'];
 
-        $query = "SELECT id, category_name, language, pdf, type FROM tbl_categories WHERE $whereClause LIMIT $limit OFFSET $offset";
+        $query = "SELECT id, category_name, language, pdf, type FROM tbl_categories WHERE $whereClause Order By time_created LIMIT $limit OFFSET $offset";
         $db->sql($query);
         $data = $db->getResult();
         foreach ($data as &$item) {
@@ -115,7 +115,7 @@ function handleGetRequest($db, &$response, $baseURL)
     } else {
         $whereClauses[] = 'pdf IS NOT NULL';
         $whereClause = implode(' AND ', $whereClauses);
-        $db->select('tbl_categories', 'id, category_name, language, pdf, type', null, $whereClause);
+        $db->select('tbl_categories', 'id, category_name, language, pdf, type', null, $whereClause, 'time_created');
         $data = $db->getResult();
         foreach ($data as &$item) {
             $item['pdf'] = $item['pdf'] != null ? $baseURL . $item['pdf'] : 'Not Set';
@@ -192,7 +192,6 @@ function handlePostRequest($db, &$response)
 
     echo json_encode($response);
     exit();
-
 }
 
 function handlePutRequest($db, &$response)
@@ -278,4 +277,3 @@ function outputResponse($db, &$response, $message)
     $response['message'] = $message;
     http_response_code($response['status']);
 }
-?>

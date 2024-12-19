@@ -2,7 +2,8 @@
 include_once('jwt.php');
 include_once('crud.php');
 
-function generate_token() {
+function generate_token()
+{
     $jwt = new JWT();
     $payload = [
         'iat' => time(), /* issued at time */
@@ -11,13 +12,14 @@ function generate_token() {
         'sub' => 'quiz Authentication'
     ];
     $token = $jwt::encode($payload, JWT_SECRET_KEY);
-    print_r(json_encode($token));
+    return ($token);
 }
 // generate_token();
 // $token = generate_token();
 // print_r($token);
 
-function verify_token() {
+function verify_token()
+{
     $jwt = new JWT();
     try {
         //echo "Token : ".$token = $jwt->getBearerToken();
@@ -53,5 +55,3 @@ function verify_token() {
         return false;
     }
 }
-
-?>

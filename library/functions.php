@@ -7,6 +7,14 @@
  */
 require_once 'crud.php';
 
+// Include PHPMailer files
+require 'mail/Exception.php';
+require 'mail/PHPMailer.php';
+require 'mail/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 /*
   Functions
   -------------
@@ -24,6 +32,8 @@ require_once 'crud.php';
   12. credit_coins_to_friends_code($friends_code)
   13. check_friends_code_is_used_by_user($user_id)
   14. valid_friends_refer_code($friends_code)
+  14. send_otp()
+  15. verify_otp()
  */
 
 class Functions
@@ -287,4 +297,176 @@ class Functions
         }
     }
 
+    public function send_otp($user_id, $otp_length = 6)
+    {
+        // Check if the user exists in the database
+        $user_check_sql = "SELECT * FROM `users` WHERE `mobile` = '$user_id' LIMIT 1";
+        $this->db->sql($user_check_sql);
+        $user = $this->db->getResult();
+
+        if (empty($user)) {
+            // User does not exist
+            return [
+                'success' => false,
+                'message' => 'User does not exist.'
+            ];
+        }
+
+        // Generate a random OTP
+        $otp = str_pad(mt_rand(0, pow(10, $otp_length) - 1), $otp_length, '0', STR_PAD_LEFT);
+
+        // Get current time for record creation
+        $created_at = date('Y-m-d H:i:s');
+
+        // Insert OTP into the database
+        $sql = "INSERT INTO `otp` (`user`, `otp`, `created_at`) VALUES ('$user_id', '$otp', '$created_at')";
+        $this->db->sql($sql);
+
+        // Send the OTP via Fast2SMS API
+        $phone_number = $user[0]['mobile']; // Assuming the user's phone number is stored in the `phone` column
+        $api_key = "ltVk2HoWMu0iqXBedN1m6rGYRhwKcfEOD54yP7QT3SUJxLnAzbvLSAHgEP0NRiU6XZcDhJzMsdwb7u2t";
+        $url = "https://www.fast2sms.com/dev/bulkV2";
+
+        $payload = [
+            "route" => "otp",
+            "variables_values" => $otp,
+            "schedule_time" => "", // Optional: Specify a scheduled time or leave it empty
+            "numbers" => $phone_number
+        ];
+
+        $headers = [
+            "authorization: $api_key",
+            "Content-Type: application/json"
+        ];
+
+        // Initialize cURL
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        // Execute cURL request and fetch response
+        $response = curl_exec($ch);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        // Check if SMS was sent successfully
+        if ($http_code == 200) {
+            return [
+                'success' => true,
+                'message' => 'OTP sent successfully.',
+                // 'otp' => $otp // Remove this in production
+            ];
+        } else {
+            return [
+                'success' => false,
+                'message' => 'Failed to send OTP. Please try again.',
+                'error' => $response // Log this for debugging
+            ];
+        }
+    }
+
+
+    function send_otp_to_email($user_email, $otp_length = 6)
+    {
+        // Check if the user exists in the database
+        $user_check_sql = "SELECT * FROM `users` WHERE `email` = '$user_email' LIMIT 1";
+        $this->db->sql($user_check_sql);
+        $user = $this->db->getResult();
+
+        if (empty($user)) {
+            // User does not exist
+            return [
+                'success' => false,
+                'message' => 'User does not exist.'
+            ];
+        }
+
+        // Generate a random OTP
+        $otp = str_pad(mt_rand(0, pow(10, $otp_length) - 1), $otp_length, '0', STR_PAD_LEFT);
+
+        // Get current time for record creation
+        $created_at = date('Y-m-d H:i:s');
+
+        // Insert OTP into the database
+        $sql = "INSERT INTO `otp` (`user`, `otp`, `created_at`) VALUES ('{$user[0]['email']}', '$otp', '$created_at')";
+        $this->db->sql($sql);
+
+        // Email details
+        $subject = "Your OTP Code";
+        $message = "Dear {$user[0]['name']},\n\nYour OTP is $otp. Please use this to verify your email. The OTP is valid for 5 minutes.";
+
+        // Send the email
+        $mail = new PHPMailer(true);
+
+        try {
+            // SMTP configuration
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'saikatdutta713@gmail.com'; // Replace with your Gmail address
+            $mail->Password = 'rhlaewczwmxkksuj';   // Replace with your Gmail App Password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587; // Use 465 for SSL if preferred
+
+            // Sender and recipient settings
+            $mail->setFrom('saikatdutta713@gmail.com', 'Englivia'); // Replace with your details
+            $mail->addAddress($user_email); // Replace with recipient's email
+
+            // Email content
+            $mail->isHTML(true);
+            $mail->Subject = $subject;
+            $mail->Body    = $message;
+            $mail->AltBody = 'This is a plain-text version of the email.';
+
+            // Send the email
+            $mail->send();
+            return [
+                'success' => true,
+                'message' => 'OTP sent successfully.',
+                'otp' => $otp // Only for debugging; remove in production.
+            ];
+        } catch (Exception $e) {
+            return [
+                'success' => false,
+                'message' => 'Failed to send OTP. Please try again later.',
+                'error' => $mail->ErrorInfo
+            ];
+        }
+    }
+
+    public function verify_otp($user_id, $otp, $expiry_minutes = 5)
+    {
+        // Calculate expiry time
+        $expiry_time = date('Y-m-d H:i:s', strtotime("-$expiry_minutes minutes"));
+
+        // Trim User ID
+        $user_id = trim($user_id);
+
+        // Check if the OTP is valid and not expired
+        $sql = "SELECT * FROM `otp` WHERE `user` = '$user_id' AND `otp` = '$otp' AND `created_at` >= '$expiry_time' LIMIT 1";
+        $this->db->sql($sql);
+        $res = $this->db->getResult();
+
+        if (!empty($res)) {
+            // OTP is valid, remove it from the database to prevent reuse
+            $delete_sql = "DELETE FROM `otp` WHERE `id` = " . $res[0]['id'];
+            $this->db->sql($delete_sql);
+
+            return [
+                'success' => true,
+                'message' => 'OTP verified successfully.'
+            ];
+        } else {
+            // Remove all expired user's otp
+            $sql = "DELETE FROM `otp` WHERE `user` = '$user_id' AND `created_at` >= '$expiry_time' LIMIT 1";
+            $this->db->sql($sql);
+
+            return [
+                'success' => false,
+                'message' => 'Invalid or expired OTP.'
+            ];
+        }
+    }
 }

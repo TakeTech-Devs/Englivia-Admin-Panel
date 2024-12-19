@@ -101,7 +101,7 @@ function handleGetRequest($db, &$response)
         sendResponse($response);
         return; // Ensure the response is sent immediately
     } else {
-        $db->select('tbl_categories', '*', null, $whereClause);
+        $db->select('tbl_categories', '*', null, $whereClause, 'time_created');
     }
     $result = $db->getResult();
 
@@ -272,4 +272,3 @@ function sendResponse($response, $code = 200)
     echo json_encode($data);
     exit();
 }
-?>
