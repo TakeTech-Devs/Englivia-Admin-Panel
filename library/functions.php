@@ -299,14 +299,14 @@ class Functions
         }
     }
 
-    public function send_otp($user_id, $otp_length = 6)
+    public function send_otp($user_id, $user_check = true, $otp_length = 6)
     {
         // Check if the user exists in the database
         $user_check_sql = "SELECT * FROM `users` WHERE `mobile` = '$user_id' LIMIT 1";
         $this->db->sql($user_check_sql);
         $user = $this->db->getResult();
 
-        if (empty($user)) {
+        if ($user_check && empty($user)) {
             // User does not exist
             return [
                 'success' => false,
@@ -325,7 +325,7 @@ class Functions
         $this->db->sql($sql);
 
         // Send the OTP via Fast2SMS API
-        $phone_number = $user[0]['mobile']; // Assuming the user's phone number is stored in the `phone` column
+        $phone_number = $user_id; // Assuming the user's phone number is stored in the `phone` column
         $api_key = "ltVk2HoWMu0iqXBedN1m6rGYRhwKcfEOD54yP7QT3SUJxLnAzbvLSAHgEP0NRiU6XZcDhJzMsdwb7u2t";
         $url = "https://www.fast2sms.com/dev/bulkV2";
 

@@ -123,7 +123,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_languages']) && $_POST['get
       id:1 // {optional}
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -158,7 +158,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_categories_by_language'])) 
       type:2  //2-learning zone , 1-quiz zone
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -221,7 +221,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_categories'])) {
       type:2  //2-learning zone , 1-quiz zone
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -291,7 +291,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_subcategory_by_maincategory
       main_id:31
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -331,7 +331,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_questions_by_category'])) {
       category:115
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -375,7 +375,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_questions_by_subcategory'])
       subcategory:115
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -422,7 +422,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_questions_by_level'])) {
       language_id:2   // {optional}
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -478,7 +478,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_questions_by_type'])) {
       language_id:2   // {optional}
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -530,7 +530,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_questions_for_self_challeng
       language_id:2   // {optional}
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -585,7 +585,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_random_questions'])) {
       category:2
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -677,7 +677,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_random_questions_for_comput
       category:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -741,7 +741,7 @@ if (isset($_POST['report_question']) && isset($_POST['access_key'])) {
       user_id:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -790,7 +790,7 @@ if (isset($_POST['access_key']) && isset($_POST['user_signup'])) {
       status:1   // 1 - Active & 0 Deactive
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -920,174 +920,6 @@ if (isset($_POST['access_key']) && isset($_POST['user_signup'])) {
     print_r(json_encode($response));
 }
 
-// 13.1. user_signup_email()
-if (isset($_POST['access_key']) && isset($_POST['user_signup_email'])) {
-    /* Parameters to be passed:
-       access_key: 6808
-       user_signup_email: 1
-       email: User's email
-       name: User's full name
-       phone: User's phone number
-       password: User's password
-    */
-
-    if ($access_key != $_POST['access_key']) {
-        $response['error'] = "true";
-        $response['message'] = "Invalid Access Key";
-        print_r(json_encode($response));
-        return false;
-    }
-
-    // Validate required input fields
-    if (
-        (isset($_POST['email']) || isset($_POST['mobile'])) &&
-        isset($_POST['name']) &&
-        isset($_POST['password'])
-    ) {
-        $email = isset($_POST['email']) ? $db->escapeString(htmlspecialchars($_POST['email'])) : "";
-        $name = $db->escapeString(htmlspecialchars($_POST['name']));
-        $age = $db->escapeString(htmlspecialchars($_POST['age']));
-        $gender = $db->escapeString(htmlspecialchars($_POST['gender']));
-        $mobile = isset($_POST['mobile']) ? $db->escapeString(htmlspecialchars($_POST['mobile'])) : null;
-        $password = $db->escapeString($_POST['password']);
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT); // Hash the password
-        $type = $db->escapeString($_POST['type']);
-
-        $profile = (isset($_POST['profile'])) ? $db->escapeString($_POST['profile']) : '';
-        $ip_address = (isset($_POST['ip_address'])) ? $db->escapeString($_POST['ip_address']) : '';
-        $fcm_id = (isset($_POST['fcm_id'])) ? $db->escapeString($_POST['fcm_id']) : '';
-        $refer_code = (isset($_POST['refer_code'])) ? $db->escapeString(htmlspecialchars($_POST['refer_code'])) : '';
-        $friends_code = (isset($_POST['friends_code'])) ? $db->escapeString(htmlspecialchars($_POST['friends_code'])) : '';
-        $points = '0';
-        $status = '1';
-
-        // Check if the email or phone number already exists
-        $sql = "SELECT id FROM users";
-        $sql .= $mobile != null ? " WHERE mobile = '$mobile'" : " WHERE email = '$email'";
-        $db->sql($sql);
-        $res = $db->getResult();
-
-        if (!empty($res)) {
-            $response['error'] = "true";
-            $response['message'] = $mobile != null ? "Phone number already exists" : "Email already exists";
-        } else {
-            // Insert the new user into the database
-            $data = array(
-                'firebase_id' => '',
-                'email' => $email,
-                'name' => $name,
-                'age' => $age,
-                'gender' => $gender,
-                'mobile' => $mobile,
-                'password' => $hashed_password,
-                'type' => $type,
-
-                'profile' => $profile,
-                'fcm_id' => $fcm_id,
-                'refer_code' => $refer_code,
-                'friends_code' => $friends_code,
-                'coins' => '0',
-                'ip_address' => $ip_address,
-                'status' => $status
-            );
-            $sql = $db->insert('users', $data);
-            $result = $db->getResult();
-
-            if (!empty($result)) {
-                $response['error'] = "false";
-                $response['message'] = "User registered successfully";
-                $response['data'] = array(
-                    'user_id' => $result[0], // ID of the newly created user
-                    'name' => $name,
-                    'mobile' => $mobile
-                );
-            } else {
-                $response['error'] = "true";
-                $response['message'] = "Failed to register user";
-            }
-        }
-    } else {
-        $response['error'] = "true";
-        $response['message'] = "Please provide all required fields: email, name, phone, password";
-    }
-
-    print_r(json_encode($response));
-}
-
-// 13.3 verify_email_password
-if (isset($_POST['access_key']) && isset($_POST['verify_user'])) {
-    /* Parameters to be passed:
-       access_key: 6808
-       verify_user: 1
-       email: User's username
-       password: User's password
-    */
-
-    if ($access_key != $_POST['access_key']) {
-        $response['error'] = "true";
-        $response['login'] = false;
-        $response['message'] = "Invalid Access Key";
-        print_r(json_encode($response));
-        return false;
-    }
-
-    // Validate input fields
-    if (isset($_POST['email']) && isset($_POST['password'])) {
-        $email = $db->escapeString(htmlspecialchars($_POST['email']));
-        $password = $db->escapeString($_POST['password']);
-        $jwt = generate_token();
-
-        // Check if the email exists
-        $sql = "SELECT * FROM users WHERE email = '$email'";
-        $db->sql($sql);
-        $res = $db->getResult();
-
-        if (!empty($res)) {
-            // Verify the password
-            if (password_verify($password, $res[0]['password'])) {
-                $user_data = array(
-                    'user_id' => $res[0]['id'],
-                    'name' => $res[0]['name'],
-                    'email' => $res[0]['email'],
-                    'mobile' => $res[0]['mobile'],
-                    'profile' => filter_var($res[0]['profile'], FILTER_VALIDATE_URL) === false
-                        ? (!empty($res[0]['profile']) ? DOMAIN_URL . 'uploads/profile/' . $res[0]['profile'] : '')
-                        : $res[0]['profile'],
-                    'type' => $res[0]['type'],
-                    'fcm_id' => $res[0]['fcm_id'],
-                    'refer_code' => $res[0]['refer_code'],
-                    'coins' => $res[0]['coins'],
-                    'ip_address' => $res[0]['ip_address'],
-                    'status' => $res[0]['status'],
-                    'date_registered' => $res[0]['date_registered']
-                );
-
-                $user_data['access_token'] = $jwt;
-
-                $response['error'] = "false";
-                $response['login'] = true;
-                $response['access_token'] = $jwt;
-                $response['message'] = "Login successful";
-                $response['user'] = $user_data;
-            } else {
-                $response['error'] = "true";
-                $response['login'] = false;
-                $response['message'] = "Incorrect password";
-            }
-        } else {
-            $response['error'] = "true";
-            $response['login'] = false;
-            $response['message'] = "email not found";
-        }
-    } else {
-        $response['error'] = "true";
-        $response['login'] = false;
-        $response['message'] = "Please provide both email and password";
-    }
-
-    print_r(json_encode($response));
-}
-
 // 14. get_user_by_id()
 if (isset($_POST['access_key']) && isset($_POST['get_user_by_id'])) {
     /* Parameters to be passed
@@ -1096,7 +928,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_user_by_id'])) {
       id:31
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1147,7 +979,7 @@ if (isset($_POST['access_key']) && isset($_POST['update_fcm_id'])) {
       fcm_id:xyzCode
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1179,7 +1011,7 @@ if (isset($_POST['access_key']) && isset($_POST['upload_profile_image'])) {
       image: image file
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1268,7 +1100,7 @@ if (isset($_POST['access_key']) && isset($_POST['update_profile'])) {
       mobile:7894561230
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1305,7 +1137,7 @@ if (isset($_POST['access_key']) && isset($_POST['set_monthly_leaderboard'])) {
       score:100
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1339,7 +1171,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_monthly_leaderboard'])) {
       user_id:54 			// for get current user rank (optional) (login user_id)
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1436,7 +1268,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_datewise_leaderboard'])) {
       user_id:25			// to get current user's rank (optional) ( login user_id )
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1520,7 +1352,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_global_leaderboard'])) {
       user_id:25		// to get current user's rank (optional) ( login user_id )
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1593,7 +1425,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_system_configurations'])) {
       get_system_configurations:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1618,7 +1450,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_about_us']) && $_POST['get_
       get_about_us:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1652,7 +1484,7 @@ if (isset($_POST['access_key']) && isset($_POST['privacy_policy_settings']) && $
       privacy_policy_settings:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1685,7 +1517,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_terms_conditions_settings']
       get_terms_conditions_settings:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1718,7 +1550,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_instructions']) && $_POST['
       get_instructions:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1755,7 +1587,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_notifications'])) {
       limit:20    // {optional} - number of records per page
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1803,7 +1635,7 @@ if (isset($_POST['access_key']) && isset($_POST['set_battle_statistics'])) {
       is_drawn:0 / 1 (0->no_drawn,1->drawn)
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1842,7 +1674,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_battle_statistics'])) {
       limit:20    // {optional} - number of records per page
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -1927,7 +1759,7 @@ if (isset($_POST['access_key']) && isset($_POST['set_users_statistics'])) {
       coins:20 // {optional}
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2027,7 +1859,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_users_statistics'])) {
       user_id:31
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2079,7 +1911,7 @@ if (isset($_POST['access_key']) && isset($_POST['set_level_data'])) {
       level:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2125,7 +1957,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_level_data'])) {
       subcategory:2
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2167,7 +1999,7 @@ if (isset($_POST['access_key']) && isset($_POST['set_bookmark'])) {
       status:1   //1-bookmark,0-unmark
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2204,7 +2036,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_bookmark'])) {
       user_id:2
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2328,7 +2160,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_user_coin_score'])) {
       user_id:31
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2371,7 +2203,7 @@ if (isset($_POST['access_key']) && isset($_POST['set_user_coin_score'])) {
       score:2      //if deduct coin than set with minus sign -2
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2428,7 +2260,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_contest'])) {
       user_id:59
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2611,7 +2443,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_questions_by_contest'])) {
       contest_id:5
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2658,7 +2490,7 @@ if (isset($_POST['access_key']) && isset($_POST['contest_update_score'])) {
       score:8
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2707,7 +2539,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_contest_leaderboard'])) {
       user_id:54 // (when show my quiz rank) (optional)
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2774,7 +2606,7 @@ if (isset($_POST['access_key']) && isset($_POST['create_room'])) {
       no_of_que:10
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2837,7 +2669,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_question_by_room_id'])) {
       room_id:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2882,7 +2714,7 @@ if (isset($_POST['access_key']) && isset($_POST['destroy_room_by_room_id'])) {
       room_id:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2911,7 +2743,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_public_room'])) {
       get_public_room:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -2948,7 +2780,7 @@ if (isset($_POST['access_key']) && isset($_POST['invite_friend'])) {
       room_key: your room key
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -3035,7 +2867,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_firebase_settings'])) {
       get_firebase_settings:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -3079,7 +2911,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_learning'])) {
       category:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -3119,7 +2951,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_questions_by_learning'])) {
       learning_id:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -3197,7 +3029,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_details_by_learning'])) {
       learning_id:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -3247,7 +3079,7 @@ if (isset($_POST['access_key']) && isset($_POST['get_data_by_sets'])) {
       learning_id:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -3276,7 +3108,7 @@ if (isset($_POST['access_key']) && isset($_POST['delete_user_account'])) {
       user_id:1
      */
     if (!verify_token()) {
-         return false;
+        return false;
     }
     if ($access_key != $_POST['access_key']) {
         $response['error'] = "true";
@@ -3335,12 +3167,181 @@ if (isset($_POST['access_key']) && isset($_POST['delete_user_account'])) {
     print_r(json_encode($response));
 }
 
+// 13.1. user_signup_email()
+if (isset($_POST['access_key']) && isset($_POST['user_signup_email'])) {
+    /* Parameters to be passed:
+       access_key: 6808
+       user_signup_email: 1
+       email: User's email
+       name: User's full name
+       phone: User's phone number
+       password: User's password
+    */
+
+    if ($access_key != $_POST['access_key']) {
+        $response['error'] = "true";
+        $response['message'] = "Invalid Access Key";
+        print_r(json_encode($response));
+        return false;
+    }
+
+    // Validate required input fields
+    if (
+        (isset($_POST['email']) || isset($_POST['mobile'])) &&
+        isset($_POST['name']) &&
+        isset($_POST['password'])
+    ) {
+        $email = isset($_POST['email']) ? $db->escapeString(htmlspecialchars($_POST['email'])) : "";
+        $name = $db->escapeString(htmlspecialchars($_POST['name']));
+        $age = $db->escapeString(htmlspecialchars($_POST['age']));
+        $gender = $db->escapeString(htmlspecialchars($_POST['gender']));
+        $mobile = isset($_POST['mobile']) ? $db->escapeString(htmlspecialchars($_POST['mobile'])) : null;
+        $password = $db->escapeString($_POST['password']);
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT); // Hash the password
+        $type = $db->escapeString($_POST['type']);
+
+        $profile = (isset($_POST['profile'])) ? $db->escapeString($_POST['profile']) : '';
+        $ip_address = (isset($_POST['ip_address'])) ? $db->escapeString($_POST['ip_address']) : '';
+        $fcm_id = (isset($_POST['fcm_id'])) ? $db->escapeString($_POST['fcm_id']) : '';
+        $refer_code = (isset($_POST['refer_code'])) ? $db->escapeString(htmlspecialchars($_POST['refer_code'])) : '';
+        $friends_code = (isset($_POST['friends_code'])) ? $db->escapeString(htmlspecialchars($_POST['friends_code'])) : '';
+        $points = '0';
+        $status = '1';
+
+        // Check if the email or phone number already exists
+        $sql = "SELECT id FROM users";
+        $sql .= $mobile != null ? " WHERE mobile = '$mobile'" : " WHERE email = '$email'";
+        $db->sql($sql);
+        $res = $db->getResult();
+
+        if (!empty($res)) {
+            $response['error'] = "true";
+            $response['message'] = $mobile != null ? "Phone number already exists" : "Email already exists";
+        } else {
+            // Insert the new user into the database
+            $data = array(
+                'firebase_id' => '',
+                'email' => $email,
+                'name' => $name,
+                'age' => $age,
+                'gender' => $gender,
+                'mobile' => $mobile,
+                'password' => $hashed_password,
+                'type' => $type,
+
+                'profile' => $profile,
+                'fcm_id' => $fcm_id,
+                'refer_code' => $refer_code,
+                'friends_code' => $friends_code,
+                'coins' => '0',
+                'ip_address' => $ip_address,
+                'status' => $status
+            );
+            $sql = $db->insert('users', $data);
+            $result = $db->getResult();
+
+            if (!empty($result)) {
+                $response['error'] = "false";
+                $response['message'] = "User registered successfully";
+                $response['data'] = array(
+                    'user_id' => $result[0], // ID of the newly created user
+                    'name' => $name,
+                    'mobile' => $mobile
+                );
+            } else {
+                $response['error'] = "true";
+                $response['message'] = "Failed to register user";
+            }
+        }
+    } else {
+        $response['error'] = "true";
+        $response['message'] = "Please provide all required fields: email, name, phone, password";
+    }
+
+    print_r(json_encode($response));
+}
+
+// 13.3 verify_email_password
+if (isset($_POST['access_key']) && isset($_POST['verify_user'])) {
+    /* Parameters to be passed:
+       access_key: 6808
+       verify_user: 1
+       email: User's username
+       password: User's password
+    */
+
+    if ($access_key != $_POST['access_key']) {
+        $response['error'] = "true";
+        $response['login'] = false;
+        $response['message'] = "Invalid Access Key";
+        print_r(json_encode($response));
+        return false;
+    }
+
+    // Validate input fields
+    if (isset($_POST['email']) && isset($_POST['password'])) {
+        $email = $db->escapeString(htmlspecialchars($_POST['email']));
+        $password = $db->escapeString($_POST['password']);
+        $jwt = generate_token();
+
+        // Check if the email exists
+        $sql = "SELECT * FROM users WHERE email = '$email'";
+        $db->sql($sql);
+        $res = $db->getResult();
+
+        if (!empty($res)) {
+            // Verify the password
+            if (password_verify($password, $res[0]['password'])) {
+                $user_data = array(
+                    'user_id' => $res[0]['id'],
+                    'name' => $res[0]['name'],
+                    'email' => $res[0]['email'],
+                    'mobile' => $res[0]['mobile'],
+                    'profile' => filter_var($res[0]['profile'], FILTER_VALIDATE_URL) === false
+                        ? (!empty($res[0]['profile']) ? DOMAIN_URL . 'uploads/profile/' . $res[0]['profile'] : '')
+                        : $res[0]['profile'],
+                    'type' => $res[0]['type'],
+                    'fcm_id' => $res[0]['fcm_id'],
+                    'refer_code' => $res[0]['refer_code'],
+                    'coins' => $res[0]['coins'],
+                    'ip_address' => $res[0]['ip_address'],
+                    'status' => $res[0]['status'],
+                    'date_registered' => $res[0]['date_registered']
+                );
+
+                $user_data['access_token'] = $jwt;
+
+                $response['error'] = "false";
+                $response['login'] = true;
+                $response['access_token'] = $jwt;
+                $response['message'] = "Login successful";
+                $response['user'] = $user_data;
+            } else {
+                $response['error'] = "true";
+                $response['login'] = false;
+                $response['message'] = "Incorrect password";
+            }
+        } else {
+            $response['error'] = "true";
+            $response['login'] = false;
+            $response['message'] = "email not found";
+        }
+    } else {
+        $response['error'] = "true";
+        $response['login'] = false;
+        $response['message'] = "Please provide both email and password";
+    }
+
+    print_r(json_encode($response));
+}
+
 // 52. send_otp()
 if (isset($_POST['access_key']) && isset($_POST['send_otp']) && $_POST['send_otp'] == 1) {
     /* Parameters to be passed:
        access_key: 6808
        send_otp: 1
        user_id: <USER_ID>
+       user_check: true/false
     */
 
     if ($access_key != $_POST['access_key']) {
@@ -3352,17 +3353,20 @@ if (isset($_POST['access_key']) && isset($_POST['send_otp']) && $_POST['send_otp
 
     if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
         $user_id = $db->escapeString($_POST['user_id']);
+        $user_check = isset($_POST['user_check']) ? false : true;
 
         // Call the send_otp function
-        $otp_response = $fn->send_otp($user_id);
+        $otp_response = $fn->send_otp($user_id, $user_check);
 
         if ($otp_response['success']) {
             $response['error'] = false;
             $response['message'] = $otp_response['message'];
-            $response['otp'] = $otp_response['otp']; // Remove 'otp' in production to prevent exposing it.
         } else {
             $response['error'] = true;
             $response['message'] = $otp_response['message'];
+            if(isset($otp_response['error'])){
+                $response['response'] = $otp_response['error'];
+            }
         }
     } else {
         $response['error'] = true;

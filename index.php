@@ -42,7 +42,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                 <input type="submit" id="login_button" class="btn btn-default text-center" value="Log in" style="margin-left: 10px;">
                             </div>
                             <div class="col text-right">
-                                <a href="#" id="forgot-pass">Forgot Password?</a>
+                                <a href="forgot-pass.php" id="forgot-pass">Forgot Password?</a>
                             </div>
                         </div>
                         <div class="clearfix"></div>
