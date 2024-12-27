@@ -86,7 +86,7 @@ if (basename($_SERVER['PHP_SELF']) == 'languages.php' && !$fn->is_language_mode_
 
                         <?php if ($fn->is_language_mode_enabled()) { ?>
 
-                            <?php
+                    <?php
                         }
                     }
                     ?>
@@ -110,11 +110,19 @@ if (basename($_SERVER['PHP_SELF']) == 'languages.php' && !$fn->is_language_mode_
                         </ul>
                     </li>
                     <li>
-                        <a><em class="fas fa-book"></em> SSC Mock Test<span class="fas fa-caret-down"></span></a>
+                        <a><em class="fas fa-book"></em> SSC PYQ Test<span class="fas fa-caret-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="ssc-categories.php">Manage Categories</a></li>
+                            <li><a href="ssc-cgl-categories.php">Manage CGL Categories</a></li>
+                            <li><a href="ssc-cgl-questions.php">Manage CGL Questions</a></li>
 
-                            <li><a href="ssc-questions.php">Manage Questions</a></li>
+                            <li><a href="ssc-chsl-categories.php">Manage CHSL Categories</a></li>
+                            <li><a href="ssc-chsl-questions.php">Manage CHSL Questions</a></li>
+
+                            <li><a href="ssc-mts-categories.php">Manage MTS Categories</a></li>
+                            <li><a href="ssc-mts-questions.php">Manage MTS Questions</a></li>
+
+                            <li><a href="ssc-steno-categories.php">Manage STENO Categories</a></li>
+                            <li><a href="ssc-steno-questions.php">Manage STENO Questions</a></li>
                         </ul>
                     </li>
                     <li>

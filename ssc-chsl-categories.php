@@ -39,6 +39,7 @@ $type = 1;
                                     <div class='col-md-12'>
                                         <form id="category_form" class="form-horizontal form-label-left">
                                             <input type="hidden" id="category_type" name="category_type" value="1">
+                                            <input type="hidden" id="category_tag" name="category_tag" value="SSCCHSL">
 
                                             <div class="form-group row">
                                                 <div class="col-md-6 col-sm-12">
@@ -105,7 +106,7 @@ $type = 1;
                                                     <label>
                                                         Show
                                                         <select name="table__length" class="table__length__selector"
-                                                            id="ssc_category__table__length">
+                                                            id="ssc_chsl_category__table__length">
                                                             <option value="5">5</option>
                                                             <option value="10">10</option>
                                                             <option value="25">25</option>
@@ -118,7 +119,7 @@ $type = 1;
                                                 <div id="tables_filter" class="tables__filter">
                                                     <label>
                                                         Search:
-                                                        <input type="search" id="ssc_category__data__search"
+                                                        <input type="search" id="ssc_chsl_category__data__search"
                                                             class="table__search" aria-controls="datatables">
                                                     </label>
                                                 </div>
@@ -143,11 +144,11 @@ $type = 1;
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="ssc_category_management_table"></tbody>
+                                                <tbody id="ssc_chsl_category_management_table"></tbody>
                                             </table>
                                             <div class="table__clearfix">
-                                                <div class="hint-text" id="ssc_category__hint__text"></div>
-                                                <ul class="pagination" id="ssc_category__table__pagination"></ul>
+                                                <div class="hint-text" id="ssc_chsl_category__hint__text"></div>
+                                                <ul class="pagination" id="ssc_chsl_category__table__pagination"></ul>
                                             </div>
                                         </div>
                                     </div>
@@ -171,8 +172,8 @@ $type = 1;
                     <div class="modal-body">
                         <form id="update_form" class="form-horizontal form-label-left">
                             <input type="hidden" id="edit_id" name="edit_id">
-                            <input type="hidden" id="edit_tag" name="edit_tag" value="SSCCGL">
-                            <input type="hidden" id="edit_language" name="edit_language" value="SSCCGL">
+                            <input type="hidden" id="edit_tag" name="edit_tag" value="SSCCHSL">
+                            <input type="hidden" id="edit_language" name="edit_language" value="SSCCHSL">
                             <input type="hidden" id="edit_type" name="edit_category_type" value="1">
 
                             <div class="form-group">
@@ -183,7 +184,7 @@ $type = 1;
                             <div class="form-group">
                                 <label>Category Instructions</label>
                                 <textarea rows=6 type="text" name="edit_instructions" id="edit_instructions"
-                                    placeholder="Category Name" class='form-control'></textarea>
+                                    placeholder="Instructions" class='form-control'></textarea>
                             </div>
                             <div style="display: none">
                                 <label class="" for="image">Image <small>( Leave it blank for no change

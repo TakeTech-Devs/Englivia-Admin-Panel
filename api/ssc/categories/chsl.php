@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: application/json");
-require_once '../library/crud.php';
+require_once '../../library/crud.php';
 
 $db = new Database();
 $db->connect();
@@ -12,9 +12,15 @@ $response = [
     'data' => []
 ];
 
+// Determine the environment and set the base URL for the PDF path
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+$host = $_SERVER['HTTP_HOST'];
+$basePath = ($host === 'localhost') ? '/cl.englivia.com/uploads/pdf/' : '/uploads/pdf/';
+$baseURL = $protocol . $host . $basePath;
+
 switch ($action) {
     case 'GET':
-        handleGetRequest($db, $response);
+        handleGetRequest($db, $response, $baseURL);
         break;
 
     case 'POST':
@@ -39,31 +45,30 @@ switch ($action) {
 echo json_encode($response);
 $db->disconnect();
 
-function handleGetRequest($db, &$response)
+function handleGetRequest($db, &$response, $baseURL)
 {
-    $type = isset($_GET['type']) ? intval($_GET['type']) : 1;
-
     $conditions = [];
-    $conditions[] = 'type = ' . $type;
 
     if (isset($_GET['id'])) {
         $conditions[] = 'id = ' . intval($_GET['id']);
     }
 
+    // Adding type = 4 condition
+    $conditions[] = 'type = 4';
+
     if (isset($_GET['language'])) {
-        $conditions[] = 'language = ' . intval(value: $_GET['language']);
+        $conditions[] = 'language = ' . $db->escapeString($_GET['language']);
     }
+
+    // Adding Tag = 'SSCCHSL' condition
+    $conditions[] = "tag = 'SSCCHSL'";
 
     if (isset($_GET['keyword'])) {
         $keyword = $db->escapeString($_GET['keyword']);
         $conditions[] = 'category_name LIKE "%' . $keyword . '%"';
     }
 
-    if (isset($_GET['tag'])) {
-        $conditions[] = 'tag = "' . $db->escapeString($_GET['tag']) . '"';
-    }
-
-    $whereClause = !empty($conditions) ? implode(' AND ', $conditions) : null;
+    $whereClause = !empty($conditions) ? implode(' AND ', $conditions) : '1'; // '1' ensures a valid WHERE clause
 
     if (isset($_GET['table'])) {
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
@@ -71,20 +76,20 @@ function handleGetRequest($db, &$response)
         $search = isset($_GET['search']) ? $db->escapeString($_GET['search']) : '';
 
         $offset = ($page - 1) * $limit;
-        $totalQuery = "SELECT COUNT(*) AS total FROM tbl_categories WHERE category_name LIKE '%$search%'" . ($whereClause ? " AND $whereClause" : '');
+        $totalQuery = "SELECT COUNT(*) AS total FROM tbl_categories WHERE category_name LIKE '%$search%' AND $whereClause";
         $db->sql($totalQuery);
         $totalResult = $db->getResult();
         $totalRecords = $totalResult[0]['total'];
 
         if ($totalRecords == 0) {
-            // Return 206 Partial Content if no complete match but some partial data exists
-            $data = ["message" => "No data available", "status" => 206];
-            http_response_code(206);
-            echo json_encode($data);
-            exit();
+            // Return 206 Partial Content if no complete match but there might be some partial data
+            $response['status'] = 206;
+            $response['message'] = 'Partial data available';
+            sendResponse($response, 206); // Send response and exit
+            return;
         }
 
-        $query = "SELECT * FROM tbl_categories WHERE category_name LIKE '%$search%'" . ($whereClause ? " AND $whereClause" : '') . " ORDER BY time_created LIMIT $limit OFFSET $offset";
+        $query = "SELECT * FROM tbl_categories WHERE category_name LIKE '%$search%' AND $whereClause LIMIT $limit OFFSET $offset";
         $db->sql($query);
         $data = $db->getResult();
 
@@ -94,6 +99,9 @@ function handleGetRequest($db, &$response)
             }
             $item['questions'] = getTotalQuestions($db, $item['id']);
             $item['total_duration'] = getTotalDuration($db, $item['id']);
+            if (isset($item['pdf'])) {
+                $item['pdf'] = $baseURL . $item['pdf'];
+            }
         }
 
         $response = [
@@ -102,41 +110,53 @@ function handleGetRequest($db, &$response)
             'limit' => $limit,
             'data' => $data,
         ];
-        sendResponse($response);
-        return; // Ensure the response is sent immediately
+
+        sendResponse($response); // Send success response if data found
+        return;
     } else {
-        $db->select('tbl_categories', '*', null, $whereClause, 'time_created');
+        $db->select('tbl_categories', '*', null, $whereClause);
     }
+
     $result = $db->getResult();
 
-    if (!empty($result)) {
-        foreach ($result as &$item) {
-            if (isset($item['instructions'])) {
-                $item['instructions'] = parseInstructions($item['instructions']);
-            }
-            $item['questions'] = getTotalQuestions($db, $item['id']);
-            $item['total_duration'] = getTotalDuration($db, $item['id']);
+    if (empty($result)) {
+        // Return 206 Partial Content if no full data match but partial results
+        $response['status'] = 206;
+        $response['message'] = 'No data available';
+        sendResponse($response, 206); // Send response and exit
+        return;
+    }
+
+    foreach ($result as &$item) {
+        if (isset($item['instructions'])) {
+            $item['instructions'] = parseInstructions($item['instructions']);
         }
-    } else {
-        // Return 206 Partial Content if no complete match but some partial data exists
-        $data = ["message" => "No data available", "status" => 206];
-        http_response_code(206);
-        echo json_encode($data);
-        exit();
+        $item['questions'] = getTotalQuestions($db, $item['id']);
+        $item['total_duration'] = getTotalDuration($db, $item['id']);
+        if (isset($item['pdf'])) {
+            $item['pdf'] = $baseURL . $item['pdf'];
+        }
     }
 
     $response['data'] = $result;
     $response['message'] = 'Data fetched successfully';
-    http_response_code($response['status']);
+    http_response_code(200); // Ensure success status code
+    sendResponse($response); // Send the response
 }
 
 function handlePostRequest($db, &$response)
 {
     $data = json_decode(file_get_contents("php://input"), true);
+
+    // Generate a custom ID based on the type and current datetime
+    $currentDateTime = date('dmyHis'); // Current day, hour, minute, second
+    $new_id = $data['type'] . '0' . $currentDateTime;
+
     $params = [
+        'id' => intval($new_id), // Set the custom ID
         'category_name' => $db->escapeString($data['category_name']),
-        'tag' => $db->escapeString($data['tag']),
         'type' => intval($data['type']),
+        'tag' => $db->escapeString($data['tag']),
         'language' => intval($data['language']),
     ];
 
@@ -148,15 +168,6 @@ function handlePostRequest($db, &$response)
         $params['instructions'] = $data['instructions'];
     }
 
-    // Generate a custom ID
-    // Get the current day, hour, minute, and second
-    $currentDateTime = date('dmyHis');
-
-    // Combine the type with the current datetime components
-    $new_id = $data['type'] . '0' . $currentDateTime;
-
-    $params['id'] = intval($new_id); // Convert to integer if needed
-
     if (!empty($params['category_name'])) {
         $db->insert('tbl_categories', $params);
         outputResponse($db, $response, 'Category created successfully');
@@ -167,7 +178,6 @@ function handlePostRequest($db, &$response)
         exit();
     }
 }
-
 
 
 function handlePutRequest($db, &$response)
@@ -195,10 +205,6 @@ function handlePutRequest($db, &$response)
         $params['type'] = intval($data['type']);
     }
 
-    if (isset($data['tag'])) {
-        $params['tag'] = $db->escapeString($data['tag']);
-    }
-
     if (!empty($params)) {
         $db->update('tbl_categories', $params, 'id = ' . $id);
         outputResponse($db, $response, 'Category updated successfully');
@@ -214,31 +220,16 @@ function handlePutRequest($db, &$response)
 function handleDeleteRequest($db, &$response)
 {
     $data = json_decode(file_get_contents("php://input"), true);
-
     if (!isset($data['id']) || empty($data['id'])) {
-        respond(['error' => 'ID is required'], 400);
+        $response['status'] = 400;
+        $response['message'] = 'ID is required';
+        echo json_encode($response);
+        exit();
     }
-
     $id = intval($data['id']);
-
-    $db->select('tbl_subcategories', '*', null, 'category = ' . $id);
-    $subCategories = $db->getResult();
-
-    foreach ($subCategories as $category) {
-        // Step 1: Delete all questions related to this category in a single query
-        $db->delete('tbl_questions', 'category_id = ' . $category['id']);
-
-        // Step 2: Delete all questions related to this category in a single query
-        $db->delete('tbl_subcategories', 'id = ' . $category['id']);
-    }
-
-
-    // Step 3: Delete the category itself
     $db->delete('tbl_categories', 'id = ' . $id);
-
     outputResponse($db, $response, 'Category deleted successfully');
 }
-
 
 function parseInstructions($instructions)
 {
