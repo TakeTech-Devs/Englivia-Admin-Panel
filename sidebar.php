@@ -153,7 +153,15 @@ if (basename($_SERVER['PHP_SELF']) == 'languages.php' && !$fn->is_language_mode_
                             <li><a href="paragraph-translation-pdf.php">Paragraph PDF </a></li>
                         </ul>
                     </li>
-                    <li><a href="dictionary.php"><em class="fas fa-question"></em> Newspapers Words</a></li>
+                    <li>
+                        <a><em class="fas fa-question"></em> Newspapers Words <span class="fas fa-caret-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="newspapers-words.php">Manage Category </a></li>
+
+                            <li><a href="newspapers-words-pdf.php">Manage PDF </a></li>
+                        </ul>
+                    </li>
+                    <!-- <li><a href="dictionary.php"><em class="fas fa-question"></em> Newspapers Words</a></li> -->
 
 
                     <li><a href="question-reports.php"><em class="far fa-question-circle"></em> Question
