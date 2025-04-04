@@ -1726,8 +1726,6 @@ if (isset($_POST['update_dictionary'])) {
 
         echo "<p class='alert alert-success'>Dictionary updated successfully!</p>";
     }
-
-
 }
 
 
@@ -1753,6 +1751,8 @@ if (isset($_POST['learning_id']) && isset($_POST['update_learning'])) {
         return false;
     }
     $id = $_POST['learning_id'];
+    // echo($id);
+    // file_put_contents("debug.log", "ID: " . $id . "\n", FILE_APPEND);
 
     $language_id = ($fn->is_language_mode_enabled()) ? $db->escapeString($_POST['language_id']) : 0;
     $category = $db->escapeString($_POST['category']);
@@ -1764,6 +1764,22 @@ if (isset($_POST['learning_id']) && isset($_POST['update_learning'])) {
     $sql .= " where `id`=" . $id;
     $db->sql($sql);
 
+    // $sql = "UPDATE `tbl_learning` SET 
+    //     `category` = '" . $db->escapeString($category) . "', 
+    //     `title` = '" . $db->escapeString($title) . "', 
+    //     `detail` = '" . $db->escapeString($detail) . "'";
+
+    // if ($fn->is_language_mode_enabled() && isset($language_id)) {
+    //     $sql .= ", `language_id` = " . intval($language_id);
+    // }
+
+    // if (isset($id) && !empty($id)) {
+    //     $sql .= " WHERE `id` = " . intval($id);
+    //     $db->sql($sql);
+    // } else {
+    //     die("Error: ID is missing or invalid.");
+    // }
+
     echo "<p class='alert alert-success'>Learning updated successfully!</p>";
 }
 // 48. update_learning_status
@@ -1773,6 +1789,8 @@ if (isset($_POST['learning_status_id']) && isset($_POST['update_learning_status'
         return false;
     }
     $id = $_POST['learning_status_id'];
+    // file_put_contents("debug.log", "UID: " . $id . "\n", FILE_APPEND);
+
     $status = $db->escapeString($_POST['status']);
     if ($status == 1 || $status == '1') {
         $sql = 'SELECT id FROM `tbl_learning_question` WHERE `learning_id`=' . $id;
@@ -1786,7 +1804,7 @@ if (isset($_POST['learning_status_id']) && isset($_POST['update_learning_status'
             echo "<p class='alert alert-success'>Learning status updated successfully!</p>";
         }
     } else {
-        $sql = "Update `tbl_learning` set `statud`='" . $status . "' where `id`=" . $id;
+        $sql = "Update `tbl_learning` set `status`='" . $status . "' where `id`=" . $id;
         $db->sql($sql);
         echo "<p class='alert alert-success'>Learning status updated successfully!</p>";
     }
@@ -1917,8 +1935,6 @@ if (isset($_POST['edit_detail']) && isset($_POST['update_learning_detail'])) {
         }
         echo "<p class='alert alert-success'>Detail updated successfully!</p>";
     }
-
-
 }
 
 
@@ -2021,7 +2037,6 @@ if (isset($_POST['meaning_id']) && isset($_POST['update_dictionary_word'])) {
         $db->sql($sql);
         echo "<p class='alert alert-success'>Word and Meaning updated successfully!</p>";
     }
-
 }
 
 
@@ -2263,7 +2278,7 @@ if (isset($_POST['update_system'])) {
                                             unlink($sql_file);
                                             DeleteDir($target_path1);
                                             $result = "<label class='alert alert-danger'>Your version is $current_version, Please update nearest version first.<lable>";
-                                        }//                                
+                                        } //                                
                                     } else {
                                         DeleteDir($target_path1);
                                         $result = "<label class='alert alert-danger'>Invalid file, please try again.!<lable>";
@@ -2581,5 +2596,3 @@ if (isset($_POST['tbl_exam_question']) && $_POST['tbl_exam_question'] == 1) {
         echo "<p class='alert alert-danger'>Invalid file format! Please upload data in CSV file!</p>";
     }
 }
-
-?>

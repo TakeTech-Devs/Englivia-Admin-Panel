@@ -77,20 +77,17 @@ $(document).ready(function () {
                   <td style="min-width:100px">${category.category_name}</td>
                   <td style="min-width:100px">${category.type}</td>
                   <td style="width:700px">${Object.values(
-                    category.instructions
-                  ).map((instruction) => {
-                    return `<p>${instruction}</p>`;
-                  })}</td>
+                category.instructions
+              ).map((instruction) => {
+                return `<p>${instruction}</p>`;
+              })}</td>
                   <td>${category.questions}</td>
                   <td>${category.total_duration}</td>
                   <td>${category.status == 1 ? "Active" : "Deactive"}</td>
                   <td style="width:100px">
-                      <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                        category.id
-                      }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                        category.id
-                      }' title='Delete'><i class='fas fa-trash'></i></a>
+                      <a class='btn btn-xs btn-primary edit-admin' data-id='${category.id}' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${category.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                   </td>
               </tr>
             `);
@@ -287,6 +284,10 @@ $(document).ready(function () {
             $("#edit_id").val(category.id);
 
             $("#edit_category_name").val(category.category_name);
+            // $("#edit_instructions").val(JSON.stringify(category.instructions, null, 2));
+            const instructionsText = category.instructions[1] || ""; // Extracting the value inside the JSON
+            $("#edit_instructions").val(instructionsText);
+
             // Set the status radio button
             if (category.status == 1) {
               $("#status_active").prop("checked", true);
@@ -332,8 +333,10 @@ $(document).ready(function () {
         status: parseInt($("input[name='status']:checked").val()),
       };
       if ($("#edit_instructions").val()) {
-        formData["instructions"] = $("#edit_instructions").val();
+        // Convert "Instruction 1 | Instruction 2" -> "Instruction 1\nInstruction 2"
+        formData["instructions"] = $("#edit_instructions").val().split(" | ").join("\n");
       }
+      
       $.ajax({
         url: `${apiUrl}?id=${categoryId}`,
         method: "PUT",
@@ -473,12 +476,10 @@ $(document).ready(function () {
                   <td>${question.answer}</td>
                   <td>${question.duration}</td>
                   <td>
-                      <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                        question.id
-                      }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                        question.id
-                      }' title='Delete'><i class='fas fa-trash'></i></a>
+                      <a class='btn btn-xs btn-primary edit-admin' data-id='${question.id
+                }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${question.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                   </td>
               </tr>
             `);
@@ -751,8 +752,8 @@ $(document).ready(function () {
             $("#update_result")
               .html(
                 '<div class="alert alert-success">' +
-                  data.response.message +
-                  "</div>"
+                data.response.message +
+                "</div>"
               )
               .show();
             setTimeout(function () {
@@ -771,8 +772,8 @@ $(document).ready(function () {
             $("#update_result")
               .html(
                 '<div class="alert alert-danger">' +
-                  data.response.error +
-                  "</div>"
+                data.response.error +
+                "</div>"
               )
               .show();
           }
@@ -887,20 +888,18 @@ $(document).ready(function () {
                   <td style="min-width:100px">${category.category_name}</td>
                   <td style="min-width:100px">${category.type}</td>
                   <td style="width:700px">${Object.values(
-                    category.instructions
-                  ).map((instruction) => {
-                    return `<p>${instruction}</p>`;
-                  })}</td>
+                category.instructions
+              ).map((instruction) => {
+                return `<p>${instruction}</p>`;
+              })}</td>
                   <td>${category.questions}</td>
                   <td>${category.total_duration}</td>
                   <td>${category.status == 1 ? "Active" : "Deactive"}</td>
                   <td style="width:100px">
-                      <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                        category.id
-                      }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                        category.id
-                      }' title='Delete'><i class='fas fa-trash'></i></a>
+                      <a class='btn btn-xs btn-primary edit-admin' data-id='${category.id
+                }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${category.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                   </td>
               </tr>
             `);
@@ -1097,6 +1096,8 @@ $(document).ready(function () {
             $("#edit_id").val(category.id);
 
             $("#edit_category_name").val(category.category_name);
+            const instructionsText = category.instructions[1] || ""; 
+            $("#edit_instructions").val(instructionsText);
             // Set the status radio button
             if (category.status == 1) {
               $("#status_active").prop("checked", true);
@@ -1141,8 +1142,12 @@ $(document).ready(function () {
         type: $("#edit_category_type").val(),
         status: parseInt($("input[name='status']:checked").val()),
       };
+      // if ($("#edit_instructions").val()) {
+      //   formData["instructions"] = $("#edit_instructions").val();
+      // }
       if ($("#edit_instructions").val()) {
-        formData["instructions"] = $("#edit_instructions").val();
+        // Convert "Instruction 1 | Instruction 2" -> "Instruction 1\nInstruction 2"
+        formData["instructions"] = $("#edit_instructions").val().split(" | ").join("\n");
       }
       $.ajax({
         url: `${apiUrl}?id=${categoryId}`,
@@ -1283,12 +1288,10 @@ $(document).ready(function () {
                   <td>${question.answer}</td>
                   <td>${question.duration}</td>
                   <td>
-                      <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                        question.id
-                      }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                        question.id
-                      }' title='Delete'><i class='fas fa-trash'></i></a>
+                      <a class='btn btn-xs btn-primary edit-admin' data-id='${question.id
+                }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${question.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                   </td>
               </tr>
             `);
@@ -1561,8 +1564,8 @@ $(document).ready(function () {
             $("#update_result")
               .html(
                 '<div class="alert alert-success">' +
-                  data.response.message +
-                  "</div>"
+                data.response.message +
+                "</div>"
               )
               .show();
             setTimeout(function () {
@@ -1581,8 +1584,8 @@ $(document).ready(function () {
             $("#update_result")
               .html(
                 '<div class="alert alert-danger">' +
-                  data.response.error +
-                  "</div>"
+                data.response.error +
+                "</div>"
               )
               .show();
           }
@@ -1697,20 +1700,18 @@ $(document).ready(function () {
                   <td style="min-width:100px">${category.category_name}</td>
                   <td style="min-width:100px">${category.type}</td>
                   <td style="width:700px">${Object.values(
-                    category.instructions
-                  ).map((instruction) => {
-                    return `<p>${instruction}</p>`;
-                  })}</td>
+                category.instructions
+              ).map((instruction) => {
+                return `<p>${instruction}</p>`;
+              })}</td>
                   <td>${category.questions}</td>
                   <td>${category.total_duration}</td>
                   <td>${category.status == 1 ? "Active" : "Deactive"}</td>
                   <td style="width:80px">
-                      <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                        category.id
-                      }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                        category.id
-                      }' title='Delete'><i class='fas fa-trash'></i></a>
+                      <a class='btn btn-xs btn-primary edit-admin' data-id='${category.id
+                }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${category.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                   </td>
               </tr>
             `);
@@ -1907,6 +1908,8 @@ $(document).ready(function () {
             $("#edit_id").val(category.id);
 
             $("#edit_category_name").val(category.category_name);
+            const instructionsText = category.instructions[1] || ""; // Extracting the value inside the JSON
+            $("#edit_instructions").val(instructionsText);
             // Set the status radio button
             if (category.status == 1) {
               $("#status_active").prop("checked", true);
@@ -1951,8 +1954,12 @@ $(document).ready(function () {
         type: $("#edit_category_type").val(),
         status: parseInt($("input[name='status']:checked").val()),
       };
+      // if ($("#edit_instructions").val()) {
+      //   formData["instructions"] = $("#edit_instructions").val();
+      // }
       if ($("#edit_instructions").val()) {
-        formData["instructions"] = $("#edit_instructions").val();
+        // Convert "Instruction 1 | Instruction 2" -> "Instruction 1\nInstruction 2"
+        formData["instructions"] = $("#edit_instructions").val().split(" | ").join("\n");
       }
       $.ajax({
         url: `${apiUrl}?id=${categoryId}`,
@@ -2093,12 +2100,10 @@ $(document).ready(function () {
                   <td>${question.answer}</td>
                   <td>${question.duration}</td>
                   <td>
-                      <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                        question.id
-                      }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                        question.id
-                      }' title='Delete'><i class='fas fa-trash'></i></a>
+                      <a class='btn btn-xs btn-primary edit-admin' data-id='${question.id
+                }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${question.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                   </td>
               </tr>
             `);
@@ -2371,8 +2376,8 @@ $(document).ready(function () {
             $("#update_result")
               .html(
                 '<div class="alert alert-success">' +
-                  data.response.message +
-                  "</div>"
+                data.response.message +
+                "</div>"
               )
               .show();
             setTimeout(function () {
@@ -2391,8 +2396,8 @@ $(document).ready(function () {
             $("#update_result")
               .html(
                 '<div class="alert alert-danger">' +
-                  data.response.error +
-                  "</div>"
+                data.response.error +
+                "</div>"
               )
               .show();
           }
@@ -2505,20 +2510,18 @@ $(document).ready(function () {
                   <td style="min-width:100px">${category.category_name}</td>
                   <td style="min-width:100px">${category.type}</td>
                   <td style="width:700px">${Object.values(
-                    category.instructions
-                  ).map((instruction) => {
-                    return `<p>${instruction}</p>`;
-                  })}</td>
+                category.instructions
+              ).map((instruction) => {
+                return `<p>${instruction}</p>`;
+              })}</td>
                   <td>${category.questions}</td>
                   <td>${category.total_duration}</td>
                   <td>${category.status == 1 ? "Active" : "Deactive"}</td>
                   <td style="width:80px">
-                      <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                        category.id
-                      }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                        category.id
-                      }' title='Delete'><i class='fas fa-trash'></i></a>
+                      <a class='btn btn-xs btn-primary edit-admin' data-id='${category.id
+                }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${category.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                   </td>
               </tr>
             `);
@@ -2715,6 +2718,8 @@ $(document).ready(function () {
             $("#edit_id").val(category.id);
 
             $("#edit_category_name").val(category.category_name);
+            const instructionsText = category.instructions[1] || ""; // Extracting the value inside the JSON
+            $("#edit_instructions").val(instructionsText);
             // Set the status radio button
             if (category.status == 1) {
               $("#status_active").prop("checked", true);
@@ -2759,8 +2764,12 @@ $(document).ready(function () {
         type: $("#edit_category_type").val(),
         status: parseInt($("input[name='status']:checked").val()),
       };
+      // if ($("#edit_instructions").val()) {
+      //   formData["instructions"] = $("#edit_instructions").val();
+      // }
       if ($("#edit_instructions").val()) {
-        formData["instructions"] = $("#edit_instructions").val();
+        // Convert "Instruction 1 | Instruction 2" -> "Instruction 1\nInstruction 2"
+        formData["instructions"] = $("#edit_instructions").val().split(" | ").join("\n");
       }
       $.ajax({
         url: `${apiUrl}?id=${categoryId}`,
@@ -2901,12 +2910,10 @@ $(document).ready(function () {
                   <td>${question.answer}</td>
                   <td>${question.duration}</td>
                   <td>
-                      <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                        question.id
-                      }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                        question.id
-                      }' title='Delete'><i class='fas fa-trash'></i></a>
+                      <a class='btn btn-xs btn-primary edit-admin' data-id='${question.id
+                }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${question.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                   </td>
               </tr>
             `);
@@ -3179,8 +3186,8 @@ $(document).ready(function () {
             $("#update_result")
               .html(
                 '<div class="alert alert-success">' +
-                  data.response.message +
-                  "</div>"
+                data.response.message +
+                "</div>"
               )
               .show();
             setTimeout(function () {
@@ -3199,8 +3206,8 @@ $(document).ready(function () {
             $("#update_result")
               .html(
                 '<div class="alert alert-danger">' +
-                  data.response.error +
-                  "</div>"
+                data.response.error +
+                "</div>"
               )
               .show();
           }
@@ -3329,9 +3336,8 @@ $(document).ready(function () {
                 <tr>
                     <td>${index + 1}</td>
                     <td>${question.id}</td>
-                    <td style="min-width: 100px;">${
-                      testList[question.category_id]
-                    }</td>
+                    <td style="min-width: 100px;">${testList[question.category_id]
+                }</td>
                     <td style="min-width: 100px;">${question.category_name}</td>
                     <td>${question.question}</td>
                     <td>${question.optiona}</td>
@@ -3341,12 +3347,10 @@ $(document).ready(function () {
                     <td>${question.answer}</td>
                     <td>${question.duration}</td>
                     <td>
-                        <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                          question.id
-                        }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                        <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                          question.id
-                        }' title='Delete'><i class='fas fa-trash'></i></a>
+                        <a class='btn btn-xs btn-primary edit-admin' data-id='${question.id
+                }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                        <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${question.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                     </td>
                 </tr>
               `);
@@ -3386,9 +3390,8 @@ $(document).ready(function () {
       if (currentPage > 1) {
         pagination.append(`
           <li class="page-item">
-            <span class="page-link" data-page="${
-              currentPage - 1
-            }">&laquo;</span>
+            <span class="page-link" data-page="${currentPage - 1
+          }">&laquo;</span>
           </li>
         `);
       }
@@ -3465,9 +3468,8 @@ $(document).ready(function () {
       if (currentPage < totalPages) {
         pagination.append(`
           <li class="page-item">
-            <span class="page-link" data-page="${
-              currentPage + 1
-            }">&raquo;</span>
+            <span class="page-link" data-page="${currentPage + 1
+          }">&raquo;</span>
           </li>
         `);
       }
@@ -3624,8 +3626,8 @@ $(document).ready(function () {
             $("#update_result")
               .html(
                 '<div class="alert alert-success">' +
-                  data.response.message +
-                  "</div>"
+                data.response.message +
+                "</div>"
               )
               .show();
             setTimeout(function () {
@@ -3644,8 +3646,8 @@ $(document).ready(function () {
             $("#update_result")
               .html(
                 '<div class="alert alert-danger">' +
-                  data.response.error +
-                  "</div>"
+                data.response.error +
+                "</div>"
               )
               .show();
           }
@@ -3763,19 +3765,16 @@ $(document).ready(function () {
                       <td>${index + 1}</td>
                       <td>${category.id}</td>
                       <td style="min-width:100px">${category.category_name}</td>
-                      <td style="min-width:100px">${
-                        category.language == null
-                          ? "N/A"
-                          : getLanguage(category.language)
-                      }</td>
+                      <td style="min-width:100px">${category.language == null
+                  ? "N/A"
+                  : getLanguage(category.language)
+                }</td>
                       <td style="min-width:100px">${category.type}</td>
                       <td style="min-width:80px">
-                          <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                            category.id
-                          }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                          <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                            category.id
-                          }' title='Delete'><i class='fas fa-trash'></i></a>
+                          <a class='btn btn-xs btn-primary edit-admin' data-id='${category.id
+                }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                          <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${category.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                       </td>
                   </tr>
                 `);
@@ -4149,21 +4148,18 @@ $(document).ready(function () {
               <tr>
                   <td>${index + 1}</td>
                   <td>${category.id}</td>
-                  <td style="min-width:100px">${
-                    parentList[category.category]
-                  }</td>
+                  <td style="min-width:100px">${parentList[category.category]
+                }</td>
                   <td style="min-width:100px">${category.category_name}</td>
                   <td style="min-width:100px">${category.type}</td>
                   <td>${category.questions}</td>
                   <td>${category.total_duration}</td>
                   <td>${category.status == 1 ? "Active" : "Deactive"}</td>
                   <td style="width:80px">
-                      <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                        category.id
-                      }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                        category.id
-                      }' title='Delete'><i class='fas fa-trash'></i></a>
+                      <a class='btn btn-xs btn-primary edit-admin' data-id='${category.id
+                }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${category.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                   </td>
               </tr>
             `);
@@ -4544,20 +4540,17 @@ $(document).ready(function () {
                       <td>${index + 1}</td>
                       <td>${category.id}</td>
                       <td style="min-width:100px">${category.category_name}</td>
-                      <td style="min-width:100px">${
-                        category.language == null
-                          ? "N/A"
-                          : getLanguage(category.language)
-                      }</td>
+                      <td style="min-width:100px">${category.language == null
+                      ? "N/A"
+                      : getLanguage(category.language)
+                    }</td>
                       <td style="min-width:100px">${category.type}</td>
                       <td>${category.pdf}</td>
                       <td style="min-width:80px">
-                          <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                            category.id
-                          }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                          <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                            category.id
-                          }' title='Delete'><i class='fas fa-trash'></i></a>
+                          <a class='btn btn-xs btn-primary edit-admin' data-id='${category.id
+                    }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                          <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${category.id
+                    }' title='Delete'><i class='fas fa-trash'></i></a>
                       </td>
                     </tr>
                   `);
@@ -4898,20 +4891,17 @@ $(document).ready(function () {
                 <td>${index + 1}</td>
                 <td>${category.id}</td>
                 <td style="min-width:100px">${category.category_name}</td>
-                <td style="min-width:100px">${
-                  category.language == null
-                    ? "N/A"
-                    : getLanguage(category.language)
+                <td style="min-width:100px">${category.language == null
+                  ? "N/A"
+                  : getLanguage(category.language)
                 }</td>
                 <td style="min-width:100px">${category.type}</td>
                 <td>${category.status == 1 ? "Active" : "Deactive"}</td>
                 <td style="width:80px">
-                    <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                      category.id
-                    }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                    <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                      category.id
-                    }' title='Delete'><i class='fas fa-trash'></i></a>
+                    <a class='btn btn-xs btn-primary edit-admin' data-id='${category.id
+                }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                    <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${category.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                 </td>
             </tr>
           `);
@@ -5298,22 +5288,19 @@ $(document).ready(function () {
                   <td>${index + 1}</td>
                   <td>${category.id}</td>
                   <td style="min-width:100px">${category.category_name}</td>
-                  <td style="min-width:100px">${
-                    category.language == null
-                      ? "N/A"
-                      : getLanguage(category.language)
-                  }</td>
+                  <td style="min-width:100px">${category.language == null
+                  ? "N/A"
+                  : getLanguage(category.language)
+                }</td>
                   <td style="min-width:100px">${category.type}</td>
                   <td>${category.pdf}</td>
                   <td style="min-width:80px">
-                      <a class="btn btn-xs btn-primary edit-btn" data-id="${
-                        category.id
-                      }" id="edit_btn" data-toggle="modal" data-target="#editModal" title="Edit">
+                      <a class="btn btn-xs btn-primary edit-btn" data-id="${category.id
+                }" id="edit_btn" data-toggle="modal" data-target="#editModal" title="Edit">
                         <i class="fas fa-edit"></i>
                       </a>
-                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                        category.id
-                      }' title='Delete'><i class='fas fa-trash'></i></a>
+                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${category.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                   </td>
               </tr>
             `);
@@ -5617,20 +5604,17 @@ $(document).ready(function () {
                 <td>${index + 1}</td>
                 <td>${category.id}</td>
                 <td style="min-width:100px">${category.category_name}</td>
-                <td style="min-width:100px">${
-                  category.language == null
-                    ? "N/A"
-                    : getLanguage(category.language)
+                <td style="min-width:100px">${category.language == null
+                  ? "N/A"
+                  : getLanguage(category.language)
                 }</td>
                 <td style="min-width:100px">${category.type}</td>
                 <td>${category.status == 1 ? "Active" : "Deactive"}</td>oo
                 <td style="width:80px">
-                    <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                      category.id
-                    }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                    <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                      category.id
-                    }' title='Delete'><i class='fas fa-trash'></i></a>
+                    <a class='btn btn-xs btn-primary edit-admin' data-id='${category.id
+                }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                    <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${category.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                 </td>
             </tr>
           `);
@@ -6018,22 +6002,19 @@ $(document).ready(function () {
                   <td>${index + 1}</td>
                   <td>${category.id}</td>
                   <td style="min-width:100px">${category.category_name}</td>
-                  <td style="min-width:100px">${
-                    category.language == null
-                      ? "N/A"
-                      : getLanguage(category.language)
-                  }</td>
+                  <td style="min-width:100px">${category.language == null
+                  ? "N/A"
+                  : getLanguage(category.language)
+                }</td>
                   <td style="min-width:100px">${category.type}</td>
                   <td>${category.pdf}</td>
                   <td style="min-width:80px">
-                      <a class="btn btn-xs btn-primary edit-btn" data-id="${
-                        category.id
-                      }" id="edit_btn" data-toggle="modal" data-target="#editModal" title="Edit">
+                      <a class="btn btn-xs btn-primary edit-btn" data-id="${category.id
+                }" id="edit_btn" data-toggle="modal" data-target="#editModal" title="Edit">
                         <i class="fas fa-edit"></i>
                       </a>
-                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                        category.id
-                      }' title='Delete'><i class='fas fa-trash'></i></a>
+                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${category.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                   </td>
               </tr>
             `);
@@ -6335,20 +6316,17 @@ $(document).ready(function () {
                 <td>${index + 1}</td>
                 <td>${category.id}</td>
                 <td style="min-width:100px">${category.category_name}</td>
-                <td style="min-width:100px">${
-                  category.language == null
-                    ? "N/A"
-                    : getLanguage(category.language)
+                <td style="min-width:100px">${category.language == null
+                  ? "N/A"
+                  : getLanguage(category.language)
                 }</td>
                 <td style="min-width:100px">${category.type}</td>
                 <td>${category.status == 1 ? "Active" : "Deactive"}</td>
                 <td style="width:80px">
-                    <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                      category.id
-                    }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                    <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                      category.id
-                    }' title='Delete'><i class='fas fa-trash'></i></a>
+                    <a class='btn btn-xs btn-primary edit-admin' data-id='${category.id
+                }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                    <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${category.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                 </td>
             </tr>
           `);
@@ -6733,22 +6711,19 @@ $(document).ready(function () {
                   <td>${index + 1}</td>
                   <td>${category.id}</td>
                   <td style="min-width:100px">${category.category_name}</td>
-                  <td style="min-width:100px">${
-                    category.language == null
-                      ? "N/A"
-                      : getLanguage(category.language)
-                  }</td>
+                  <td style="min-width:100px">${category.language == null
+                  ? "N/A"
+                  : getLanguage(category.language)
+                }</td>
                   <td style="min-width:100px">${category.type}</td>
                   <td>${category.pdf}</td>
                   <td style="min-width:80px">
-                      <a class="btn btn-xs btn-primary edit-btn" data-id="${
-                        category.id
-                      }" id="edit_btn" data-toggle="modal" data-target="#editModal" title="Edit">
+                      <a class="btn btn-xs btn-primary edit-btn" data-id="${category.id
+                }" id="edit_btn" data-toggle="modal" data-target="#editModal" title="Edit">
                         <i class="fas fa-edit"></i>
                       </a>
-                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                        category.id
-                      }' title='Delete'><i class='fas fa-trash'></i></a>
+                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${category.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                   </td>
               </tr>
             `);
@@ -7050,20 +7025,17 @@ $(document).ready(function () {
                 <td>${index + 1}</td>
                 <td>${category.id}</td>
                 <td style="min-width:100px">${category.category_name}</td>
-                <td style="min-width:100px">${
-                  category.language == null
-                    ? "N/A"
-                    : getLanguage(category.language)
+                <td style="min-width:100px">${category.language == null
+                  ? "N/A"
+                  : getLanguage(category.language)
                 }</td>
                 <td style="min-width:100px">${category.type}</td>
                 <td>${category.status == 1 ? "Active" : "Deactive"}</td>
                 <td style="width:80px">
-                    <a class='btn btn-xs btn-primary edit-admin' data-id='${
-                      category.id
-                    }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
-                    <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                      category.id
-                    }' title='Delete'><i class='fas fa-trash'></i></a>
+                    <a class='btn btn-xs btn-primary edit-admin' data-id='${category.id
+                }' id='edit_btn' data-toggle='modal' data-target='#editAdminModal' title='Edit'><i class='fas fa-edit'></i></a>
+                    <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${category.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                 </td>
             </tr>
           `);
@@ -7436,22 +7408,19 @@ $(document).ready(function () {
                   <td>${index + 1}</td>
                   <td>${category.id}</td>
                   <td style="min-width:100px">${category.category_name}</td>
-                  <td style="min-width:100px">${
-                    category.language == null
-                      ? "N/A"
-                      : getLanguage(category.language)
-                  }</td>
+                  <td style="min-width:100px">${category.language == null
+                  ? "N/A"
+                  : getLanguage(category.language)
+                }</td>
                   <td style="min-width:100px">${category.type}</td>
                   <td>${category.pdf}</td>
                   <td style="min-width:80px">
-                      <a class="btn btn-xs btn-primary edit-btn" data-id="${
-                        category.id
-                      }" id="edit_btn" data-toggle="modal" data-target="#editModal" title="Edit">
+                      <a class="btn btn-xs btn-primary edit-btn" data-id="${category.id
+                }" id="edit_btn" data-toggle="modal" data-target="#editModal" title="Edit">
                         <i class="fas fa-edit"></i>
                       </a>
-                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${
-                        category.id
-                      }' title='Delete'><i class='fas fa-trash'></i></a>
+                      <a class='btn btn-xs btn-danger delete-admin' id='delete_btn' data-id='${category.id
+                }' title='Delete'><i class='fas fa-trash'></i></a>
                   </td>
               </tr>
             `);
@@ -7641,7 +7610,7 @@ $(document).ready(function () {
           if (data.status === 200) {
             const category = data.data[0];
             $("#edit_id").val(category.id);
-            $("#edit_category_name").val(category.category_name);
+            // $("#edit_category_name").val(category.category_name);
 
             $("#editModal").modal({
               show: true,
