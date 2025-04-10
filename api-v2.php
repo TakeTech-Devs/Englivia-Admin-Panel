@@ -2943,6 +2943,46 @@ if (isset($_POST['access_key']) && isset($_POST['get_learning'])) {
     print_r(json_encode($response));
 }
 
+// 49. get_learning_images()
+if (isset($_POST['access_key']) && isset($_POST['get_learning_images'])) {
+    /* Parameters to be passed
+      access_key:6808
+      get_learning_images:1
+      category:1
+     */
+    if (!verify_token()) {
+        return false;
+    }
+    if ($access_key != $_POST['access_key']) {
+        $response['error'] = "true";
+        $response['message'] = "Invalid Access Key";
+        print_r(json_encode($response));
+        return false;
+    }
+    if (isset($_POST['category'])) {
+        $category = $db->escapeString($_POST['category']);
+        $where = '';
+        if (isset($_POST['id'])) {
+            $id = $db->escapeString($_POST['id']);
+            $where = ' AND `id` =' . $id;
+        }
+        $sql = "SELECT *, (SELECT COUNT(id) FROM tbl_learning_detail WHERE tbl_learning_detail.learning_id=tbl_learning.id ) as no_of FROM tbl_learning WHERE status=1 AND category=" . $category . " " . $where . " ORDER BY id DESC";
+        $db->sql($sql);
+        $result = $db->getResult();
+        if (!empty($result)) {
+            $response['error'] = "false";
+            $response['data'] = $result;
+        } else {
+            $response['error'] = "true";
+            $response['message'] = "No data found!";
+        }
+    } else {
+        $response['error'] = "true";
+        $response['message'] = "Please pass all the fields";
+    }
+    print_r(json_encode($response));
+}
+
 // 50. get_questions_by_learning()
 if (isset($_POST['access_key']) && isset($_POST['get_questions_by_learning'])) {
     /* Parameters to be passed
