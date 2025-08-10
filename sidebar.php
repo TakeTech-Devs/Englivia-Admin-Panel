@@ -161,6 +161,50 @@ if (basename($_SERVER['PHP_SELF']) == 'languages.php' && !$fn->is_language_mode_
                             <li><a href="newspapers-words-pdf.php">Manage PDF </a></li>
                         </ul>
                     </li>
+                    
+                    <li>
+                        <a><em class="fas fa-book"></em> Narration <span class="fas fa-caret-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="narration-category-manage.php">Narration Category </a></li>
+
+                            <!-- <li><a href="narration-subcategory-manage.php">Narration Manage Test </a></li> -->
+
+                            <li><a href="narration-questions-manage.php">Narration Manage Questions </a></li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a><em class="fas fa-book"></em> Voice Change <span class="fas fa-caret-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="voice-category-manage.php">Voice Change Category </a></li>
+
+                            <!-- <li><a href="voice-subcategory-manage.php">Voice Change Manage Test </a></li> -->
+
+                            <li><a href="voice-questions-manage.php">Voice Change Manage Questions </a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a><em class="fas fa-book"></em> Fill in the blanks <span class="fas fa-caret-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="blanks-category-manage.php">Fill in the blanks Category </a></li>
+
+                            <!-- <li><a href="blanks-subcategory-manage.php">Fill in the blanks Manage Test </a></li> -->
+
+                            <li><a href="blanks-questions-manage.php">Fill in the blanks Manage Questions </a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a><em class="fas fa-book"></em> Grammar Exercise <span class="fas fa-caret-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="grammar-exercise-categories.php">Grammar Exercise Category </a></li>
+
+                            <li><a href="grammar-exercise-subcategories.php">Grammar Exercise Manage Test </a></li>
+
+                            <li><a href="grammar-exercise-questions.php">Grammar Exercise Manage Questions </a></li>
+                        </ul>
+                    </li>
                     <!-- <li><a href="dictionary.php"><em class="fas fa-question"></em> Newspapers Words</a></li> -->
 
 

@@ -41,36 +41,50 @@ $type = 2;
                                             <input type="hidden" id="category_type" name="category_type" value="2">
                                             <input type="hidden" id="category_tag" name="category_tag" value="CA">
 
+                                            <!-- Choose mode: Manual or CSV -->
+
                                             <div class="form-group row">
-                                                <div class="col-md-6 col-sm-12">
-                                                    <label for="category_name">Category Name</label>
-                                                    <input type="text" id="category_name" name="category_name" required
-                                                        class="form-control">
+                                                <label for="entry_mode">Choose Entry Mode:</label>
+                                                <select id="entry_mode" class="form-control" onchange="toggleEntryMode(this.value)">
+                                                    <option value="manual">Manual Entry</option>
+                                                    <option value="csv">CSV Upload</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Manual Entry Section -->
+                                            <div id="manual_entry">
+                                                <div class="form-group row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <label for="category_name">Category Name</label>
+                                                        <input type="text" id="category_name" name="category_name"
+                                                            class="form-control">
+                                                    </div>
+                                                    <div style="display: none">
+                                                        <label for="image">Image</label>
+                                                        <input type='file' name="image" id="image" class="form-control">
+                                                    </div>
                                                 </div>
-                                                <div style="display: none">
-                                                    <label for="image">Image</label>
-                                                    <input type='file' name="image" id="image" class="form-control">
+                                                <div class="form-group row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <?php
+                                                        $sql = "SELECT * FROM `languages` ORDER BY id DESC";
+                                                        $db->sql($sql);
+                                                        $languages = $db->getResult();
+                                                        ?>
+                                                        <label for="category_language">Category Language</label>
+                                                        <select id="category_language" name="category_language" 
+                                                            class="form-control">
+                                                            <option value='3'>Select language</option>
+                                                            <?php foreach ($languages as $language) { ?>
+                                                                <option value='<?= $language['id'] ?>'>
+                                                                    <?= $language['language'] ?>
+                                                                </option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-6 col-sm-12">
-                                                    <?php
-                                                    $sql = "SELECT * FROM `languages` ORDER BY id DESC";
-                                                    $db->sql($sql);
-                                                    $languages = $db->getResult();
-                                                    ?>
-                                                    <label for="category_language">Category Language</label>
-                                                    <select id="category_language" name="category_language" required
-                                                        class="form-control">
-                                                        <option value='3'>Select language</option>
-                                                        <?php foreach ($languages as $language) { ?>
-                                                            <option value='<?= $language['id'] ?>'>
-                                                                <?= $language['language'] ?>
-                                                            </option>
-                                                        <?php } ?>
-                                                    </select>
-                                                </div>
-                                            </div>
+
                                             <!-- <div class="form-group row">
                                                 <div class="col-md-6 col-sm-12">
                                                     <label for="category_instructions">Instructions</label>
@@ -89,6 +103,30 @@ $type = 2;
                                                     </div>
                                                 </div>
                                             </div> -->
+
+                                            <!-- CSV Upload Section (hidden initially) -->
+                                            <div id="csv_upload" style="display: none;">
+                                                <div class="form-group row">
+                                                    <?php
+                                                    $sql = "SELECT * FROM `languages` ORDER BY id DESC";
+                                                    $db->sql($sql);
+                                                    $languages = $db->getResult();
+                                                    ?>
+                                                    <label for="category_language">Category Language</label>
+                                                    <select id="category_language" name="category_language" 
+                                                        class="form-control">
+                                                        <option value=''>Select language</option>
+                                                        <option value="all">All Languages</option>
+                                                        <?php foreach ($languages as $language) { ?>
+                                                            <option value='<?= $language['id'] ?>'>
+                                                                <?= $language['language'] ?>
+                                                            </option>
+                                                        <?php } ?>
+                                                    </select>
+                                                    <label for="csv_file">Upload CSV File</label>
+                                                    <input type="file" name="csv_file" id="csv_file" class="form-control" accept=".csv">
+                                                </div>
+                                            </div>
 
                                             <div class="ln_solid"></div>
                                             <div id="result"></div>
@@ -254,6 +292,18 @@ $type = 2;
         <!-- footer content -->
         <!-- <?php include 'footer.php'; ?> -->
         <!-- /footer content -->
+
+        <script>
+            function toggleEntryMode(value) {
+                if (value === "csv") {
+                    $("#manual_entry").hide();
+                    $("#csv_upload").show();
+                } else {
+                    $("#manual_entry").show();
+                    $("#csv_upload").hide();
+                }
+            }
+        </script>
     </div>
 
 </body>

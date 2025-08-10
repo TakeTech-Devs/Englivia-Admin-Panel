@@ -1834,52 +1834,93 @@ if (isset($_GET['delete_learning']) && $_GET['delete_learning'] != '') {
 // 46-2. add_learning_detail
 
 
+// if (isset($_POST['detail']) && isset($_POST['add_learning_detail'])) {
+//     $headline = $db->escapeString($_POST['headline']);
+//     $headline_meaning = $db->escapeString($_POST['headline_meaning']);
+//     $detail = $db->escapeString($_POST['detail']);
+//     $image = $db->escapeString($_POST['image']);
+//     $learning_id = $db->escapeString($_POST['learning_id']);
+//     $filename = '';
+
+
+
+//     if ($_FILES['image']['error'] == 0 && $_FILES['image']['size'] > 0) {
+//         if (!is_dir('images/category')) {
+//             mkdir('images/category', 0777, true);
+//         }
+
+//         $extension = pathinfo($_FILES["image"]["name"])['extension'];
+//         if (!(in_array($extension, $allowedExts))) {
+//             $response['error'] = true;
+//             $response['message'] = 'Image type is invalid';
+//             echo json_encode($response);
+//             return false;
+//         }
+//         $target_path = 'images/category/';
+//         $filename = microtime(true) . '.' . strtolower($extension);
+//         $full_path = $target_path . "" . $filename;
+//         if (!move_uploaded_file($_FILES["image"]["tmp_name"], $full_path)) {
+//             $response['error'] = true;
+//             $response['message'] = 'Image type is invalid';
+//             echo json_encode($response);
+//             return false;
+//         }
+//     }
+
+
+
+
+
+
+
+//     $sql = "INSERT INTO `tbl_learning_detail`(`learning_id`, `detail`, `image`, `headline`, `headline_meaning`) VALUES 
+// 	('" . $learning_id . "','" . $detail . "','" . $filename . "','" . $headline . "','" . $headline_meaning . "')";
+
+//     $db->sql($sql);
+//     $res = $db->getResult();
+//     echo '<label class="alert alert-success">Detail created successfully!</label>';
+// }
+
 if (isset($_POST['detail']) && isset($_POST['add_learning_detail'])) {
     $headline = $db->escapeString($_POST['headline']);
     $headline_meaning = $db->escapeString($_POST['headline_meaning']);
     $detail = $db->escapeString($_POST['detail']);
-    $image = $db->escapeString($_POST['image']);
     $learning_id = $db->escapeString($_POST['learning_id']);
     $filename = '';
 
-
-
-    if ($_FILES['image']['error'] == 0 && $_FILES['image']['size'] > 0) {
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0 && $_FILES['image']['size'] > 0) {
         if (!is_dir('images/category')) {
             mkdir('images/category', 0777, true);
         }
 
-        $extension = pathinfo($_FILES["image"]["name"])['extension'];
-        if (!(in_array($extension, $allowedExts))) {
+        $extension = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
+        if (!in_array(strtolower($extension), $allowedExts)) {
             $response['error'] = true;
             $response['message'] = 'Image type is invalid';
             echo json_encode($response);
             return false;
         }
+
         $target_path = 'images/category/';
         $filename = microtime(true) . '.' . strtolower($extension);
-        $full_path = $target_path . "" . $filename;
+        $full_path = $target_path . $filename;
+
         if (!move_uploaded_file($_FILES["image"]["tmp_name"], $full_path)) {
             $response['error'] = true;
-            $response['message'] = 'Image type is invalid';
+            $response['message'] = 'Failed to upload image';
             echo json_encode($response);
             return false;
         }
     }
 
-
-
-
-
-
-
-    $sql = "INSERT INTO `tbl_learning_detail`(`learning_id`, `detail`, `image`, `headline`, `headline_meaning`) VALUES 
-	('" . $learning_id . "','" . $detail . "','" . $filename . "','" . $headline . "','" . $headline_meaning . "')";
+    $sql = "INSERT INTO `tbl_learning_detail`(`learning_id`, `detail`, `image`, `headline`, `headline_meaning`) 
+            VALUES ('$learning_id', '$detail', '$filename', '$headline', '$headline_meaning')";
 
     $db->sql($sql);
     $res = $db->getResult();
     echo '<label class="alert alert-success">Detail created successfully!</label>';
 }
+
 
 
 // 46-3. edit_learning_detail
@@ -1930,7 +1971,7 @@ if (isset($_POST['edit_detail']) && isset($_POST['update_learning_detail'])) {
         $sql1 = "Update `tbl_learning_detail` set `detail`='" . $detail . "',`headline`='" . $headline . "',`headline_meaning`='" . $headline_meaning . "' where `id`=" . $ld_id . " and `learning_id`=" . $learning_id;
         $db->sql($sql1);
         if ($filename != '') {
-            $sql2 = "Update `tbl_learning_detail` set `image`='" . $$filename . "' where `id`=" . $ld_id . " and `learning_id`=" . $learning_id;
+            $sql2 = "Update `tbl_learning_detail` set `image`='" . $filename . "' where `id`=" . $ld_id . " and `learning_id`=" . $learning_id;
             $db->sql($sql2);
         }
         echo "<p class='alert alert-success'>Detail updated successfully!</p>";

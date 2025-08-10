@@ -2,6 +2,9 @@
 header("Content-Type: application/json");
 require_once '../library/crud.php';
 
+// require 'vendor/autoload.php'; // if using PhpSpreadsheet for xlsx
+// use PhpOffice\PhpSpreadsheet\IOFactory;
+
 $db = new Database();
 $db->connect();
 
@@ -130,43 +133,318 @@ function handleGetRequest($db, &$response)
     http_response_code($response['status']);
 }
 
+// function handlePostRequest($db, &$response)
+// {
+//     $data = json_decode(file_get_contents("php://input"), true);
+//     $params = [
+//         'category_name' => $db->escapeString($data['category_name']),
+//         'tag' => $db->escapeString($data['tag']),
+//         'type' => intval($data['type']),
+//         'language' => intval($data['language']),
+//     ];
+
+//     if (isset($data['image'])) {
+//         $params['image'] = $db->escapeString($data['image']);
+//     }
+
+//     if (isset($data['instructions'])) {
+//         $params['instructions'] = $data['instructions'];
+//     }
+
+//     // Generate a custom ID
+//     // Get the current day, hour, minute, and second
+//     $currentDateTime = date('dmyHis');
+
+//     // Combine the type with the current datetime components
+//     $new_id = $data['type'] . '0' . $currentDateTime;
+
+//     $params['id'] = intval($new_id); // Convert to integer if needed
+
+//     if (!empty($params['category_name'])) {
+//         $db->insert('tbl_categories', $params);
+//         outputResponse($db, $response, 'Category created successfully');
+//     } else {
+//         $response['status'] = 400;
+//         $response['message'] = 'No valid data provided';
+//         echo json_encode($response);
+//         exit();
+//     }
+// }
+
+// function handlePostRequest($db, &$response)
+// {
+//     if (isset($_GET['upload_csv']) && $_GET['upload_csv'] == 1) {
+//         // CSV Upload Mode
+//         if (isset($_FILES['csv_file']) && $_FILES['csv_file']['error'] === UPLOAD_ERR_OK) {
+//             $file = fopen($_FILES['csv_file']['tmp_name'], 'r');
+//             $row = 0;
+//             $inserted = 0;
+
+//             while (($data = fgetcsv($file)) !== FALSE) {
+//                 if ($row === 0) {
+//                     $row++;
+//                     continue; // Skip header
+//                 }
+
+//                 $category_name = $db->escapeString($data[0]);
+
+//                 $params = [
+//                     'category_name' => $category_name,
+//                     'language' => intval($data[1]), // fallback if not present
+//                     'type' => intval($_POST['category_type']),
+//                     'tag' => $db->escapeString($_POST['category_tag']),
+//                     'id' => intval($_POST['category_type'] . '0' . date('dmyHis') . sprintf('%02d', $inserted)),
+//                 ];
+
+//                 $db->insert('tbl_categories', $params);
+//                 usleep(100000); // Sleep for 100ms to avoid same timestamp issue
+//                 $inserted++;
+//                 $row++;
+//             }
+
+//             fclose($file);
+//             outputResponse($db, $response, "$inserted categories uploaded successfully.");
+//         } else {
+//             $response['status'] = 400;
+//             $response['message'] = 'CSV file upload failed';
+//             echo json_encode($response);
+//             exit();
+//         }
+//     } else {
+//         // Manual JSON Mode
+//         $data = json_decode(file_get_contents("php://input"), true);
+//         $params = [
+//             'category_name' => $db->escapeString($data['category_name']),
+//             'tag' => $db->escapeString($data['tag']),
+//             'type' => intval($data['type']),
+//             'language' => intval($data['language']),
+//             'id' => intval($data['type'] . '0' . date('dmyHis')),
+//         ];
+
+//         $db->insert('tbl_categories', $params);
+//         outputResponse($db, $response, 'Category created successfully');
+//     }
+// }
+
+// function handlePostRequest($db, &$response)
+// {
+//     if (isset($_GET['upload_csv']) && $_GET['upload_csv'] == 1) {
+//         // CSV Upload Mode
+//         if (isset($_FILES['csv_file']) && $_FILES['csv_file']['error'] === UPLOAD_ERR_OK) {
+//             $file = fopen($_FILES['csv_file']['tmp_name'], 'r');
+//             $row = 0;
+//             $inserted = 0;
+
+//             while (($data = fgetcsv($file)) !== FALSE) {
+//                 if ($row === 0) {
+//                     $row++;
+//                     continue; // Skip header
+//                 }
+
+//                 $category_name = $db->escapeString($data[0]);
+//                 $language = intval($data[1]);
+//                 $image = isset($data[2]) ? $db->escapeString($data[2]) : null;
+//                 $instructions = isset($data[3]) ? $data[3] : null;
+
+//                 $type = intval($_POST['category_type']);
+//                 $tag = $db->escapeString($_POST['category_tag']);
+//                 $unique_id = intval($type . '0' . date('dmyHis') . sprintf('%02d', $inserted));
+
+//                 $params = [
+//                     'category_name' => $category_name,
+//                     'language' => $language,
+//                     'type' => $type,
+//                     'tag' => $tag,
+//                     'id' => $unique_id,
+//                 ];
+
+//                 // Include image and instructions only if type is not SVG (example type 3)
+//                 if ($type !== 3) {
+//                     if (!empty($image)) {
+//                         $params['image'] = $image;
+//                     }
+
+//                     if (!empty($instructions)) {
+//                         $params['instructions'] = $instructions;
+//                     }
+//                 }
+
+//                 $db->insert('tbl_categories', $params);
+//                 usleep(100000); // 100ms to prevent timestamp collision
+//                 $inserted++;
+//                 $row++;
+//             }
+
+//             fclose($file);
+//             outputResponse($db, $response, "$inserted categories uploaded successfully.");
+//         } else {
+//             $response['status'] = 400;
+//             $response['message'] = 'CSV file upload failed';
+//             echo json_encode($response);
+//             exit();
+//         }
+//     } else {
+//         // Manual JSON Mode
+//         $data = json_decode(file_get_contents("php://input"), true);
+//         $type = intval($data['type']);
+
+//         $params = [
+//             'category_name' => $db->escapeString($data['category_name']),
+//             'tag' => $db->escapeString($data['tag']),
+//             'type' => $type,
+//             'language' => intval($data['language']),
+//             'id' => intval($type . '0' . date('dmyHis')),
+//         ];
+
+//         // Include image and instructions only if type is not SVG
+//         if ($type !== 3) {
+//             if (isset($data['image'])) {
+//                 $params['image'] = $db->escapeString($data['image']);
+//             }
+
+//             if (isset($data['instructions'])) {
+//                 $params['instructions'] = $data['instructions'];
+//             }
+//         }
+
+//         if (!empty($params['category_name'])) {
+//             $db->insert('tbl_categories', $params);
+//             outputResponse($db, $response, 'Category created successfully');
+//         } else {
+//             $response['status'] = 400;
+//             $response['message'] = 'No valid data provided';
+//             echo json_encode($response);
+//             exit();
+//         }
+//     }
+// }
+
 function handlePostRequest($db, &$response)
 {
-    $data = json_decode(file_get_contents("php://input"), true);
-    $params = [
-        'category_name' => $db->escapeString($data['category_name']),
-        'tag' => $db->escapeString($data['tag']),
-        'type' => intval($data['type']),
-        'language' => intval($data['language']),
-    ];
+    if (isset($_GET['upload_csv']) && $_GET['upload_csv'] == 1) {
+        // CSV Upload Mode
+        if (isset($_FILES['csv_file']) && $_FILES['csv_file']['error'] === UPLOAD_ERR_OK) {
+            $file = fopen($_FILES['csv_file']['tmp_name'], 'r');
+            $row = 0;
+            $inserted = 0;
 
-    if (isset($data['image'])) {
-        $params['image'] = $db->escapeString($data['image']);
-    }
+            $selectedLang = $_POST['category_language'] ?? null;
 
-    if (isset($data['instructions'])) {
-        $params['instructions'] = $data['instructions'];
-    }
+            if (!$selectedLang) {
+                $response['status'] = 400;
+                $response['message'] = 'Language selection is required.';
+                echo json_encode($response);
+                exit();
+            }
 
-    // Generate a custom ID
-    // Get the current day, hour, minute, and second
-    $currentDateTime = date('dmyHis');
+            // Determine language IDs to use
+            $languagesToInsert = [];
 
-    // Combine the type with the current datetime components
-    $new_id = $data['type'] . '0' . $currentDateTime;
+            if ($selectedLang === 'all') {
+                $db->sql("SELECT id FROM `languages`");
+                $allLanguages = $db->getResult();
 
-    $params['id'] = intval($new_id); // Convert to integer if needed
+                foreach ($allLanguages as $langRow) {
+                    $languagesToInsert[] = intval($langRow['id']);
+                }
+            } else {
+                $languagesToInsert[] = intval($selectedLang);
+            }
 
-    if (!empty($params['category_name'])) {
-        $db->insert('tbl_categories', $params);
-        outputResponse($db, $response, 'Category created successfully');
+            $type = intval($_POST['category_type']);
+            $tag = $db->escapeString($_POST['category_tag']);
+
+            while (($data = fgetcsv($file)) !== FALSE) {
+                if ($row === 0) {
+                    $row++;
+                    continue; // Skip header
+                }
+
+                $category_name = $db->escapeString($data[0]);
+                // Ignored: $data[1] (CSV language)
+                $image = isset($data[2]) ? $db->escapeString($data[2]) : null;
+                $instructions = isset($data[3]) ? $data[3] : null;
+
+                foreach ($languagesToInsert as $languageId) {
+                    $unique_id = intval($type . '0' . date('dmyHis') . sprintf('%02d', $inserted));
+
+                    $params = [
+                        'category_name' => $category_name,
+                        'language' => $languageId,
+                        'type' => $type,
+                        'tag' => $tag,
+                        'id' => $unique_id,
+                    ];
+
+                    if ($type !== 3) {
+                        if (!empty($image)) {
+                            $params['image'] = $image;
+                        }
+                        if (!empty($instructions)) {
+                            $params['instructions'] = $instructions;
+                        }
+                    }
+                    //file_put_contents('params_log.txt', print_r($params, true), FILE_APPEND);
+                    //file_put_contents('category_log.txt', "CSV Insert Category ID: " . $params['category_id'] . "\n", FILE_APPEND);
+
+                    $db->insert('tbl_categories', $params);
+                    usleep(100000); // avoid collision
+                    $inserted++;
+                }
+
+                $row++;
+            }
+
+            fclose($file);
+            outputResponse($db, $response, "$inserted categories uploaded successfully.");
+        } else {
+            $response['status'] = 400;
+            $response['message'] = 'CSV file upload failed';
+            echo json_encode($response);
+            exit();
+        }
     } else {
-        $response['status'] = 400;
-        $response['message'] = 'No valid data provided';
-        echo json_encode($response);
-        exit();
+        // Manual JSON Mode
+        $data = json_decode(file_get_contents("php://input"), true);
+        $type = intval($data['type']);
+
+        $params = [
+            'category_name' => $db->escapeString($data['category_name']),
+            'tag' => $db->escapeString($data['tag']),
+            'type' => $type,
+            'language' => intval($data['language']),
+            'id' => intval($type . '0' . date('dmyHis')),
+        ];
+
+        if ($type !== 3) {
+            if (isset($data['image'])) {
+                $params['image'] = $db->escapeString($data['image']);
+            }
+            if (isset($data['instructions'])) {
+                $params['instructions'] = $data['instructions'];
+            }
+        }
+
+        if (!empty($params['category_name'])) {
+            $db->insert('tbl_categories', $params);
+            outputResponse($db, $response, 'Category created successfully');
+        } else {
+            $response['status'] = 400;
+            $response['message'] = 'No valid data provided';
+            echo json_encode($response);
+            exit();
+        }
     }
 }
+
+
+
+
+
+
+
+
+
 
 
 

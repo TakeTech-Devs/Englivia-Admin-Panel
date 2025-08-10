@@ -41,143 +41,187 @@ $type = 2;
                                         <input type="hidden" id="add_question" name="add_question" required="" value="2"
                                             aria-required="true">
 
-                                        <?php $db->sql("SET NAMES 'utf8'"); ?>
+                                        <!-- Choose mode: Manual or CSV -->
+                                        <div class="form-group row">
+                                            <label for="entry_mode">Choose Entry Mode:</label>
+                                            <select id="entry_mode" class="form-control" onchange="toggleEntryMode(this.value)">
+                                                <option value="manual">Manual Entry</option>
+                                                <option value="csv">CSV Upload</option>
+                                            </select>
+                                        </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label col-md-1 col-sm-3 col-xs-12"
-                                                for="category">Category</label>
-                                            <div class="col-md-10 col-sm-6 col-xs-12">
-                                                <?php
-                                                $sql = "SELECT tbl_subcategories.*, tbl_categories.category_name AS parent_category, tbl_categories.Tag
+                                        <!-- Manual Entry Section -->
+                                        <div id="manual_entry">
+                                            <?php $db->sql("SET NAMES 'utf8'"); ?>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-1 col-sm-3 col-xs-12"
+                                                    for="category">Category</label>
+                                                <div class="col-md-10 col-sm-6 col-xs-12">
+                                                    <?php
+                                                    $sql = "SELECT tbl_subcategories.*, tbl_categories.category_name AS parent_category, tbl_categories.Tag
                                                 FROM `tbl_subcategories` JOIN `tbl_categories` ON tbl_subcategories.category = tbl_categories.id 
                                                 WHERE tbl_subcategories.type = 2 
                                                 ORDER BY tbl_subcategories.id DESC";
+                                                    $db->sql($sql);
+                                                    $categories = $db->getResult();
+                                                    ?>
+                                                    <select id="current_affairs_category_id"
+                                                        name="current_affairs_category_id" class="form-control">
+                                                        <option value="">Select Category</option>
+                                                        <?php
+                                                        if (!empty($categories)) {
+                                                            foreach ($categories as $category) { ?>
+                                                                <option value='<?= htmlspecialchars($category['id']) ?>'>
+                                                                    <?= strtoupper(trim($category['Tag'])) ?> -
+                                                                    <?= trim($category['parent_category']) ?> -
+                                                                    <?= trim($category['category_name']) ?>
+                                                                </option>
+                                                            <?php }
+                                                        } else { ?>
+                                                            <option value="">No category available</option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-1 col-sm-3 col-xs-12"
+                                                    for="question">Question</label>
+                                                <div class="col-md-10 col-sm-6 col-xs-12">
+                                                    <textarea id="question" name="question" class="form-control"
+                                                        ></textarea>
+                                                </div>
+                                            </div>
+                                            <div style="display: none">
+                                                <label class="control-label col-md-1 col-sm-3 col-xs-12" for="image">Image
+                                                    for Question <small>( if any )</small></label>
+                                                <div class="col-md-10 col-sm-6 col-xs-12">
+                                                    <input type="file" id="image" name="image" class="form-control"
+                                                        aria-required="true">
+                                                </div>
+                                            </div>
+                                            <div style="display: none">
+                                                <label class="control-label col-md-1 col-sm-3 col-xs-12"
+                                                    for="answer type">Question
+                                                    Type</label>
+                                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                                    <div id="status" class="btn-group">
+                                                        <label class="btn btn-default" data-toggle-class="btn-primary"
+                                                            data-toggle-passive-class="btn-default">
+                                                            <input type="radio" name="question_type" value="2" checked="">
+                                                            Options
+                                                        </label>
+                                                        <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                            <input type="radio" name="question_type" value="2"> True / False
+                                                        </label> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-1 col-sm-3 col-xs-12"
+                                                    for="a">Options</label>
+                                                <div class="col-md-8 col-sm-6 col-xs-12"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="a" class="control-label col-md-1 col-sm-3 col-xs-12">A</label>
+                                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                                    <input id="a" class="form-control" type="text" value="" name="a">
+                                                </div>
+                                                <label for="b" class="control-label col-md-1 col-sm-3 col-xs-12">B</label>
+                                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                                    <input id="b" class="form-control" type="text" name="b">
+                                                </div>
+                                            </div>
+                                            <div id="tf">
+                                                <div class="form-group">
+                                                    <label for="c"
+                                                        class="control-label col-md-1 col-sm-3 col-xs-12">C</label>
+                                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                                        <input id="c" class="form-control" type="text" name="c">
+                                                    </div>
+                                                    <label for="d"
+                                                        class="control-label col-md-1 col-sm-3 col-xs-12">D</label>
+                                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                                        <input id="d" class="form-control" type="text" name="d">
+                                                    </div>
+                                                </div>
+                                                <?php if ($fn->is_option_e_mode_enabled()) { ?>
+                                                    <div class="form-group">
+                                                        <label for="e" class="control-label col-md-1 col-sm-3 col-xs-12">E
+                                                        </label>
+                                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                                            <input id="e" class="form-control" type="text" name="e">
+                                                        </div>
+                                                        <label for="d"
+                                                            class="control-label col-md-1 col-sm-3 col-xs-12"></label>
+                                                        <div class="col-md-5 col-sm-6 col-xs-12">
+                                                        </div>
+                                                    </div>
+                                                <?php } ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-1 col-sm-3 col-xs-12"
+                                                    for="answer">Answer</label>
+                                                <div class="col-md-10 col-sm-6 col-xs-12">
+                                                    <select name='answer' id='answer' class='form-control'>
+                                                        <option value=''>Select Right Answer</option>
+                                                        <option value='a'>A</option>
+                                                        <option value='b'>B</option>
+                                                        <option class='ntf' value='c'>C</option>
+                                                        <option class='ntf' value='d'>D</option>
+                                                        <?php if ($fn->is_option_e_mode_enabled()) { ?>
+                                                            <option class='ntf' value='e'>E</option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-1 col-sm-3 col-xs-12"
+                                                    for="duration">Duration (In Minutes)</label>
+                                                <div class="col-md-10 col-sm-6 col-xs-12">
+                                                    <input type='text' name='duration' id='duration' class='form-control'
+                                                        >
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-1 col-sm-3 col-xs-12"
+                                                    for="note">Note</label>
+                                                <div class="col-md-10 col-sm-6 col-xs-12">
+                                                    <textarea name='note' id='note' class='form-control'></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- CSV Upload Section (hidden initially) -->
+
+                                        <div id="csv_upload" style="display: none;">
+                                            <input type="hidden" name="type" value="2" />
+                                            <div class="form-group row">
+                                                <?php
+                                                $sql = "SELECT * FROM `languages` ORDER BY id DESC";
                                                 $db->sql($sql);
-                                                $categories = $db->getResult();
+                                                $languages = $db->getResult();
                                                 ?>
-                                                <select id="current_affairs_category_id"
-                                                    name="current_affairs_category_id" required class="form-control">
-                                                    <option value="">Select Category</option>
-                                                    <?php
-                                                    if (!empty($categories)) {
-                                                        foreach ($categories as $category) { ?>
-                                                            <option value='<?= htmlspecialchars($category['id']) ?>'>
-                                                                <?= strtoupper(trim($category['Tag'])) ?> -
-                                                                <?= trim($category['parent_category']) ?> -
-                                                                <?= trim($category['category_name']) ?>
-                                                            </option>
-                                                        <?php }
-                                                    } else { ?>
-                                                        <option value="">No category available</option>
+                                                <label for="language">Category Language</label>
+                                                <select id="language" name="language"  class="form-control">
+                                                    <option value="">Select language</option>
+                                                    <option value="all">All Languages</option>
+                                                    <?php foreach ($languages as $language) { ?>
+                                                        <option value='<?= $language['id'] ?>'><?= $language['language'] ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
 
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-1 col-sm-3 col-xs-12"
-                                                for="question">Question</label>
-                                            <div class="col-md-10 col-sm-6 col-xs-12">
-                                                <textarea id="question" name="question" class="form-control"
-                                                    required></textarea>
-                                            </div>
-                                        </div>
-                                        <div style="display: none">
-                                            <label class="control-label col-md-1 col-sm-3 col-xs-12" for="image">Image
-                                                for Question <small>( if any )</small></label>
-                                            <div class="col-md-10 col-sm-6 col-xs-12">
-                                                <input type="file" id="image" name="image" class="form-control"
-                                                    aria-required="true">
-                                            </div>
-                                        </div>
-                                        <div style="display: none">
-                                            <label class="control-label col-md-1 col-sm-3 col-xs-12"
-                                                for="answer type">Question
-                                                Type</label>
-                                            <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <div id="status" class="btn-group">
-                                                    <label class="btn btn-default" data-toggle-class="btn-primary"
-                                                        data-toggle-passive-class="btn-default">
-                                                        <input type="radio" name="question_type" value="2" checked="">
-                                                        Options
-                                                    </label>
-                                                    <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                                            <input type="radio" name="question_type" value="2"> True / False
-                                                        </label> -->
+                                            <div class="form-group row">
+                                                <div class="form-group row" id="category_group" style="display: none;">
+                                                    <label for="category_id">Category</label>
+                                                    <select id="category_id" name="category_id" class="form-control" >
+                                                        <option value="">Select Category</option>
+                                                    </select>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-1 col-sm-3 col-xs-12"
-                                                for="a">Options</label>
-                                            <div class="col-md-8 col-sm-6 col-xs-12"></div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="a" class="control-label col-md-1 col-sm-3 col-xs-12">A</label>
-                                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                                <input id="a" class="form-control" type="text" value="" name="a">
-                                            </div>
-                                            <label for="b" class="control-label col-md-1 col-sm-3 col-xs-12">B</label>
-                                            <div class="col-md-5 col-sm-6 col-xs-12">
-                                                <input id="b" class="form-control" type="text" name="b">
-                                            </div>
-                                        </div>
-                                        <div id="tf">
-                                            <div class="form-group">
-                                                <label for="c"
-                                                    class="control-label col-md-1 col-sm-3 col-xs-12">C</label>
-                                                <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <input id="c" class="form-control" type="text" name="c">
-                                                </div>
-                                                <label for="d"
-                                                    class="control-label col-md-1 col-sm-3 col-xs-12">D</label>
-                                                <div class="col-md-5 col-sm-6 col-xs-12">
-                                                    <input id="d" class="form-control" type="text" name="d">
-                                                </div>
-                                            </div>
-                                            <?php if ($fn->is_option_e_mode_enabled()) { ?>
-                                                <div class="form-group">
-                                                    <label for="e" class="control-label col-md-1 col-sm-3 col-xs-12">E
-                                                    </label>
-                                                    <div class="col-md-4 col-sm-6 col-xs-12">
-                                                        <input id="e" class="form-control" type="text" name="e">
-                                                    </div>
-                                                    <label for="d"
-                                                        class="control-label col-md-1 col-sm-3 col-xs-12"></label>
-                                                    <div class="col-md-5 col-sm-6 col-xs-12">
-                                                    </div>
-                                                </div>
-                                            <?php } ?>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-1 col-sm-3 col-xs-12"
-                                                for="answer">Answer</label>
-                                            <div class="col-md-10 col-sm-6 col-xs-12">
-                                                <select name='answer' id='answer' class='form-control'>
-                                                    <option value=''>Select Right Answer</option>
-                                                    <option value='a'>A</option>
-                                                    <option value='b'>B</option>
-                                                    <option class='ntf' value='c'>C</option>
-                                                    <option class='ntf' value='d'>D</option>
-                                                    <?php if ($fn->is_option_e_mode_enabled()) { ?>
-                                                        <option class='ntf' value='e'>E</option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-1 col-sm-3 col-xs-12"
-                                                for="duration">Duration (In Minutes)</label>
-                                            <div class="col-md-10 col-sm-6 col-xs-12">
-                                                <input type='text' name='duration' id='duration' class='form-control'
-                                                    required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-1 col-sm-3 col-xs-12"
-                                                for="note">Note</label>
-                                            <div class="col-md-10 col-sm-6 col-xs-12">
-                                                <textarea name='note' id='note' class='form-control'></textarea>
+
+                                                <label for="csv_file">Upload CSV File</label>
+                                                <input type="file" name="csv_file" id="csv_file" class="form-control" accept=".csv">
                                             </div>
                                         </div>
 
@@ -459,6 +503,83 @@ $type = 2;
         <!-- <?php include 'footer.php'; ?> -->
         <!-- /footer content -->
     </div>
+
+
+    <script>
+        function toggleEntryMode(value) {
+            if (value === "csv") {
+                $("#manual_entry").hide();
+                $("#csv_upload").show();
+            } else {
+                $("#manual_entry").show();
+                $("#csv_upload").hide();
+            }
+        }
+    </script>
+
+    <?php
+    $sql = "SELECT * FROM tbl_categories WHERE type = 2 ORDER BY id ASC";
+    $db->sql($sql);
+    $categories = $db->getResult();
+
+    // Group categories by language_id
+    $grouped = [];
+    foreach ($categories as $cat) {
+        $langId = (string) $cat['language']; // use correct field here
+        $grouped[$langId][] = [
+            'id' => $cat['id'],
+            'name' => strtoupper(trim($cat['Tag'])) . ' - ' . trim($cat['category_name'])
+        ];
+    }
+    ?>
+
+    <script>
+        const categoriesByLanguage = <?= json_encode($grouped) ?>;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const languageSelect = document.getElementById("language");
+            const csvUploadSection = document.getElementById("csv_upload");
+            const categorySelect = csvUploadSection.querySelector("#category_id");
+            const categoryGroup = document.getElementById("category_group");
+
+            languageSelect.addEventListener("change", function() {
+                const langId = String(this.value);
+                categorySelect.innerHTML = '<option value="">Select Category</option>';
+                categoryGroup.style.display = "none";
+
+                // ✅ Handle "all" language case
+                let categories = [];
+                if (langId === "all") {
+                    categories = Object.values(categoriesByLanguage).flat();
+                } else {
+                    categories = categoriesByLanguage[langId] || [];
+                }
+
+                if (categories.length === 0) {
+                    const noOption = document.createElement("option");
+                    noOption.value = "";
+                    noOption.textContent = "No category available";
+                    categorySelect.appendChild(noOption);
+                    categoryGroup.style.display = "block";
+                    console.log("No category available for language ID:", langId);
+                    return;
+                }
+
+                // ✅ Render each category as <option>
+                categories.forEach(cat => {
+                    const option = document.createElement("option");
+                    option.value = cat.id;
+                    option.textContent = cat.name;
+                    categorySelect.appendChild(option);
+                    console.log(`Added to select: [${cat.id}] ${cat.name}`);
+                });
+
+                categoryGroup.style.display = "block";
+                console.log("categorySelect.innerHTML:", categorySelect.innerHTML);
+            });
+        });
+    </script>
+
 
 </body>
 

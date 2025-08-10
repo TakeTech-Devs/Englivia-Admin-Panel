@@ -40,8 +40,20 @@ $type = 2;
                                         <form id="category_form" class="form-horizontal form-label-left">
                                             <input type="hidden" id="category_type" name="category_type" value="2">
 
+                                            <!-- Entry Mode Toggle -->
+                                            <div class="form-group row">
+                                                <div class="col-md-6 col-sm-12">
+                                                    <label for="entry_mode">Choose Entry Mode:</label>
+                                                    <select id="entry_mode" class="form-control" onchange="toggleEntryMode(this.value)">
+                                                        <option value="manual">Manual Entry</option>
+                                                        <option value="csv">CSV Upload</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- Shared Parent Category Dropdown (for both modes) -->
                                             <div class="form-group row ">
-                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div class="col-md-6 col-sm-6 col-xs-12" id="category_dropdown_row">
                                                     <?php
                                                     $sql = "SELECT * FROM `tbl_categories` where `type` = 2 ORDER BY id DESC";
                                                     $db->sql($sql);
@@ -61,15 +73,30 @@ $type = 2;
                                                 </div>
                                             </div>
 
-                                            <div class="form-group row">
-                                                <div class="col-md-6 col-sm-12">
-                                                    <label for="category_name">Test Name</label>
-                                                    <input type="text" id="category_name" name="category_name" required
-                                                        class="form-control">
+
+                                            <!-- Manual Entry Section -->
+                                            <div id="manual_entry">
+                                                <div class="form-group row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <label for="category_name">Test Name</label>
+                                                        <input type="text" id="category_name" name="category_name"
+                                                            class="form-control">
+                                                    </div>
+                                                    <div style="display: none">
+                                                        <label for="image">Image</label>
+                                                        <input type='file' name="image" id="image" class="form-control">
+                                                    </div>
                                                 </div>
-                                                <div style="display: none">
-                                                    <label for="image">Image</label>
-                                                    <input type='file' name="image" id="image" class="form-control">
+                                            </div>
+
+                                            <!-- CSV Upload Section -->
+                                            <div id="csv_upload" style="display: none;">
+                                                <div class="form-group row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <label for="csv_file">Upload CSV File</label>
+                                                        <input type="file" name="csv_file" id="csv_file" class="form-control" accept=".csv">
+                                                        <!-- <small class="text-muted">CSV should contain column: <code>category_name</code></small> -->
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -209,7 +236,7 @@ $type = 2;
                                         class='form-control' required>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -244,6 +271,26 @@ $type = 2;
         <!-- <?php include 'footer.php'; ?> -->
         <!-- /footer content -->
     </div>
+
+    <script>
+        function toggleEntryMode(value) {
+            if (value === "csv") {
+                $("#manual_entry").hide();
+                $("#csv_upload").show();
+
+                // CSV mode: Make file required, remove required from manual fields
+                $("#category_name").prop("required", false);
+                $("#csv_file").prop("required", true);
+            } else {
+                $("#manual_entry").show();
+                $("#csv_upload").hide();
+
+                // Manual mode: Make text input required, remove required from file
+                $("#category_name").prop("required", true);
+                $("#csv_file").prop("required", false);
+            }
+        }
+    </script>
 
 </body>
 

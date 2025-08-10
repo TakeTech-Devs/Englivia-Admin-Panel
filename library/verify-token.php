@@ -8,7 +8,9 @@ function generate_token()
     $payload = [
         'iat' => time(), /* issued at time */
         'iss' => 'quiz',
-        'exp' => time() + (30 * 60 * 60), /* expires after 1 minute */
+        // 'exp' => time() + (30 * 60 * 60), /* expires after 1 minute */
+        'exp' => strtotime('+1 year'),
+        'nbf' => time(), /* not before time */
         'sub' => 'quiz Authentication'
     ];
     $token = $jwt::encode($payload, JWT_SECRET_KEY);
