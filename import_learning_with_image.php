@@ -53,7 +53,7 @@ if (!isset($_SESSION['id']) && !isset($_SESSION['username'])) {
                                 </div>
                                 <p>Download Empty CSV file</p>
                                   
-                                   <a href="https://cl.englivia.com/%20cvfile/Learning%20With%20Image.csv" class="btn btn-large btn-primary ">DownLoad File</a>
+                                   <a href="cvfile/Learning%20With%20Image.csv" class="btn btn-large btn-primary ">DownLoad File</a>
                                 <div class="row">
                                     <div  class="col-md-offset-3 col-md-4" style ="display:none;" id="result">
                                     </div>
