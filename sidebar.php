@@ -193,6 +193,7 @@ if (basename($_SERVER['PHP_SELF']) == 'languages.php' && !$fn->is_language_mode_
                                     MCQ Exam</a></li>
                             <li><a href="import_news_papper_words.php"><em class="fas fa-upload"></em> Import
                                     News Papper Words</a></li>
+                            <li><a href="import-current-affairs-questions.php"><em class="fas fa-upload"></em> Import Current Affairs Questions</a></li>
                         </ul>
                     </li>
                 </ul>

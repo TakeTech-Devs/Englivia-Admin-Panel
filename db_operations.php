@@ -2582,4 +2582,65 @@ if (isset($_POST['tbl_exam_question']) && $_POST['tbl_exam_question'] == 1) {
     }
 }
 
+
+//import_current_affairs_questions
+if (isset($_POST['import_current_affairs_questions']) && $_POST['import_current_affairs_questions'] == 1) {
+    if (!checkadmin($auth_username)) {
+        echo "<label class='alert alert-danger'>Access denied - You are not authorized to access this page.</label>";
+        return false;
+    }
+    $count = $count1 = 0;
+    $filename = $_FILES["questions_file"]["tmp_name"];
+    $file_extension = pathinfo($_FILES["questions_file"]["name"], PATHINFO_EXTENSION);
+    if ($_FILES["questions_file"]["size"] > 0 && $file_extension == "csv") {
+        $file = fopen($filename, "r");
+        $empty_value_found = false;
+
+        while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE) {
+            if (count($emapData) > 2) {
+                $count++;
+                if ($count > 1) {
+                    if ($emapData[0] != '' && $emapData[1] != '' && $emapData[2] != '' && $emapData[3] != '' && $emapData[4] != '' && $emapData[5] != '' && $emapData[7] != '' && $emapData[8] != '') {
+                        $empty_value_found = true;
+                    } else {
+                        $empty_value_found = false;
+                        echo '<p class="text-danger">Please Check ' . $count . ' row</p>';
+                        break;
+                    }
+                }
+            }
+        }
+        fclose($file);
+        if ($empty_value_found == TRUE) {
+            $file = fopen($filename, "r");
+            while (($emapData1 = fgetcsv($file, 10000, ",")) !== FALSE) {
+                if (count($emapData1) > 2) {
+                    $count1++;
+                    if ($count1 > 1) {
+                        $category_id = $db->escapeString($emapData1[0]);
+                        $question = $db->escapeString($emapData1[1]);
+                        $optiona = $db->escapeString($emapData1[2]);
+                        $optionb = $db->escapeString($emapData1[3]);
+                        $optionc = $db->escapeString($emapData1[4]);
+                        $optiond = $db->escapeString($emapData1[5]);
+                        $optione = $db->escapeString($emapData1[6]);
+                        $answer = $db->escapeString(trim($emapData1[7]));
+                        $duration = intval($emapData1[8]) * 60000;
+                        $note = $db->escapeString($emapData1[9]);
+
+                        $sql = "INSERT INTO `tbl_questions`(`category_id`, `question`, `optiona`, `optionb`, `optionc`,`optiond`, `optione`, `answer`, `duration`, `note`) VALUES 
+						('$category_id','$question','$optiona','$optionb','$optionc','$optiond','$optione','$answer','$duration','$note')";
+                        $db->sql($sql);
+                    }
+                }
+            }
+            fclose($file);
+            echo "<p class='alert alert-success'>CSV file is successfully imported!</p>";
+        } else {
+            echo "<p class='alert alert-danger'>Please fill all the data in CSV file!</p>";
+        }
+    } else {
+        echo "<p class='alert alert-danger'>Invalid file format! Please upload data in CSV file!</p>";
+    }
+}
 ?>

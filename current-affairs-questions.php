@@ -32,6 +32,9 @@ $type = 2;
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>Questions for Current Affairs mock test <small>Create New Question</small></h2>
+                                <div class="pull-right">
+                                    <a href="import-current-affairs-questions.php" class="btn btn-primary btn-sm"><em class="fas fa-upload"></em> Import Questions</a>
+                                </div>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
