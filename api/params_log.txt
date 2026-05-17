@@ -1,0 +1,1951 @@
+
+Array
+(
+    [id] => 2082515073501
+    [category_id] => 20271124084835
+    [question] => He said, \"Ravi, why are you sounding so depressed today?\"
+    [optiona] => He asked Ravi why did he sound so depressed that day.
+    [optionb] => He asked Ravi why he was sounding so depressed that day.
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked that did she want to buy a house in Noida.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 2082515073502
+    [category_id] => 20271124084835
+    [question] => He asked me, \"What time will the sun set tomorrow?\"
+    [optiona] => He asked me what time does the sun set the next day.
+    [optionb] => He asked me what time that sun would set tomorrow.
+    [optionc] => He said that he used to go for a walk every morning
+    [optiond] => He asked me what time would the sun set the next day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 2082515073503
+    [category_id] => 20271124084835
+    [question] => \"Tinu, where have you been all these days?\" asked the Principal.
+    [optiona] => The principal asked Tinu where he had been all those days.
+    [optionb] => The Principal asked Tinu where he has been all those days.
+    [optionc] => The Principal asked Tinu were had he been all those days.
+    [optiond] => The Principal asked to Tinu where was he all those days.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 2082515073504
+    [category_id] => 20271124084835
+    [question] => \"Have you finished your assignment, Minu?\" said her brother.
+    [optiona] => Minu\'s brother asked Minu if you have finished your assignment.
+    [optionb] => \"Minu\'s brother said to Minu if she had finished her assignment.
+    [optionc] => Minu\'s brother asked her if she had finished her assignment.
+    [optiond] => Minu\'s brother asked Minu if she has finished her assignment
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 2082515073505
+    [category_id] => 20271124084835
+    [question] => He says, \"I go for a walk every morning.\"
+    [optiona] => He says that he goes for a walk every morning.
+    [optionb] => He said that he used to go for a walk every morning
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked Ravi why he was sounding so depressed that day.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 2082515073506
+    [category_id] => 20271124084835
+    [question] => The Principal said, \"Why didn\'t you attend the flag hoisting ceremony, Anuj?\"
+    [optiona] => The Principal asked Anuj why hadn\'t he attended the flag hoisting ceremony.
+    [optionb] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [optionc] => The Principal asked Anuj why didn\'t he attended the flag hoisting ceremony.
+    [optiond] => The Principal asked Anuj why he didn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 2082515073507
+    [category_id] => 20271124084835
+    [question] => I said to him, \"Where have you lost the pen I brought for you yesterday?\"
+    [optiona] => I asked him where he had lost the pen I had brought him yesterday.
+    [optionb] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optionc] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optiond] => I asked him where had he lost the pen I had brought him the previous day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 2082515073508
+    [category_id] => 20271124084835
+    [question] => He said, \"Garima wants to take up a job while here husband wants here to look after the family.\"
+    [optiona] => He said that Garima wanted to take up a job while her husband wanted her to look after the family
+    [optionb] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optionc] => He told that Garima wanted to take up a job while here husband wants here to look after the family.
+    [optiond] => He said to Garima that though she wanted to take up a job while her husband wanted her to look after the family.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 2082515073509
+    [category_id] => 20271124084835
+    [question] => She said, \"When I was a child, I wasn\'t afraid of ghosts.\"
+    [optiona] => She said that when she was a child she wasn\'t not afraid of ghosts.
+    [optionb] => She said that when she was child she hadn\'t been afraid of ghosts.
+    [optionc] => She said that when she was a child she wasn\'t afraid of ghosts.
+    [optiond] => She said that when she had been a child she wasn\'t afraid of ghosts.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 2082515073510
+    [category_id] => 20271124084835
+    [question] => He said, \"Reena, do you want to buy a house in Noida?\"
+    [optiona] => He told Reena if she wanted to buy a house in Noida.
+    [optionb] => He asked that did she want to buy a house in Noida.
+    [optionc] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optiond] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 2082515073511
+    [category_id] => 20271124084836
+    [question] => He said, \"Ravi, why are you sounding so depressed today?\"
+    [optiona] => He asked Ravi why did he sound so depressed that day.
+    [optionb] => He asked Ravi why he was sounding so depressed that day.
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked that did she want to buy a house in Noida.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 2082515073512
+    [category_id] => 20271124084836
+    [question] => He asked me, \"What time will the sun set tomorrow?\"
+    [optiona] => He asked me what time does the sun set the next day.
+    [optionb] => He asked me what time that sun would set tomorrow.
+    [optionc] => He said that he used to go for a walk every morning
+    [optiond] => He asked me what time would the sun set the next day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 2082515073513
+    [category_id] => 20271124084836
+    [question] => \"Tinu, where have you been all these days?\" asked the Principal.
+    [optiona] => The principal asked Tinu where he had been all those days.
+    [optionb] => The Principal asked Tinu where he has been all those days.
+    [optionc] => The Principal asked Tinu were had he been all those days.
+    [optiond] => The Principal asked to Tinu where was he all those days.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 2082515073514
+    [category_id] => 20271124084836
+    [question] => \"Have you finished your assignment, Minu?\" said her brother.
+    [optiona] => Minu\'s brother asked Minu if you have finished your assignment.
+    [optionb] => \"Minu\'s brother said to Minu if she had finished her assignment.
+    [optionc] => Minu\'s brother asked her if she had finished her assignment.
+    [optiond] => Minu\'s brother asked Minu if she has finished her assignment
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 2082515073515
+    [category_id] => 20271124084836
+    [question] => He says, \"I go for a walk every morning.\"
+    [optiona] => He says that he goes for a walk every morning.
+    [optionb] => He said that he used to go for a walk every morning
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked Ravi why he was sounding so depressed that day.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 2082515073516
+    [category_id] => 20271124084836
+    [question] => The Principal said, \"Why didn\'t you attend the flag hoisting ceremony, Anuj?\"
+    [optiona] => The Principal asked Anuj why hadn\'t he attended the flag hoisting ceremony.
+    [optionb] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [optionc] => The Principal asked Anuj why didn\'t he attended the flag hoisting ceremony.
+    [optiond] => The Principal asked Anuj why he didn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 2082515073517
+    [category_id] => 20271124084836
+    [question] => I said to him, \"Where have you lost the pen I brought for you yesterday?\"
+    [optiona] => I asked him where he had lost the pen I had brought him yesterday.
+    [optionb] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optionc] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optiond] => I asked him where had he lost the pen I had brought him the previous day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 2082515073518
+    [category_id] => 20271124084836
+    [question] => He said, \"Garima wants to take up a job while here husband wants here to look after the family.\"
+    [optiona] => He said that Garima wanted to take up a job while her husband wanted her to look after the family
+    [optionb] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optionc] => He told that Garima wanted to take up a job while here husband wants here to look after the family.
+    [optiond] => He said to Garima that though she wanted to take up a job while her husband wanted her to look after the family.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 2082515073519
+    [category_id] => 20271124084836
+    [question] => She said, \"When I was a child, I wasn\'t afraid of ghosts.\"
+    [optiona] => She said that when she was a child she wasn\'t not afraid of ghosts.
+    [optionb] => She said that when she was child she hadn\'t been afraid of ghosts.
+    [optionc] => She said that when she was a child she wasn\'t afraid of ghosts.
+    [optiond] => She said that when she had been a child she wasn\'t afraid of ghosts.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 2082515073520
+    [category_id] => 20271124084836
+    [question] => He said, \"Reena, do you want to buy a house in Noida?\"
+    [optiona] => He told Reena if she wanted to buy a house in Noida.
+    [optionb] => He asked that did she want to buy a house in Noida.
+    [optionc] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optiond] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 2082515073521
+    [category_id] => 20271124084837
+    [question] => He said, \"Ravi, why are you sounding so depressed today?\"
+    [optiona] => He asked Ravi why did he sound so depressed that day.
+    [optionb] => He asked Ravi why he was sounding so depressed that day.
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked that did she want to buy a house in Noida.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 2082515073522
+    [category_id] => 20271124084837
+    [question] => He asked me, \"What time will the sun set tomorrow?\"
+    [optiona] => He asked me what time does the sun set the next day.
+    [optionb] => He asked me what time that sun would set tomorrow.
+    [optionc] => He said that he used to go for a walk every morning
+    [optiond] => He asked me what time would the sun set the next day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 2082515073523
+    [category_id] => 20271124084837
+    [question] => \"Tinu, where have you been all these days?\" asked the Principal.
+    [optiona] => The principal asked Tinu where he had been all those days.
+    [optionb] => The Principal asked Tinu where he has been all those days.
+    [optionc] => The Principal asked Tinu were had he been all those days.
+    [optiond] => The Principal asked to Tinu where was he all those days.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 2082515073524
+    [category_id] => 20271124084837
+    [question] => \"Have you finished your assignment, Minu?\" said her brother.
+    [optiona] => Minu\'s brother asked Minu if you have finished your assignment.
+    [optionb] => \"Minu\'s brother said to Minu if she had finished her assignment.
+    [optionc] => Minu\'s brother asked her if she had finished her assignment.
+    [optiond] => Minu\'s brother asked Minu if she has finished her assignment
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 2082515073525
+    [category_id] => 20271124084837
+    [question] => He says, \"I go for a walk every morning.\"
+    [optiona] => He says that he goes for a walk every morning.
+    [optionb] => He said that he used to go for a walk every morning
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked Ravi why he was sounding so depressed that day.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 2082515073526
+    [category_id] => 20271124084837
+    [question] => The Principal said, \"Why didn\'t you attend the flag hoisting ceremony, Anuj?\"
+    [optiona] => The Principal asked Anuj why hadn\'t he attended the flag hoisting ceremony.
+    [optionb] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [optionc] => The Principal asked Anuj why didn\'t he attended the flag hoisting ceremony.
+    [optiond] => The Principal asked Anuj why he didn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 2082515073527
+    [category_id] => 20271124084837
+    [question] => I said to him, \"Where have you lost the pen I brought for you yesterday?\"
+    [optiona] => I asked him where he had lost the pen I had brought him yesterday.
+    [optionb] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optionc] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optiond] => I asked him where had he lost the pen I had brought him the previous day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 2082515073528
+    [category_id] => 20271124084837
+    [question] => He said, \"Garima wants to take up a job while here husband wants here to look after the family.\"
+    [optiona] => He said that Garima wanted to take up a job while her husband wanted her to look after the family
+    [optionb] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optionc] => He told that Garima wanted to take up a job while here husband wants here to look after the family.
+    [optiond] => He said to Garima that though she wanted to take up a job while her husband wanted her to look after the family.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 2082515073529
+    [category_id] => 20271124084837
+    [question] => She said, \"When I was a child, I wasn\'t afraid of ghosts.\"
+    [optiona] => She said that when she was a child she wasn\'t not afraid of ghosts.
+    [optionb] => She said that when she was child she hadn\'t been afraid of ghosts.
+    [optionc] => She said that when she was a child she wasn\'t afraid of ghosts.
+    [optiond] => She said that when she had been a child she wasn\'t afraid of ghosts.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 2082515073530
+    [category_id] => 20271124084837
+    [question] => He said, \"Reena, do you want to buy a house in Noida?\"
+    [optiona] => He told Reena if she wanted to buy a house in Noida.
+    [optionb] => He asked that did she want to buy a house in Noida.
+    [optionc] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optiond] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514341101
+    [category_id] => 20271124084764
+    [question] => He said, \"Ravi, why are you sounding so depressed today?\"
+    [optiona] => He asked Ravi why did he sound so depressed that day.
+    [optionb] => He asked Ravi why he was sounding so depressed that day.
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked that did she want to buy a house in Noida.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514341102
+    [category_id] => 20271124084764
+    [question] => He asked me, \"What time will the sun set tomorrow?\"
+    [optiona] => He asked me what time does the sun set the next day.
+    [optionb] => He asked me what time that sun would set tomorrow.
+    [optionc] => He said that he used to go for a walk every morning
+    [optiond] => He asked me what time would the sun set the next day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514341103
+    [category_id] => 20271124084764
+    [question] => \"Tinu, where have you been all these days?\" asked the Principal.
+    [optiona] => The principal asked Tinu where he had been all those days.
+    [optionb] => The Principal asked Tinu where he has been all those days.
+    [optionc] => The Principal asked Tinu were had he been all those days.
+    [optiond] => The Principal asked to Tinu where was he all those days.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514341104
+    [category_id] => 20271124084764
+    [question] => \"Have you finished your assignment, Minu?\" said her brother.
+    [optiona] => Minu\'s brother asked Minu if you have finished your assignment.
+    [optionb] => \"Minu\'s brother said to Minu if she had finished her assignment.
+    [optionc] => Minu\'s brother asked her if she had finished her assignment.
+    [optiond] => Minu\'s brother asked Minu if she has finished her assignment
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514341105
+    [category_id] => 20271124084764
+    [question] => He says, \"I go for a walk every morning.\"
+    [optiona] => He says that he goes for a walk every morning.
+    [optionb] => He said that he used to go for a walk every morning
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked Ravi why he was sounding so depressed that day.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514341106
+    [category_id] => 20271124084764
+    [question] => The Principal said, \"Why didn\'t you attend the flag hoisting ceremony, Anuj?\"
+    [optiona] => The Principal asked Anuj why hadn\'t he attended the flag hoisting ceremony.
+    [optionb] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [optionc] => The Principal asked Anuj why didn\'t he attended the flag hoisting ceremony.
+    [optiond] => The Principal asked Anuj why he didn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514341107
+    [category_id] => 20271124084764
+    [question] => I said to him, \"Where have you lost the pen I brought for you yesterday?\"
+    [optiona] => I asked him where he had lost the pen I had brought him yesterday.
+    [optionb] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optionc] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optiond] => I asked him where had he lost the pen I had brought him the previous day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514341108
+    [category_id] => 20271124084764
+    [question] => He said, \"Garima wants to take up a job while here husband wants here to look after the family.\"
+    [optiona] => He said that Garima wanted to take up a job while her husband wanted her to look after the family
+    [optionb] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optionc] => He told that Garima wanted to take up a job while here husband wants here to look after the family.
+    [optiond] => He said to Garima that though she wanted to take up a job while her husband wanted her to look after the family.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514341109
+    [category_id] => 20271124084764
+    [question] => She said, \"When I was a child, I wasn\'t afraid of ghosts.\"
+    [optiona] => She said that when she was a child she wasn\'t not afraid of ghosts.
+    [optionb] => She said that when she was child she hadn\'t been afraid of ghosts.
+    [optionc] => She said that when she was a child she wasn\'t afraid of ghosts.
+    [optiond] => She said that when she had been a child she wasn\'t afraid of ghosts.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514341110
+    [category_id] => 20271124084764
+    [question] => He said, \"Reena, do you want to buy a house in Noida?\"
+    [optiona] => He told Reena if she wanted to buy a house in Noida.
+    [optionb] => He asked that did she want to buy a house in Noida.
+    [optionc] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optiond] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514341111
+    [category_id] => 20271124084765
+    [question] => He said, \"Ravi, why are you sounding so depressed today?\"
+    [optiona] => He asked Ravi why did he sound so depressed that day.
+    [optionb] => He asked Ravi why he was sounding so depressed that day.
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked that did she want to buy a house in Noida.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514341112
+    [category_id] => 20271124084765
+    [question] => He asked me, \"What time will the sun set tomorrow?\"
+    [optiona] => He asked me what time does the sun set the next day.
+    [optionb] => He asked me what time that sun would set tomorrow.
+    [optionc] => He said that he used to go for a walk every morning
+    [optiond] => He asked me what time would the sun set the next day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514341113
+    [category_id] => 20271124084765
+    [question] => \"Tinu, where have you been all these days?\" asked the Principal.
+    [optiona] => The principal asked Tinu where he had been all those days.
+    [optionb] => The Principal asked Tinu where he has been all those days.
+    [optionc] => The Principal asked Tinu were had he been all those days.
+    [optiond] => The Principal asked to Tinu where was he all those days.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514341114
+    [category_id] => 20271124084765
+    [question] => \"Have you finished your assignment, Minu?\" said her brother.
+    [optiona] => Minu\'s brother asked Minu if you have finished your assignment.
+    [optionb] => \"Minu\'s brother said to Minu if she had finished her assignment.
+    [optionc] => Minu\'s brother asked her if she had finished her assignment.
+    [optiond] => Minu\'s brother asked Minu if she has finished her assignment
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514341115
+    [category_id] => 20271124084765
+    [question] => He says, \"I go for a walk every morning.\"
+    [optiona] => He says that he goes for a walk every morning.
+    [optionb] => He said that he used to go for a walk every morning
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked Ravi why he was sounding so depressed that day.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514341116
+    [category_id] => 20271124084765
+    [question] => The Principal said, \"Why didn\'t you attend the flag hoisting ceremony, Anuj?\"
+    [optiona] => The Principal asked Anuj why hadn\'t he attended the flag hoisting ceremony.
+    [optionb] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [optionc] => The Principal asked Anuj why didn\'t he attended the flag hoisting ceremony.
+    [optiond] => The Principal asked Anuj why he didn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514341117
+    [category_id] => 20271124084765
+    [question] => I said to him, \"Where have you lost the pen I brought for you yesterday?\"
+    [optiona] => I asked him where he had lost the pen I had brought him yesterday.
+    [optionb] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optionc] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optiond] => I asked him where had he lost the pen I had brought him the previous day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514341118
+    [category_id] => 20271124084765
+    [question] => He said, \"Garima wants to take up a job while here husband wants here to look after the family.\"
+    [optiona] => He said that Garima wanted to take up a job while her husband wanted her to look after the family
+    [optionb] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optionc] => He told that Garima wanted to take up a job while here husband wants here to look after the family.
+    [optiond] => He said to Garima that though she wanted to take up a job while her husband wanted her to look after the family.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514341119
+    [category_id] => 20271124084765
+    [question] => She said, \"When I was a child, I wasn\'t afraid of ghosts.\"
+    [optiona] => She said that when she was a child she wasn\'t not afraid of ghosts.
+    [optionb] => She said that when she was child she hadn\'t been afraid of ghosts.
+    [optionc] => She said that when she was a child she wasn\'t afraid of ghosts.
+    [optiond] => She said that when she had been a child she wasn\'t afraid of ghosts.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514341120
+    [category_id] => 20271124084765
+    [question] => He said, \"Reena, do you want to buy a house in Noida?\"
+    [optiona] => He told Reena if she wanted to buy a house in Noida.
+    [optionb] => He asked that did she want to buy a house in Noida.
+    [optionc] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optiond] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514341121
+    [category_id] => 20271124084766
+    [question] => He said, \"Ravi, why are you sounding so depressed today?\"
+    [optiona] => He asked Ravi why did he sound so depressed that day.
+    [optionb] => He asked Ravi why he was sounding so depressed that day.
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked that did she want to buy a house in Noida.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514341122
+    [category_id] => 20271124084766
+    [question] => He asked me, \"What time will the sun set tomorrow?\"
+    [optiona] => He asked me what time does the sun set the next day.
+    [optionb] => He asked me what time that sun would set tomorrow.
+    [optionc] => He said that he used to go for a walk every morning
+    [optiond] => He asked me what time would the sun set the next day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514341123
+    [category_id] => 20271124084766
+    [question] => \"Tinu, where have you been all these days?\" asked the Principal.
+    [optiona] => The principal asked Tinu where he had been all those days.
+    [optionb] => The Principal asked Tinu where he has been all those days.
+    [optionc] => The Principal asked Tinu were had he been all those days.
+    [optiond] => The Principal asked to Tinu where was he all those days.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514341124
+    [category_id] => 20271124084766
+    [question] => \"Have you finished your assignment, Minu?\" said her brother.
+    [optiona] => Minu\'s brother asked Minu if you have finished your assignment.
+    [optionb] => \"Minu\'s brother said to Minu if she had finished her assignment.
+    [optionc] => Minu\'s brother asked her if she had finished her assignment.
+    [optiond] => Minu\'s brother asked Minu if she has finished her assignment
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514341125
+    [category_id] => 20271124084766
+    [question] => He says, \"I go for a walk every morning.\"
+    [optiona] => He says that he goes for a walk every morning.
+    [optionb] => He said that he used to go for a walk every morning
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked Ravi why he was sounding so depressed that day.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514341126
+    [category_id] => 20271124084766
+    [question] => The Principal said, \"Why didn\'t you attend the flag hoisting ceremony, Anuj?\"
+    [optiona] => The Principal asked Anuj why hadn\'t he attended the flag hoisting ceremony.
+    [optionb] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [optionc] => The Principal asked Anuj why didn\'t he attended the flag hoisting ceremony.
+    [optiond] => The Principal asked Anuj why he didn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514341127
+    [category_id] => 20271124084766
+    [question] => I said to him, \"Where have you lost the pen I brought for you yesterday?\"
+    [optiona] => I asked him where he had lost the pen I had brought him yesterday.
+    [optionb] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optionc] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optiond] => I asked him where had he lost the pen I had brought him the previous day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514341128
+    [category_id] => 20271124084766
+    [question] => He said, \"Garima wants to take up a job while here husband wants here to look after the family.\"
+    [optiona] => He said that Garima wanted to take up a job while her husband wanted her to look after the family
+    [optionb] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optionc] => He told that Garima wanted to take up a job while here husband wants here to look after the family.
+    [optiond] => He said to Garima that though she wanted to take up a job while her husband wanted her to look after the family.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514341129
+    [category_id] => 20271124084766
+    [question] => She said, \"When I was a child, I wasn\'t afraid of ghosts.\"
+    [optiona] => She said that when she was a child she wasn\'t not afraid of ghosts.
+    [optionb] => She said that when she was child she hadn\'t been afraid of ghosts.
+    [optionc] => She said that when she was a child she wasn\'t afraid of ghosts.
+    [optiond] => She said that when she had been a child she wasn\'t afraid of ghosts.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514341130
+    [category_id] => 20271124084766
+    [question] => He said, \"Reena, do you want to buy a house in Noida?\"
+    [optiona] => He told Reena if she wanted to buy a house in Noida.
+    [optionb] => He asked that did she want to buy a house in Noida.
+    [optionc] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optiond] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514344201
+    [category_id] => 20271124084724
+    [question] => He said, \"Ravi, why are you sounding so depressed today?\"
+    [optiona] => He asked Ravi why did he sound so depressed that day.
+    [optionb] => He asked Ravi why he was sounding so depressed that day.
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked that did she want to buy a house in Noida.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514344202
+    [category_id] => 20271124084724
+    [question] => He asked me, \"What time will the sun set tomorrow?\"
+    [optiona] => He asked me what time does the sun set the next day.
+    [optionb] => He asked me what time that sun would set tomorrow.
+    [optionc] => He said that he used to go for a walk every morning
+    [optiond] => He asked me what time would the sun set the next day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514344203
+    [category_id] => 20271124084724
+    [question] => \"Tinu, where have you been all these days?\" asked the Principal.
+    [optiona] => The principal asked Tinu where he had been all those days.
+    [optionb] => The Principal asked Tinu where he has been all those days.
+    [optionc] => The Principal asked Tinu were had he been all those days.
+    [optiond] => The Principal asked to Tinu where was he all those days.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514344204
+    [category_id] => 20271124084724
+    [question] => \"Have you finished your assignment, Minu?\" said her brother.
+    [optiona] => Minu\'s brother asked Minu if you have finished your assignment.
+    [optionb] => \"Minu\'s brother said to Minu if she had finished her assignment.
+    [optionc] => Minu\'s brother asked her if she had finished her assignment.
+    [optiond] => Minu\'s brother asked Minu if she has finished her assignment
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514344205
+    [category_id] => 20271124084724
+    [question] => He says, \"I go for a walk every morning.\"
+    [optiona] => He says that he goes for a walk every morning.
+    [optionb] => He said that he used to go for a walk every morning
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked Ravi why he was sounding so depressed that day.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514344206
+    [category_id] => 20271124084724
+    [question] => The Principal said, \"Why didn\'t you attend the flag hoisting ceremony, Anuj?\"
+    [optiona] => The Principal asked Anuj why hadn\'t he attended the flag hoisting ceremony.
+    [optionb] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [optionc] => The Principal asked Anuj why didn\'t he attended the flag hoisting ceremony.
+    [optiond] => The Principal asked Anuj why he didn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514344207
+    [category_id] => 20271124084724
+    [question] => I said to him, \"Where have you lost the pen I brought for you yesterday?\"
+    [optiona] => I asked him where he had lost the pen I had brought him yesterday.
+    [optionb] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optionc] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optiond] => I asked him where had he lost the pen I had brought him the previous day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514344208
+    [category_id] => 20271124084724
+    [question] => He said, \"Garima wants to take up a job while here husband wants here to look after the family.\"
+    [optiona] => He said that Garima wanted to take up a job while her husband wanted her to look after the family
+    [optionb] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optionc] => He told that Garima wanted to take up a job while here husband wants here to look after the family.
+    [optiond] => He said to Garima that though she wanted to take up a job while her husband wanted her to look after the family.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514344209
+    [category_id] => 20271124084724
+    [question] => She said, \"When I was a child, I wasn\'t afraid of ghosts.\"
+    [optiona] => She said that when she was a child she wasn\'t not afraid of ghosts.
+    [optionb] => She said that when she was child she hadn\'t been afraid of ghosts.
+    [optionc] => She said that when she was a child she wasn\'t afraid of ghosts.
+    [optiond] => She said that when she had been a child she wasn\'t afraid of ghosts.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514344210
+    [category_id] => 20271124084724
+    [question] => He said, \"Reena, do you want to buy a house in Noida?\"
+    [optiona] => He told Reena if she wanted to buy a house in Noida.
+    [optionb] => He asked that did she want to buy a house in Noida.
+    [optionc] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optiond] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514344211
+    [category_id] => 20271124084725
+    [question] => He said, \"Ravi, why are you sounding so depressed today?\"
+    [optiona] => He asked Ravi why did he sound so depressed that day.
+    [optionb] => He asked Ravi why he was sounding so depressed that day.
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked that did she want to buy a house in Noida.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514344212
+    [category_id] => 20271124084725
+    [question] => He asked me, \"What time will the sun set tomorrow?\"
+    [optiona] => He asked me what time does the sun set the next day.
+    [optionb] => He asked me what time that sun would set tomorrow.
+    [optionc] => He said that he used to go for a walk every morning
+    [optiond] => He asked me what time would the sun set the next day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514344213
+    [category_id] => 20271124084725
+    [question] => \"Tinu, where have you been all these days?\" asked the Principal.
+    [optiona] => The principal asked Tinu where he had been all those days.
+    [optionb] => The Principal asked Tinu where he has been all those days.
+    [optionc] => The Principal asked Tinu were had he been all those days.
+    [optiond] => The Principal asked to Tinu where was he all those days.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514344214
+    [category_id] => 20271124084725
+    [question] => \"Have you finished your assignment, Minu?\" said her brother.
+    [optiona] => Minu\'s brother asked Minu if you have finished your assignment.
+    [optionb] => \"Minu\'s brother said to Minu if she had finished her assignment.
+    [optionc] => Minu\'s brother asked her if she had finished her assignment.
+    [optiond] => Minu\'s brother asked Minu if she has finished her assignment
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514344215
+    [category_id] => 20271124084725
+    [question] => He says, \"I go for a walk every morning.\"
+    [optiona] => He says that he goes for a walk every morning.
+    [optionb] => He said that he used to go for a walk every morning
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked Ravi why he was sounding so depressed that day.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514344216
+    [category_id] => 20271124084725
+    [question] => The Principal said, \"Why didn\'t you attend the flag hoisting ceremony, Anuj?\"
+    [optiona] => The Principal asked Anuj why hadn\'t he attended the flag hoisting ceremony.
+    [optionb] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [optionc] => The Principal asked Anuj why didn\'t he attended the flag hoisting ceremony.
+    [optiond] => The Principal asked Anuj why he didn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514344217
+    [category_id] => 20271124084725
+    [question] => I said to him, \"Where have you lost the pen I brought for you yesterday?\"
+    [optiona] => I asked him where he had lost the pen I had brought him yesterday.
+    [optionb] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optionc] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optiond] => I asked him where had he lost the pen I had brought him the previous day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514344218
+    [category_id] => 20271124084725
+    [question] => He said, \"Garima wants to take up a job while here husband wants here to look after the family.\"
+    [optiona] => He said that Garima wanted to take up a job while her husband wanted her to look after the family
+    [optionb] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optionc] => He told that Garima wanted to take up a job while here husband wants here to look after the family.
+    [optiond] => He said to Garima that though she wanted to take up a job while her husband wanted her to look after the family.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514344219
+    [category_id] => 20271124084725
+    [question] => She said, \"When I was a child, I wasn\'t afraid of ghosts.\"
+    [optiona] => She said that when she was a child she wasn\'t not afraid of ghosts.
+    [optionb] => She said that when she was child she hadn\'t been afraid of ghosts.
+    [optionc] => She said that when she was a child she wasn\'t afraid of ghosts.
+    [optiond] => She said that when she had been a child she wasn\'t afraid of ghosts.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514344220
+    [category_id] => 20271124084725
+    [question] => He said, \"Reena, do you want to buy a house in Noida?\"
+    [optiona] => He told Reena if she wanted to buy a house in Noida.
+    [optionb] => He asked that did she want to buy a house in Noida.
+    [optionc] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optiond] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514344221
+    [category_id] => 20271124084726
+    [question] => He said, \"Ravi, why are you sounding so depressed today?\"
+    [optiona] => He asked Ravi why did he sound so depressed that day.
+    [optionb] => He asked Ravi why he was sounding so depressed that day.
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked that did she want to buy a house in Noida.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514344222
+    [category_id] => 20271124084726
+    [question] => He asked me, \"What time will the sun set tomorrow?\"
+    [optiona] => He asked me what time does the sun set the next day.
+    [optionb] => He asked me what time that sun would set tomorrow.
+    [optionc] => He said that he used to go for a walk every morning
+    [optiond] => He asked me what time would the sun set the next day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514344223
+    [category_id] => 20271124084726
+    [question] => \"Tinu, where have you been all these days?\" asked the Principal.
+    [optiona] => The principal asked Tinu where he had been all those days.
+    [optionb] => The Principal asked Tinu where he has been all those days.
+    [optionc] => The Principal asked Tinu were had he been all those days.
+    [optiond] => The Principal asked to Tinu where was he all those days.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514344224
+    [category_id] => 20271124084726
+    [question] => \"Have you finished your assignment, Minu?\" said her brother.
+    [optiona] => Minu\'s brother asked Minu if you have finished your assignment.
+    [optionb] => \"Minu\'s brother said to Minu if she had finished her assignment.
+    [optionc] => Minu\'s brother asked her if she had finished her assignment.
+    [optiond] => Minu\'s brother asked Minu if she has finished her assignment
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514344225
+    [category_id] => 20271124084726
+    [question] => He says, \"I go for a walk every morning.\"
+    [optiona] => He says that he goes for a walk every morning.
+    [optionb] => He said that he used to go for a walk every morning
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked Ravi why he was sounding so depressed that day.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514344226
+    [category_id] => 20271124084726
+    [question] => The Principal said, \"Why didn\'t you attend the flag hoisting ceremony, Anuj?\"
+    [optiona] => The Principal asked Anuj why hadn\'t he attended the flag hoisting ceremony.
+    [optionb] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [optionc] => The Principal asked Anuj why didn\'t he attended the flag hoisting ceremony.
+    [optiond] => The Principal asked Anuj why he didn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514344227
+    [category_id] => 20271124084726
+    [question] => I said to him, \"Where have you lost the pen I brought for you yesterday?\"
+    [optiona] => I asked him where he had lost the pen I had brought him yesterday.
+    [optionb] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optionc] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optiond] => I asked him where had he lost the pen I had brought him the previous day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514344228
+    [category_id] => 20271124084726
+    [question] => He said, \"Garima wants to take up a job while here husband wants here to look after the family.\"
+    [optiona] => He said that Garima wanted to take up a job while her husband wanted her to look after the family
+    [optionb] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optionc] => He told that Garima wanted to take up a job while here husband wants here to look after the family.
+    [optiond] => He said to Garima that though she wanted to take up a job while her husband wanted her to look after the family.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514344229
+    [category_id] => 20271124084726
+    [question] => She said, \"When I was a child, I wasn\'t afraid of ghosts.\"
+    [optiona] => She said that when she was a child she wasn\'t not afraid of ghosts.
+    [optionb] => She said that when she was child she hadn\'t been afraid of ghosts.
+    [optionc] => She said that when she was a child she wasn\'t afraid of ghosts.
+    [optiond] => She said that when she had been a child she wasn\'t afraid of ghosts.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514344230
+    [category_id] => 20271124084726
+    [question] => He said, \"Reena, do you want to buy a house in Noida?\"
+    [optiona] => He told Reena if she wanted to buy a house in Noida.
+    [optionb] => He asked that did she want to buy a house in Noida.
+    [optionc] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optiond] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514421301
+    [category_id] => 20271124084754
+    [question] => He said, \"Ravi, why are you sounding so depressed today?\"
+    [optiona] => He asked Ravi why did he sound so depressed that day.
+    [optionb] => He asked Ravi why he was sounding so depressed that day.
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked that did she want to buy a house in Noida.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514421302
+    [category_id] => 20271124084754
+    [question] => He asked me, \"What time will the sun set tomorrow?\"
+    [optiona] => He asked me what time does the sun set the next day.
+    [optionb] => He asked me what time that sun would set tomorrow.
+    [optionc] => He said that he used to go for a walk every morning
+    [optiond] => He asked me what time would the sun set the next day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514421303
+    [category_id] => 20271124084754
+    [question] => \"Tinu, where have you been all these days?\" asked the Principal.
+    [optiona] => The principal asked Tinu where he had been all those days.
+    [optionb] => The Principal asked Tinu where he has been all those days.
+    [optionc] => The Principal asked Tinu were had he been all those days.
+    [optiond] => The Principal asked to Tinu where was he all those days.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514421304
+    [category_id] => 20271124084754
+    [question] => \"Have you finished your assignment, Minu?\" said her brother.
+    [optiona] => Minu\'s brother asked Minu if you have finished your assignment.
+    [optionb] => \"Minu\'s brother said to Minu if she had finished her assignment.
+    [optionc] => Minu\'s brother asked her if she had finished her assignment.
+    [optiond] => Minu\'s brother asked Minu if she has finished her assignment
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514421305
+    [category_id] => 20271124084754
+    [question] => He says, \"I go for a walk every morning.\"
+    [optiona] => He says that he goes for a walk every morning.
+    [optionb] => He said that he used to go for a walk every morning
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked Ravi why he was sounding so depressed that day.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514421306
+    [category_id] => 20271124084754
+    [question] => The Principal said, \"Why didn\'t you attend the flag hoisting ceremony, Anuj?\"
+    [optiona] => The Principal asked Anuj why hadn\'t he attended the flag hoisting ceremony.
+    [optionb] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [optionc] => The Principal asked Anuj why didn\'t he attended the flag hoisting ceremony.
+    [optiond] => The Principal asked Anuj why he didn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514421307
+    [category_id] => 20271124084754
+    [question] => I said to him, \"Where have you lost the pen I brought for you yesterday?\"
+    [optiona] => I asked him where he had lost the pen I had brought him yesterday.
+    [optionb] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optionc] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optiond] => I asked him where had he lost the pen I had brought him the previous day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514421308
+    [category_id] => 20271124084754
+    [question] => He said, \"Garima wants to take up a job while here husband wants here to look after the family.\"
+    [optiona] => He said that Garima wanted to take up a job while her husband wanted her to look after the family
+    [optionb] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optionc] => He told that Garima wanted to take up a job while here husband wants here to look after the family.
+    [optiond] => He said to Garima that though she wanted to take up a job while her husband wanted her to look after the family.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514421309
+    [category_id] => 20271124084754
+    [question] => She said, \"When I was a child, I wasn\'t afraid of ghosts.\"
+    [optiona] => She said that when she was a child she wasn\'t not afraid of ghosts.
+    [optionb] => She said that when she was child she hadn\'t been afraid of ghosts.
+    [optionc] => She said that when she was a child she wasn\'t afraid of ghosts.
+    [optiond] => She said that when she had been a child she wasn\'t afraid of ghosts.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514421310
+    [category_id] => 20271124084754
+    [question] => He said, \"Reena, do you want to buy a house in Noida?\"
+    [optiona] => He told Reena if she wanted to buy a house in Noida.
+    [optionb] => He asked that did she want to buy a house in Noida.
+    [optionc] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optiond] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514421311
+    [category_id] => 20271124084755
+    [question] => He said, \"Ravi, why are you sounding so depressed today?\"
+    [optiona] => He asked Ravi why did he sound so depressed that day.
+    [optionb] => He asked Ravi why he was sounding so depressed that day.
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked that did she want to buy a house in Noida.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514421312
+    [category_id] => 20271124084755
+    [question] => He asked me, \"What time will the sun set tomorrow?\"
+    [optiona] => He asked me what time does the sun set the next day.
+    [optionb] => He asked me what time that sun would set tomorrow.
+    [optionc] => He said that he used to go for a walk every morning
+    [optiond] => He asked me what time would the sun set the next day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514421313
+    [category_id] => 20271124084755
+    [question] => \"Tinu, where have you been all these days?\" asked the Principal.
+    [optiona] => The principal asked Tinu where he had been all those days.
+    [optionb] => The Principal asked Tinu where he has been all those days.
+    [optionc] => The Principal asked Tinu were had he been all those days.
+    [optiond] => The Principal asked to Tinu where was he all those days.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514421314
+    [category_id] => 20271124084755
+    [question] => \"Have you finished your assignment, Minu?\" said her brother.
+    [optiona] => Minu\'s brother asked Minu if you have finished your assignment.
+    [optionb] => \"Minu\'s brother said to Minu if she had finished her assignment.
+    [optionc] => Minu\'s brother asked her if she had finished her assignment.
+    [optiond] => Minu\'s brother asked Minu if she has finished her assignment
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514421315
+    [category_id] => 20271124084755
+    [question] => He says, \"I go for a walk every morning.\"
+    [optiona] => He says that he goes for a walk every morning.
+    [optionb] => He said that he used to go for a walk every morning
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked Ravi why he was sounding so depressed that day.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514421316
+    [category_id] => 20271124084755
+    [question] => The Principal said, \"Why didn\'t you attend the flag hoisting ceremony, Anuj?\"
+    [optiona] => The Principal asked Anuj why hadn\'t he attended the flag hoisting ceremony.
+    [optionb] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [optionc] => The Principal asked Anuj why didn\'t he attended the flag hoisting ceremony.
+    [optiond] => The Principal asked Anuj why he didn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514421317
+    [category_id] => 20271124084755
+    [question] => I said to him, \"Where have you lost the pen I brought for you yesterday?\"
+    [optiona] => I asked him where he had lost the pen I had brought him yesterday.
+    [optionb] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optionc] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optiond] => I asked him where had he lost the pen I had brought him the previous day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514421318
+    [category_id] => 20271124084755
+    [question] => He said, \"Garima wants to take up a job while here husband wants here to look after the family.\"
+    [optiona] => He said that Garima wanted to take up a job while her husband wanted her to look after the family
+    [optionb] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optionc] => He told that Garima wanted to take up a job while here husband wants here to look after the family.
+    [optiond] => He said to Garima that though she wanted to take up a job while her husband wanted her to look after the family.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514421319
+    [category_id] => 20271124084755
+    [question] => She said, \"When I was a child, I wasn\'t afraid of ghosts.\"
+    [optiona] => She said that when she was a child she wasn\'t not afraid of ghosts.
+    [optionb] => She said that when she was child she hadn\'t been afraid of ghosts.
+    [optionc] => She said that when she was a child she wasn\'t afraid of ghosts.
+    [optiond] => She said that when she had been a child she wasn\'t afraid of ghosts.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514421320
+    [category_id] => 20271124084755
+    [question] => He said, \"Reena, do you want to buy a house in Noida?\"
+    [optiona] => He told Reena if she wanted to buy a house in Noida.
+    [optionb] => He asked that did she want to buy a house in Noida.
+    [optionc] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optiond] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514421321
+    [category_id] => 20271124084756
+    [question] => He said, \"Ravi, why are you sounding so depressed today?\"
+    [optiona] => He asked Ravi why did he sound so depressed that day.
+    [optionb] => He asked Ravi why he was sounding so depressed that day.
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked that did she want to buy a house in Noida.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514421322
+    [category_id] => 20271124084756
+    [question] => He asked me, \"What time will the sun set tomorrow?\"
+    [optiona] => He asked me what time does the sun set the next day.
+    [optionb] => He asked me what time that sun would set tomorrow.
+    [optionc] => He said that he used to go for a walk every morning
+    [optiond] => He asked me what time would the sun set the next day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514421323
+    [category_id] => 20271124084756
+    [question] => \"Tinu, where have you been all these days?\" asked the Principal.
+    [optiona] => The principal asked Tinu where he had been all those days.
+    [optionb] => The Principal asked Tinu where he has been all those days.
+    [optionc] => The Principal asked Tinu were had he been all those days.
+    [optiond] => The Principal asked to Tinu where was he all those days.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514421324
+    [category_id] => 20271124084756
+    [question] => \"Have you finished your assignment, Minu?\" said her brother.
+    [optiona] => Minu\'s brother asked Minu if you have finished your assignment.
+    [optionb] => \"Minu\'s brother said to Minu if she had finished her assignment.
+    [optionc] => Minu\'s brother asked her if she had finished her assignment.
+    [optiond] => Minu\'s brother asked Minu if she has finished her assignment
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514421325
+    [category_id] => 20271124084756
+    [question] => He says, \"I go for a walk every morning.\"
+    [optiona] => He says that he goes for a walk every morning.
+    [optionb] => He said that he used to go for a walk every morning
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked Ravi why he was sounding so depressed that day.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514421326
+    [category_id] => 20271124084756
+    [question] => The Principal said, \"Why didn\'t you attend the flag hoisting ceremony, Anuj?\"
+    [optiona] => The Principal asked Anuj why hadn\'t he attended the flag hoisting ceremony.
+    [optionb] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [optionc] => The Principal asked Anuj why didn\'t he attended the flag hoisting ceremony.
+    [optiond] => The Principal asked Anuj why he didn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514421327
+    [category_id] => 20271124084756
+    [question] => I said to him, \"Where have you lost the pen I brought for you yesterday?\"
+    [optiona] => I asked him where he had lost the pen I had brought him yesterday.
+    [optionb] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optionc] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optiond] => I asked him where had he lost the pen I had brought him the previous day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514421328
+    [category_id] => 20271124084756
+    [question] => He said, \"Garima wants to take up a job while here husband wants here to look after the family.\"
+    [optiona] => He said that Garima wanted to take up a job while her husband wanted her to look after the family
+    [optionb] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optionc] => He told that Garima wanted to take up a job while here husband wants here to look after the family.
+    [optiond] => He said to Garima that though she wanted to take up a job while her husband wanted her to look after the family.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514421329
+    [category_id] => 20271124084756
+    [question] => She said, \"When I was a child, I wasn\'t afraid of ghosts.\"
+    [optiona] => She said that when she was a child she wasn\'t not afraid of ghosts.
+    [optionb] => She said that when she was child she hadn\'t been afraid of ghosts.
+    [optionc] => She said that when she was a child she wasn\'t afraid of ghosts.
+    [optiond] => She said that when she had been a child she wasn\'t afraid of ghosts.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514421330
+    [category_id] => 20271124084756
+    [question] => He said, \"Reena, do you want to buy a house in Noida?\"
+    [optiona] => He told Reena if she wanted to buy a house in Noida.
+    [optionb] => He asked that did she want to buy a house in Noida.
+    [optionc] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optiond] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514424401
+    [category_id] => 20271124084744
+    [question] => He said, \"Ravi, why are you sounding so depressed today?\"
+    [optiona] => He asked Ravi why did he sound so depressed that day.
+    [optionb] => He asked Ravi why he was sounding so depressed that day.
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked that did she want to buy a house in Noida.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514424402
+    [category_id] => 20271124084744
+    [question] => He asked me, \"What time will the sun set tomorrow?\"
+    [optiona] => He asked me what time does the sun set the next day.
+    [optionb] => He asked me what time that sun would set tomorrow.
+    [optionc] => He said that he used to go for a walk every morning
+    [optiond] => He asked me what time would the sun set the next day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514424403
+    [category_id] => 20271124084744
+    [question] => \"Tinu, where have you been all these days?\" asked the Principal.
+    [optiona] => The principal asked Tinu where he had been all those days.
+    [optionb] => The Principal asked Tinu where he has been all those days.
+    [optionc] => The Principal asked Tinu were had he been all those days.
+    [optiond] => The Principal asked to Tinu where was he all those days.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514424404
+    [category_id] => 20271124084744
+    [question] => \"Have you finished your assignment, Minu?\" said her brother.
+    [optiona] => Minu\'s brother asked Minu if you have finished your assignment.
+    [optionb] => \"Minu\'s brother said to Minu if she had finished her assignment.
+    [optionc] => Minu\'s brother asked her if she had finished her assignment.
+    [optiond] => Minu\'s brother asked Minu if she has finished her assignment
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514424405
+    [category_id] => 20271124084744
+    [question] => He says, \"I go for a walk every morning.\"
+    [optiona] => He says that he goes for a walk every morning.
+    [optionb] => He said that he used to go for a walk every morning
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked Ravi why he was sounding so depressed that day.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514424406
+    [category_id] => 20271124084744
+    [question] => The Principal said, \"Why didn\'t you attend the flag hoisting ceremony, Anuj?\"
+    [optiona] => The Principal asked Anuj why hadn\'t he attended the flag hoisting ceremony.
+    [optionb] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [optionc] => The Principal asked Anuj why didn\'t he attended the flag hoisting ceremony.
+    [optiond] => The Principal asked Anuj why he didn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514424407
+    [category_id] => 20271124084744
+    [question] => I said to him, \"Where have you lost the pen I brought for you yesterday?\"
+    [optiona] => I asked him where he had lost the pen I had brought him yesterday.
+    [optionb] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optionc] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optiond] => I asked him where had he lost the pen I had brought him the previous day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514424408
+    [category_id] => 20271124084744
+    [question] => He said, \"Garima wants to take up a job while here husband wants here to look after the family.\"
+    [optiona] => He said that Garima wanted to take up a job while her husband wanted her to look after the family
+    [optionb] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optionc] => He told that Garima wanted to take up a job while here husband wants here to look after the family.
+    [optiond] => He said to Garima that though she wanted to take up a job while her husband wanted her to look after the family.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514424409
+    [category_id] => 20271124084744
+    [question] => She said, \"When I was a child, I wasn\'t afraid of ghosts.\"
+    [optiona] => She said that when she was a child she wasn\'t not afraid of ghosts.
+    [optionb] => She said that when she was child she hadn\'t been afraid of ghosts.
+    [optionc] => She said that when she was a child she wasn\'t afraid of ghosts.
+    [optiond] => She said that when she had been a child she wasn\'t afraid of ghosts.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514424410
+    [category_id] => 20271124084744
+    [question] => He said, \"Reena, do you want to buy a house in Noida?\"
+    [optiona] => He told Reena if she wanted to buy a house in Noida.
+    [optionb] => He asked that did she want to buy a house in Noida.
+    [optionc] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optiond] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 1
+)
+Array
+(
+    [id] => 3082514424411
+    [category_id] => 20271124084745
+    [question] => He said, \"Ravi, why are you sounding so depressed today?\"
+    [optiona] => He asked Ravi why did he sound so depressed that day.
+    [optionb] => He asked Ravi why he was sounding so depressed that day.
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked that did she want to buy a house in Noida.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514424512
+    [category_id] => 20271124084745
+    [question] => He asked me, \"What time will the sun set tomorrow?\"
+    [optiona] => He asked me what time does the sun set the next day.
+    [optionb] => He asked me what time that sun would set tomorrow.
+    [optionc] => He said that he used to go for a walk every morning
+    [optiond] => He asked me what time would the sun set the next day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514424513
+    [category_id] => 20271124084745
+    [question] => \"Tinu, where have you been all these days?\" asked the Principal.
+    [optiona] => The principal asked Tinu where he had been all those days.
+    [optionb] => The Principal asked Tinu where he has been all those days.
+    [optionc] => The Principal asked Tinu were had he been all those days.
+    [optiond] => The Principal asked to Tinu where was he all those days.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514424514
+    [category_id] => 20271124084745
+    [question] => \"Have you finished your assignment, Minu?\" said her brother.
+    [optiona] => Minu\'s brother asked Minu if you have finished your assignment.
+    [optionb] => \"Minu\'s brother said to Minu if she had finished her assignment.
+    [optionc] => Minu\'s brother asked her if she had finished her assignment.
+    [optiond] => Minu\'s brother asked Minu if she has finished her assignment
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514424515
+    [category_id] => 20271124084745
+    [question] => He says, \"I go for a walk every morning.\"
+    [optiona] => He says that he goes for a walk every morning.
+    [optionb] => He said that he used to go for a walk every morning
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked Ravi why he was sounding so depressed that day.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514424516
+    [category_id] => 20271124084745
+    [question] => The Principal said, \"Why didn\'t you attend the flag hoisting ceremony, Anuj?\"
+    [optiona] => The Principal asked Anuj why hadn\'t he attended the flag hoisting ceremony.
+    [optionb] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [optionc] => The Principal asked Anuj why didn\'t he attended the flag hoisting ceremony.
+    [optiond] => The Principal asked Anuj why he didn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514424517
+    [category_id] => 20271124084745
+    [question] => I said to him, \"Where have you lost the pen I brought for you yesterday?\"
+    [optiona] => I asked him where he had lost the pen I had brought him yesterday.
+    [optionb] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optionc] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optiond] => I asked him where had he lost the pen I had brought him the previous day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514424518
+    [category_id] => 20271124084745
+    [question] => He said, \"Garima wants to take up a job while here husband wants here to look after the family.\"
+    [optiona] => He said that Garima wanted to take up a job while her husband wanted her to look after the family
+    [optionb] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optionc] => He told that Garima wanted to take up a job while here husband wants here to look after the family.
+    [optiond] => He said to Garima that though she wanted to take up a job while her husband wanted her to look after the family.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514424519
+    [category_id] => 20271124084745
+    [question] => She said, \"When I was a child, I wasn\'t afraid of ghosts.\"
+    [optiona] => She said that when she was a child she wasn\'t not afraid of ghosts.
+    [optionb] => She said that when she was child she hadn\'t been afraid of ghosts.
+    [optionc] => She said that when she was a child she wasn\'t afraid of ghosts.
+    [optiond] => She said that when she had been a child she wasn\'t afraid of ghosts.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514424520
+    [category_id] => 20271124084745
+    [question] => He said, \"Reena, do you want to buy a house in Noida?\"
+    [optiona] => He told Reena if she wanted to buy a house in Noida.
+    [optionb] => He asked that did she want to buy a house in Noida.
+    [optionc] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optiond] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 2
+)
+Array
+(
+    [id] => 3082514424521
+    [category_id] => 20271124084746
+    [question] => He said, \"Ravi, why are you sounding so depressed today?\"
+    [optiona] => He asked Ravi why did he sound so depressed that day.
+    [optionb] => He asked Ravi why he was sounding so depressed that day.
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked that did she want to buy a house in Noida.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514424522
+    [category_id] => 20271124084746
+    [question] => He asked me, \"What time will the sun set tomorrow?\"
+    [optiona] => He asked me what time does the sun set the next day.
+    [optionb] => He asked me what time that sun would set tomorrow.
+    [optionc] => He said that he used to go for a walk every morning
+    [optiond] => He asked me what time would the sun set the next day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514424523
+    [category_id] => 20271124084746
+    [question] => \"Tinu, where have you been all these days?\" asked the Principal.
+    [optiona] => The principal asked Tinu where he had been all those days.
+    [optionb] => The Principal asked Tinu where he has been all those days.
+    [optionc] => The Principal asked Tinu were had he been all those days.
+    [optiond] => The Principal asked to Tinu where was he all those days.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514424524
+    [category_id] => 20271124084746
+    [question] => \"Have you finished your assignment, Minu?\" said her brother.
+    [optiona] => Minu\'s brother asked Minu if you have finished your assignment.
+    [optionb] => \"Minu\'s brother said to Minu if she had finished her assignment.
+    [optionc] => Minu\'s brother asked her if she had finished her assignment.
+    [optiond] => Minu\'s brother asked Minu if she has finished her assignment
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514424525
+    [category_id] => 20271124084746
+    [question] => He says, \"I go for a walk every morning.\"
+    [optiona] => He says that he goes for a walk every morning.
+    [optionb] => He said that he used to go for a walk every morning
+    [optionc] => Minu\'s brother said to Minu if she had finished her assignment.
+    [optiond] => He asked Ravi why he was sounding so depressed that day.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514424526
+    [category_id] => 20271124084746
+    [question] => The Principal said, \"Why didn\'t you attend the flag hoisting ceremony, Anuj?\"
+    [optiona] => The Principal asked Anuj why hadn\'t he attended the flag hoisting ceremony.
+    [optionb] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [optionc] => The Principal asked Anuj why didn\'t he attended the flag hoisting ceremony.
+    [optiond] => The Principal asked Anuj why he didn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514424527
+    [category_id] => 20271124084746
+    [question] => I said to him, \"Where have you lost the pen I brought for you yesterday?\"
+    [optiona] => I asked him where he had lost the pen I had brought him yesterday.
+    [optionb] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optionc] => I asked him where he had lost the pen I have brought for him the previous days.
+    [optiond] => I asked him where had he lost the pen I had brought him the previous day.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514424528
+    [category_id] => 20271124084746
+    [question] => He said, \"Garima wants to take up a job while here husband wants here to look after the family.\"
+    [optiona] => He said that Garima wanted to take up a job while her husband wanted her to look after the family
+    [optionb] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optionc] => He told that Garima wanted to take up a job while here husband wants here to look after the family.
+    [optiond] => He said to Garima that though she wanted to take up a job while her husband wanted her to look after the family.
+    [answer] => a
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514424529
+    [category_id] => 20271124084746
+    [question] => She said, \"When I was a child, I wasn\'t afraid of ghosts.\"
+    [optiona] => She said that when she was a child she wasn\'t not afraid of ghosts.
+    [optionb] => She said that when she was child she hadn\'t been afraid of ghosts.
+    [optionc] => She said that when she was a child she wasn\'t afraid of ghosts.
+    [optiond] => She said that when she had been a child she wasn\'t afraid of ghosts.
+    [answer] => c
+    [duration] => 60000
+    [note] => SET 3
+)
+Array
+(
+    [id] => 3082514424530
+    [category_id] => 20271124084746
+    [question] => He said, \"Reena, do you want to buy a house in Noida?\"
+    [optiona] => He told Reena if she wanted to buy a house in Noida.
+    [optionb] => He asked that did she want to buy a house in Noida.
+    [optionc] => He said that Garima wants to take up a job while her husband wanted her to look after the family.
+    [optiond] => The Principal asked Anuj why he hadn\'t attended the flag hoisting ceremony.
+    [answer] => b
+    [duration] => 60000
+    [note] => SET 3
+)

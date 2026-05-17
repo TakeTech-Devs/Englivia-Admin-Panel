@@ -178,7 +178,7 @@ $type = 1;
 
                             <div class="form-group">
                                 <label>Category Name</label>
-                                <input type="text" name="name" id="edit_category_name" placeholder="Category Name"
+                                <input type="text" name="name" id="edit_category_name"  placeholder="Category Name"
                                     class='form-control' required>
                             </div>
                             <div class="form-group">
@@ -223,7 +223,7 @@ $type = 1;
         </div>
 
         <!-- footer content -->
-        <!-- <?php include 'footer.php'; ?> -->
+        <?php include 'footer.php'; ?>
         <!-- /footer content -->
     </div>
 

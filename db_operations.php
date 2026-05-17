@@ -1726,8 +1726,6 @@ if (isset($_POST['update_dictionary'])) {
 
         echo "<p class='alert alert-success'>Dictionary updated successfully!</p>";
     }
-
-
 }
 
 
@@ -1753,6 +1751,8 @@ if (isset($_POST['learning_id']) && isset($_POST['update_learning'])) {
         return false;
     }
     $id = $_POST['learning_id'];
+    // echo($id);
+    // file_put_contents("debug.log", "ID: " . $id . "\n", FILE_APPEND);
 
     $language_id = ($fn->is_language_mode_enabled()) ? $db->escapeString($_POST['language_id']) : 0;
     $category = $db->escapeString($_POST['category']);
@@ -1764,6 +1764,22 @@ if (isset($_POST['learning_id']) && isset($_POST['update_learning'])) {
     $sql .= " where `id`=" . $id;
     $db->sql($sql);
 
+    // $sql = "UPDATE `tbl_learning` SET 
+    //     `category` = '" . $db->escapeString($category) . "', 
+    //     `title` = '" . $db->escapeString($title) . "', 
+    //     `detail` = '" . $db->escapeString($detail) . "'";
+
+    // if ($fn->is_language_mode_enabled() && isset($language_id)) {
+    //     $sql .= ", `language_id` = " . intval($language_id);
+    // }
+
+    // if (isset($id) && !empty($id)) {
+    //     $sql .= " WHERE `id` = " . intval($id);
+    //     $db->sql($sql);
+    // } else {
+    //     die("Error: ID is missing or invalid.");
+    // }
+
     echo "<p class='alert alert-success'>Learning updated successfully!</p>";
 }
 // 48. update_learning_status
@@ -1773,6 +1789,8 @@ if (isset($_POST['learning_status_id']) && isset($_POST['update_learning_status'
         return false;
     }
     $id = $_POST['learning_status_id'];
+    // file_put_contents("debug.log", "UID: " . $id . "\n", FILE_APPEND);
+
     $status = $db->escapeString($_POST['status']);
     if ($status == 1 || $status == '1') {
         $sql = 'SELECT id FROM `tbl_learning_question` WHERE `learning_id`=' . $id;
@@ -1786,7 +1804,7 @@ if (isset($_POST['learning_status_id']) && isset($_POST['update_learning_status'
             echo "<p class='alert alert-success'>Learning status updated successfully!</p>";
         }
     } else {
-        $sql = "Update `tbl_learning` set `statud`='" . $status . "' where `id`=" . $id;
+        $sql = "Update `tbl_learning` set `status`='" . $status . "' where `id`=" . $id;
         $db->sql($sql);
         echo "<p class='alert alert-success'>Learning status updated successfully!</p>";
     }
@@ -1816,52 +1834,93 @@ if (isset($_GET['delete_learning']) && $_GET['delete_learning'] != '') {
 // 46-2. add_learning_detail
 
 
+// if (isset($_POST['detail']) && isset($_POST['add_learning_detail'])) {
+//     $headline = $db->escapeString($_POST['headline']);
+//     $headline_meaning = $db->escapeString($_POST['headline_meaning']);
+//     $detail = $db->escapeString($_POST['detail']);
+//     $image = $db->escapeString($_POST['image']);
+//     $learning_id = $db->escapeString($_POST['learning_id']);
+//     $filename = '';
+
+
+
+//     if ($_FILES['image']['error'] == 0 && $_FILES['image']['size'] > 0) {
+//         if (!is_dir('images/category')) {
+//             mkdir('images/category', 0777, true);
+//         }
+
+//         $extension = pathinfo($_FILES["image"]["name"])['extension'];
+//         if (!(in_array($extension, $allowedExts))) {
+//             $response['error'] = true;
+//             $response['message'] = 'Image type is invalid';
+//             echo json_encode($response);
+//             return false;
+//         }
+//         $target_path = 'images/category/';
+//         $filename = microtime(true) . '.' . strtolower($extension);
+//         $full_path = $target_path . "" . $filename;
+//         if (!move_uploaded_file($_FILES["image"]["tmp_name"], $full_path)) {
+//             $response['error'] = true;
+//             $response['message'] = 'Image type is invalid';
+//             echo json_encode($response);
+//             return false;
+//         }
+//     }
+
+
+
+
+
+
+
+//     $sql = "INSERT INTO `tbl_learning_detail`(`learning_id`, `detail`, `image`, `headline`, `headline_meaning`) VALUES 
+// 	('" . $learning_id . "','" . $detail . "','" . $filename . "','" . $headline . "','" . $headline_meaning . "')";
+
+//     $db->sql($sql);
+//     $res = $db->getResult();
+//     echo '<label class="alert alert-success">Detail created successfully!</label>';
+// }
+
 if (isset($_POST['detail']) && isset($_POST['add_learning_detail'])) {
     $headline = $db->escapeString($_POST['headline']);
     $headline_meaning = $db->escapeString($_POST['headline_meaning']);
     $detail = $db->escapeString($_POST['detail']);
-    $image = $db->escapeString($_POST['image']);
     $learning_id = $db->escapeString($_POST['learning_id']);
     $filename = '';
 
-
-
-    if ($_FILES['image']['error'] == 0 && $_FILES['image']['size'] > 0) {
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0 && $_FILES['image']['size'] > 0) {
         if (!is_dir('images/category')) {
             mkdir('images/category', 0777, true);
         }
 
-        $extension = pathinfo($_FILES["image"]["name"])['extension'];
-        if (!(in_array($extension, $allowedExts))) {
+        $extension = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
+        if (!in_array(strtolower($extension), $allowedExts)) {
             $response['error'] = true;
             $response['message'] = 'Image type is invalid';
             echo json_encode($response);
             return false;
         }
+
         $target_path = 'images/category/';
         $filename = microtime(true) . '.' . strtolower($extension);
-        $full_path = $target_path . "" . $filename;
+        $full_path = $target_path . $filename;
+
         if (!move_uploaded_file($_FILES["image"]["tmp_name"], $full_path)) {
             $response['error'] = true;
-            $response['message'] = 'Image type is invalid';
+            $response['message'] = 'Failed to upload image';
             echo json_encode($response);
             return false;
         }
     }
 
-
-
-
-
-
-
-    $sql = "INSERT INTO `tbl_learning_detail`(`learning_id`, `detail`, `image`, `headline`, `headline_meaning`) VALUES 
-	('" . $learning_id . "','" . $detail . "','" . $filename . "','" . $headline . "','" . $headline_meaning . "')";
+    $sql = "INSERT INTO `tbl_learning_detail`(`learning_id`, `detail`, `image`, `headline`, `headline_meaning`) 
+            VALUES ('$learning_id', '$detail', '$filename', '$headline', '$headline_meaning')";
 
     $db->sql($sql);
     $res = $db->getResult();
     echo '<label class="alert alert-success">Detail created successfully!</label>';
 }
+
 
 
 // 46-3. edit_learning_detail
@@ -1912,13 +1971,11 @@ if (isset($_POST['edit_detail']) && isset($_POST['update_learning_detail'])) {
         $sql1 = "Update `tbl_learning_detail` set `detail`='" . $detail . "',`headline`='" . $headline . "',`headline_meaning`='" . $headline_meaning . "' where `id`=" . $ld_id . " and `learning_id`=" . $learning_id;
         $db->sql($sql1);
         if ($filename != '') {
-            $sql2 = "Update `tbl_learning_detail` set `image`='" . $$filename . "' where `id`=" . $ld_id . " and `learning_id`=" . $learning_id;
+            $sql2 = "Update `tbl_learning_detail` set `image`='" . $filename . "' where `id`=" . $ld_id . " and `learning_id`=" . $learning_id;
             $db->sql($sql2);
         }
         echo "<p class='alert alert-success'>Detail updated successfully!</p>";
     }
-
-
 }
 
 
@@ -2021,7 +2078,6 @@ if (isset($_POST['meaning_id']) && isset($_POST['update_dictionary_word'])) {
         $db->sql($sql);
         echo "<p class='alert alert-success'>Word and Meaning updated successfully!</p>";
     }
-
 }
 
 
@@ -2263,7 +2319,7 @@ if (isset($_POST['update_system'])) {
                                             unlink($sql_file);
                                             DeleteDir($target_path1);
                                             $result = "<label class='alert alert-danger'>Your version is $current_version, Please update nearest version first.<lable>";
-                                        }//                                
+                                        } //                                
                                     } else {
                                         DeleteDir($target_path1);
                                         $result = "<label class='alert alert-danger'>Invalid file, please try again.!<lable>";

@@ -1,0 +1,47 @@
+Learning ID: 2005
+Learning ID: 2005
+Learning ID: 2005
+Learning ID: 2005
+SQL Query: SELECT q.* FROM `tbl_learning_detail` q  WHERE learning_id=2005 ORDER BY q.id desc LIMIT 0, 10
+Learning ID: 427
+SQL Query: SELECT q.* FROM `tbl_learning_detail` q  WHERE learning_id=427 ORDER BY q.id desc LIMIT 0, 10
+Learning ID: 2004
+SQL Query: SELECT q.* FROM `tbl_learning_detail` q  WHERE learning_id=2004 ORDER BY q.id desc LIMIT 0, 10
+Learning ID: 427
+SQL Query: SELECT q.* FROM `tbl_learning_detail` q  WHERE learning_id=427 ORDER BY q.id desc LIMIT 0, 10
+Learning ID: 426
+SQL Query: SELECT q.* FROM `tbl_learning_detail` q  WHERE learning_id=426 ORDER BY q.id desc LIMIT 0, 10
+Learning ID: 758
+SQL Query: SELECT q.* FROM `tbl_learning_detail` q  WHERE learning_id=758 ORDER BY q.id desc LIMIT 0, 10
+Learning ID: 758
+SQL Query: SELECT q.* FROM `tbl_learning_detail` q  WHERE learning_id=758 ORDER BY q.id desc LIMIT 0, 10
+Learning ID: 2006
+SQL Query: SELECT q.* FROM `tbl_learning_detail` q  WHERE learning_id=2006 ORDER BY q.id desc LIMIT 0, 10
+Learning ID: 1171
+SQL Query: SELECT q.* FROM `tbl_learning_detail` q  WHERE learning_id=1171 ORDER BY q.id desc LIMIT 0, 10
+Learning ID: 1760
+SQL Query: SELECT q.* FROM `tbl_learning_detail` q  WHERE learning_id=1760 ORDER BY q.id desc LIMIT 0, 10
+Learning ID: 1722
+SQL Query: SELECT q.* FROM `tbl_learning_detail` q  WHERE learning_id=1722 ORDER BY q.id desc LIMIT 0, 10
+Learning ID: 675
+SQL Query: SELECT q.* FROM `tbl_learning_detail` q  WHERE learning_id=675 ORDER BY q.id desc LIMIT 0, 10
+Learning ID: 510
+SQL Query: SELECT q.* FROM `tbl_learning_detail` q  WHERE learning_id=510 ORDER BY q.id desc LIMIT 0, 10
+Learning ID: 1706
+SQL Query: SELECT q.* FROM `tbl_learning_detail` q  WHERE learning_id=1706 ORDER BY q.id desc LIMIT 0, 10
+Learning ID: 758
+SQL Query: SELECT q.* FROM `tbl_learning_detail` q  WHERE learning_id=758 ORDER BY q.id desc LIMIT 0, 10
+ID: 
+ID: <br /><b>Warning</b>:  Undefined array key "id" in <b>C:\xampp\htdocs\hit\learning.php</b> on line <b>194</b><br />
+ID: <br /><b>Warning</b>:  Undefined array key "id" in <b>C:\xampp\htdocs\hit\learning.php</b> on line <b>194</b><br />
+ID: 2015
+ID: 2015
+ID: 2015
+ID: 2015
+UID: 2015
+UID: 2015
+UID: 2015
+UID: 2015
+UID: 2015
+UID: 2015
+UID: 2015

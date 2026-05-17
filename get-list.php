@@ -13,6 +13,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
+
 include('library/crud.php');
 include('library/functions.php');
 $db = new Database();
@@ -1439,7 +1440,9 @@ if (isset($_GET['table']) && $_GET['table'] == 'learnning_detail') {
 
     if (isset($_GET['learning_id'])) {
         $learning_id = $_GET['learning_id'];
+        error_log("Learning ID: " . $learning_id);
         $where = " WHERE learning_id=" . $learning_id;
+        // file_put_contents("debug.log", "Learning ID: " . $learning_id . "\n", FILE_APPEND);
     }
 
     if (isset($_GET['search'])) {
@@ -1455,6 +1458,8 @@ if (isset($_GET['table']) && $_GET['table'] == 'learnning_detail') {
     }
 
     $sql = "SELECT q.* FROM `tbl_learning_detail` q " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
+    error_log("SQL Query: " . $sql);
+    // file_put_contents("debug.log", "SQL Query: " . $sql . "\n", FILE_APPEND);
 
     $db->sql($sql);
     $res = $db->getResult();
@@ -1492,7 +1497,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'learnning_detail') {
 
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
-        $tempRow['note'] = $row['note'];
+        // $tempRow['note'] = $row['note'];
     }
 
     $bulkData['rows'] = $rows;
