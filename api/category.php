@@ -66,6 +66,10 @@ function handleGetRequest($db, &$response)
         $conditions[] = 'tag = "' . $db->escapeString($_GET['tag']) . '"';
     }
 
+    if ($type == 7 && !isset($_GET['id']) && !isset($_GET['table'])) {
+        $conditions[] = 'id IN (SELECT DISTINCT category_id FROM tbl_questions)';
+    }
+
     $whereClause = !empty($conditions) ? implode(' AND ', $conditions) : null;
 
     if (isset($_GET['table'])) {
