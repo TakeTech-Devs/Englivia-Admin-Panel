@@ -9021,6 +9021,9 @@ $(document).ready(function () {
             $("#edit_c").val(question.optionc);
             $("#edit_d").val(question.optiond);
             $("#edit_note").val(question.note);
+            if (typeof tinymce !== "undefined" && tinymce.get("edit_note")) {
+              tinymce.get("edit_note").setContent(question.note || "");
+            }
             if (question.optione) {
               $("#edit_e").val(question.optione);
             }
@@ -10322,6 +10325,9 @@ $(document).ready(function () {
             $("#edit_c").val(question.optionc);
             $("#edit_d").val(question.optiond);
             $("#edit_note").val(question.note);
+            if (typeof tinymce !== "undefined" && tinymce.get("edit_note")) {
+              tinymce.get("edit_note").setContent(question.note || "");
+            }
             if (question.optione) {
               $("#edit_e").val(question.optione);
             }
@@ -11641,6 +11647,9 @@ $(document).ready(function () {
             $("#edit_c").val(question.optionc);
             $("#edit_d").val(question.optiond);
             $("#edit_note").val(question.note);
+            if (typeof tinymce !== "undefined" && tinymce.get("edit_note")) {
+              tinymce.get("edit_note").setContent(question.note || "");
+            }
             if (question.optione) {
               $("#edit_e").val(question.optione);
             }
@@ -12925,6 +12934,9 @@ $(document).ready(function () {
             $("#edit_c").val(question.optionc);
             $("#edit_d").val(question.optiond);
             $("#edit_note").val(question.note);
+            if (typeof tinymce !== "undefined" && tinymce.get("edit_note")) {
+              tinymce.get("edit_note").setContent(question.note || "");
+            }
             if (question.optione) {
               $("#edit_e").val(question.optione);
             }
